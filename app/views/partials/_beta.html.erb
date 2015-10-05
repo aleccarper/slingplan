@@ -1,0 +1,38 @@
+<div class='beta-container'>
+  <div class='inner-container'>
+
+    <div class='backdrop-top'>
+      <div class='logo'>
+        <a href='/'>SlingPlan</a>
+      </div>
+    </div>
+
+    <div class='container'>
+
+      <div class='title'>Ahoy!</div>
+      <div class='subtitle'>Welcome to the SlingPlan closed BETA.</div>
+
+      <div class='description'>
+        <p>If you are part of our BETA testing group and have been provided beta login information, enter it below.</p>
+      </div>
+
+      <%= responsive_form_for(BetaTester.new, method: :post, url: '/beta') do |f| %>
+
+        <% if flash[:email_error] %>
+          <div class='hint red'><%= flash[:email_error] %></div>
+        <% end %>
+        <%= f.email_field :email, placeholder: 'Email', label: false, validate: false, autofocus: true %>
+
+        <% if flash[:password_error] %>
+          <div class='hint red'><%= flash[:password_error] %></div>
+        <% end %>
+        <%= f.password_field :password, placeholder: 'Password', label: false, validate: false %>
+
+        <%= f.submit 'Sign Into BETA' %>
+
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

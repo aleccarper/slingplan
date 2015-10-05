@@ -1,0 +1,40 @@
+<%= responsive_form_for(@event, url: planners_admin_event_path(@event), validate_submit: true) do |f| %>
+
+  <div class='subsection-wrap'>
+    <h3>Contact Info</h3>
+
+    <div class='hint'>
+      Your Planner information is attached to RFPs associated with your Events, but you may optionally hide some of it.  <strong>Un-check</strong> any information you would like to keep private for this Event.
+    </div>
+
+    <div class='section-content'>
+      <div class='check-boxes'>
+        <% Event.potentially_hidden_contact_info.each do |attribute| %>
+          <%= check_box_tag "hidden_contact_info_#{attribute.to_s}", true, !@event.contact_info_hidden_for?(attribute) %>
+          <%= label_tag "hidden_contact_info_#{attribute.to_s}", attribute.to_s.titleize %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class='subsection-wrap'>
+    <h3>Contracting</h3>
+
+    <div class='hint'>
+      Have you been contracted by a company to plan this Event?  If so, you may enter their company name below and we will show you are representing them.
+    </div>
+
+    <div class='section-content'>
+      <div class='check-boxes'>
+        <%= f.text_field :contracted_by %>
+      </div>
+    </div>
+  </div>
+
+  <div class='save-wrap'>
+    <%= submit_tag 'Next', name: 'next', class: 'btn f-right btn-next' %>
+    <%= submit_tag 'Save', name: 'save', class: 'btn f-right btn-save' %>
+    <%= submit_tag 'Back', name: 'back', class: 'btn f-right btn-back' %>
+  </div>
+<% end %>

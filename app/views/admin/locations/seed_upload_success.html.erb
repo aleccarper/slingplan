@@ -1,0 +1,23 @@
+<div class='seed-upload-success'>
+  <div class='page-header'>
+    <%= link_to "<i class='left fa fa-arrow-left'></i>Back".html_safe, admin_locations_path, class: 'left btn btn-back-to-locations' %>
+    <div class='title'>Seeds Successfully Uploaded</div>
+  </div>
+
+  <div class='locations tree'>
+    <div class='tree-level tree-level-0 state'>
+      <div class='tree-header'>
+      <div class='tree-items'>
+        <% for loc in @locations %>
+          <div class='tree-item'>
+            <%= render partial: 'location', locals: {
+              location: loc,
+              hide_controls: true,
+              show_claim_button: false
+            } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

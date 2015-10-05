@@ -1,0 +1,17 @@
+<ul>
+  <li class='staffer  {{#if any_staffers }}visible{{/if}} {{#if any_staffers }}selected{{/if}}'>
+    <div class='hint'>
+      <h6>Staffing</h6>
+      <div class='desc'>Need professionals to help manage your event?  Look no further.</div>
+    </div>
+  </li>
+  {{#each all}}
+    <li class='service {{#ifIn id ../visible }}visible{{/ifIn}} {{#ifIn id ../selected }}selected{{/ifIn}}'
+      data-service-id='{{id}}' >
+      <div class='hint'>
+        <h6>{{name}}</h6>
+        <div class='desc'>{{description}}</div>
+      </div>
+    </li>
+  {{/each}}
+</ul>

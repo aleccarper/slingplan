@@ -1,0 +1,135 @@
+.home {
+  &:not(.planner-signed-in),
+  &:not(.vendor-signed-in) {
+
+    .section-wrap-full {
+
+      &.first {
+        background-image: url(image-path('service-11.jpg'));
+
+        @include breakpoint(620px) {
+          section {
+            h1 {
+              font-size: 62px !important;
+            }
+          }
+        }
+      }
+
+      &.second {
+        background-image: url(asset-path('notebook.jpg')) !important;
+      }
+
+      &.third {
+        background-image: url(asset-path('gears.jpg')) !important;
+      }
+
+      &.fourth {
+        background-image: url(image-path('handshake.jpg')) !important;
+      }
+
+      &.fifth {
+        background-image: url(image-path('map.jpg')) !important;
+      }
+    }
+
+    .section-wrap-between:not(.hint) {
+      h1 {
+        padding: 0 0 $margin / 2;
+      }
+
+      a {
+        background: $palette-blue-light;
+      }
+
+      .fa {
+        font-size: $font-size-giant;
+        position: relative;
+        bottom: 4px;
+        margin: 0 $margin / 2;
+      }
+
+      span {
+        font-size: 26px;
+        position: relative;
+        bottom: 6px;
+      }
+
+      &.first {
+        h1 {
+          padding: $margin / 6 0;
+        }
+        .just-subscribed, .already-subscribed, .call-to-action {
+          font-size: 16px;
+        }
+        .errorlist {
+          display: none;
+        }
+        .field {
+          display: inline-block;
+          width: 260px;
+        }
+        .field-wrapper {
+          background: $white;
+
+          input {
+            color: $black;
+          }
+        }
+        div {
+          margin-bottom: 12px;
+        }
+        .submit {
+          display: inline-block;
+          top: 5px;
+
+          input {
+            background: $palette-blue-light !important;
+            padding: 0 $margin / 2;
+          }
+        }
+
+        @include breakpoint(520px) {
+          .just-subscribed, .already-subscribed, .call-to-action {
+            font-size: 11px;
+          }
+          .submit {
+            top: 0;
+          }
+
+          div {
+            margin-bottom: 4px;
+          }
+
+          h1 {
+            font-size: 22px;
+          }
+
+          .btn {
+            margin-top: 8px;
+            margin-bottom: 8px;
+          }
+        }
+      }
+
+      &.second {
+        h1 {
+          padding: 0;
+        }
+
+        a {
+          background: $palette-green-medium;
+          margin-top: 6px;
+        }
+      }
+
+      &.first, &.third, &.fifth {
+        background: $palette-green-medium;
+      }
+
+      &.second h1:last-child {
+        padding: 0;
+      }
+    }
+  }
+}

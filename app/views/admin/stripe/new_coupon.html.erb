@@ -1,0 +1,11 @@
+<%= responsive_form_for(@coupon, url: '/admin/stripe/create_coupon', method: 'post', class: 'new-coupon-form') do |f| %>
+
+  <%= f.text_field :id %>
+  <%= f.select :duration, collection: options_for_select(stripe_durations) %>
+  <%= f.text_field :amount_off %>
+  <%= f.text_field :max_redemptions %>
+
+  <%= f.submit 'Add' %>
+  <%= link_to 'Cancel', admin_stripe_index_path %>
+
+<% end %>

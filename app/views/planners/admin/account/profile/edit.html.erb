@@ -1,0 +1,41 @@
+<%= section_wrap_full({
+  title: "Profile",
+  subtitle: "Define yourself for the vendors you will be working with."
+}) do %>
+  Keeping this information detailed and up to date will help vendors communicate with you during the event planning process.
+<% end %>
+
+
+
+<div class='inner'>
+<%= responsive_form_for(@planner, url: planners_admin_account_profile_path(current_planner.id), method: :patch, validate_submit: true) do |f| %>
+
+    <div class='subsection-wrap'>
+      <h1>Contact Info</h1>
+      <%= f.text_field :primary_phone_number %>
+      <%= f.text_field :primary_email %>
+      <%= f.text_field :primary_website %>
+    </div>
+
+    <div class='subsection-wrap'>
+      <h1>Misc</h1>
+      <%= f.text_field :first_name, autofocus: true %>
+      <%= f.text_field :last_name %>
+      <%= f.text_field :company_name %>
+      <%= f.time_zone_select :time_zone,
+        ActiveSupport::TimeZone.us_zones,
+        default: 'Central Time (US & Canada)'
+      %>
+      <%= f.file_field :logo_image %>
+      <%= image_tag @planner.logo_image.url(:medium) %>
+    </div>
+
+    <div class='subsection-wrap'>
+      <%= link_to 'Change Password', edit_planner_registration_path, class: 'btn' %>
+    </div>
+
+    <div class='submit'>
+      <%= submit_tag 'Update Profile' %>
+    </div>
+  <% end %>
+</div>

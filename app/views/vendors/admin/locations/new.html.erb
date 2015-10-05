@@ -1,0 +1,19 @@
+<%= section_wrap_full({
+  title: "New Location",
+  subtitle: "Double check the accuracy of this information.  We will use it to determine if the location should be visible for a prospective event."
+}) do %>
+  <%= link_to new_vendors_admin_location_path, class: 'btn btn-large' do %>
+    View Locations <%= icon('list') %>
+  <% end %>
+  <%= link_to vendors_admin_locations_claims_path, class: 'btn btn-large' do %>
+    View Claims <%= icon('files-o') %>
+  <% end %>
+<% end %>
+
+
+
+<div class='inner'>
+  <%= responsive_form_for(@location, url: vendors_admin_locations_path, validate_submit: true) do |f| %>
+    <%= render partial: 'new_form_fields', locals: { f: f } %>
+  <% end %>
+</div>

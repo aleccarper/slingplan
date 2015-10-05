@@ -1,0 +1,27 @@
+<%= section_wrap_full({
+  title: "#{role.to_s.titleize} Sign in",
+  subtitle: sign_in_call_to_action,
+  class: 'short'
+}) do; end %>
+
+
+
+<div class='inner devise'>
+  <%= responsive_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+    <div class='subsection-wrap'>
+      <%= devise_error_messages! %>
+
+      <%= f.email_field :email, autofocus: true, validate: false %>
+      <%= f.password_field :password, validate: false, recover: true %>
+
+      <% if devise_mapping.rememberable? %>
+        <div class='options'>
+          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <%= f.submit 'Sign In' %>
+    </div>
+  <% end %>
+</div>

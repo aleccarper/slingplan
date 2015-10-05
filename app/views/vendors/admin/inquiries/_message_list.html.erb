@@ -1,0 +1,25 @@
+<ul>
+  <% if inquiry.messages.blank? %>
+    <div class='nothing-here'>No responses as of yet...</div>
+  <% else %>
+
+    <% for message in inquiry.messages.order(created_at: :asc) %>
+      <% @cls = (message.owner.class == Admin and !message.read?) ? 'unread' : '' %>
+
+      <%= content_tag :li, data: { id: message.id }, class: 'inquiry-message' do %>
+
+        <% if message.owner.class == Vendor %>
+          <div class="me">
+            <%= render partial: '/vendors/admin/inquiries/vendor_message', locals: { message: message } %>
+          </div>
+        <% elsif message.owner.class == Admin %>
+          <div class="them">
+            <%= render partial: '/vendors/admin/inquiries/admin_message', locals: { message: message } %>
+          </div>
+        <% end %>
+
+      <% end %>
+    <% end %>
+
+  <% end %>
+</ul>

@@ -1,0 +1,14 @@
+.location-list-item {
+  background: $color-sub-container-background-solid;
+  margin-bottom: 5px;
+  padding: 12px;
+  border-radius: 15px;
+  position: relative;
+  overflow-y: hidden;
+  width: 100%;
+
+  .location-name {
+    font-weight: bold;
+    float: left;
+  }
+}

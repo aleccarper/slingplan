@@ -1,0 +1,22 @@
+<%= service_result(location, bookmark_list, for_bookmarks, vendor_profile) do %>
+
+  <%= content_tag :div, truncate_with_ellipsis(location.name, 22), class: 'title' %>
+
+  <div class='location-info'>
+    <%= content_tag :p, "#{location.address1} #{location.address2}" %>
+    <%= content_tag :p, "#{location.city}, #{location.state} #{location.zip}" %>
+    <%= content_tag :p, location.phone_number %>
+    <%= content_tag :p, location.email %>
+    <% unless location.website.blank? %>
+      <%= content_tag :p, link_to(truncate_with_ellipsis("#{location.website}", 22), location.website, target: '_blank') %>
+    <% end %>
+  </div>
+
+  <div class='controls'>
+    <i class='fa fa-crosshairs find-location'></i>
+    <i class='fa fa-building-o view-company'></i>
+    <i class="fa fa-times remove-bookmark"></i>
+    <i class="fa fa-bookmark add-bookmark"></i>
+  </div>
+
+<% end %>

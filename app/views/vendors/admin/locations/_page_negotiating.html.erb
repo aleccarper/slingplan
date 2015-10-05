@@ -1,0 +1,19 @@
+<div class='locations tree'>
+  <div class='tree-level tree-level-0'>
+    <div class='tree-items'>
+      <% page.each do |location| %>
+        <div class='tree-item'>
+          <%= render partial: '/vendors/admin/locations/location', locals: {
+            location: location,
+            hide_edit_button: true,
+            hide_delete_button: true,
+            hide_active_slider: true,
+            show_claim_button: false,
+            show_complete_button: false,
+            show_manage_button: true
+          } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

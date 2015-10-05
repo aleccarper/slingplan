@@ -1,0 +1,14 @@
+<div class='new-message-reply'>
+  <%= responsive_form_for NegotiationMessage.new(negotiation: inquiry),
+    url: '/inquiries/create_negotiation_message', remote: true do |f| %>
+
+    <%= f.hidden_field :negotiation_id, value: inquiry.id %>
+    <%= f.hidden_field :action, value: 'reply' %>
+
+    <%= f.text_area :content, class: 'new-message-area', label: 'Create Response' %>
+
+    <div class='controls'>
+      <%= submit_tag 'Reply', class: 'f-right btn' %>
+    </div>
+  <% end %>
+</div>

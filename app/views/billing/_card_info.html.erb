@@ -1,0 +1,82 @@
+
+<div class='card-info'>
+
+  <h3 class='card-info-header'>Payment Information</h3>
+
+  <div class="credit-card-wrapper">
+    <div class="credit-card front">
+      <div class="card-title">CREDIT CARD</div>
+      <div class='accepted-cards'></div>
+
+      <div class="card-number">
+        <div class="card-number-label">CARD NUMBER</div>
+        <div class="card-numbers">
+          <%= text_field_tag :stripe_number_value, @credit_card_value, data: { stripe: 'number' }, style: 'display: none;' %>
+          <%= text_field_tag :stripe_number, @credit_card_value, autocomplete: :off %>
+        </div>
+      </div>
+
+      <div class="card-expiration">
+        <div class="card-expiration-label">
+          <div>VALID</div>
+          <div>THRU</div>
+        </div>
+        <div class="card-expiration-month">
+          <div class="card-expiration-month-label">MONTH</div>
+          <%= select_tag :exp_month, options_for_select({
+              '01' => '01',
+              '02' => '02',
+              '03' => '03',
+              '04' => '04',
+              '05' => '05',
+              '06' => '06',
+              '07' => '07',
+              '08' => '08',
+              '09' => '09',
+              '10' => '10',
+              '11' => '11',
+              '12' => '12'
+            },
+            @cc_exp_month).html_safe,
+            data: { stripe: 'exp-month' } %>
+        </div>
+
+        <div class="card-expiration-slash">/</div>
+
+        <div class="card-expiration-year">
+          <div class="card-expiration-year-label">YEAR</div>
+          <%= select_tag :exp_year, options_for_select({
+              '15' => '2015',
+              '16' => '2016',
+              '17' => '2017',
+              '18' => '2018',
+              '19' => '2019',
+              '20' => '2020',
+              '21' => '2021',
+              '22' => '2022',
+              '23' => '2023',
+              '24' => '2024'
+            },
+            @cc_exp_year).html_safe,
+            data: { stripe: 'exp-year' } %>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-card back unfocused">
+
+      <div class="magnetic-strip"></div>
+
+      <div class="credit-card-ccv">
+        <div class="credit-card-ccv-label">CCV CODE</div>
+        <div class="credit-card-ccv-strip">
+          <div class="credit-card-ccv-box"></div>
+          <%= text_field_tag :stripe_cvc, @cvc_value, maxlength: 3, :autocomplete => :off, data: { stripe: 'cvc' } %>
+          <div class="credit-card-ccv-prefix">XXXX</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class='seed-upload'>
+  <div class='page-header'>
+    <%= link_to "<i class='left fa fa-arrow-left'></i>Back".html_safe, admin_locations_path, class: 'left btn btn-back-to-locations' %>
+    <div class='title'>Seed Uploads</div>
+  </div>
+
+  <%= responsive_form_for(@seed_upload, url: admin_locations_seed_path) do |f| %>
+
+    <div class='subtitle'>Seed File Upload (.ods)</div>
+    <section>
+      <%= f.file_field :file %>
+    </section>
+
+    <% unless @errors.blank? %>
+      <div class='subtitle'>Errors</div>
+      <section class='errors'>
+        <table>
+          <thead>
+            <tr>
+              <th class='sheet'>Sheet</th>
+              <th class='Row'>Row</th>
+              <th class='messages'>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for err in @errors %>
+              <tr class='error'>
+                <%= content_tag :td, err[:sheet], class: 'sheet' %>
+                <%= content_tag :td, err[:row], class: 'row' %>
+
+                <td class='messages'>
+                  <% err[:messages].each do |v|  %>
+                    <%= content_tag :div, v, class: 'message' %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <ul>
+        </ul>
+      </section>
+    <% end %>
+
+    <%= f.submit 'Import' %>
+  <% end %>
+</div>

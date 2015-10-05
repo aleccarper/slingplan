@@ -1,0 +1,86 @@
+<div class='container'>
+  <div class='inner'>
+    <div></div>
+    <div class='section-wrap'>
+      <div class='subsection-label'><%= @vendor.name %></div>
+      <div class='section-content'>
+        <%= image_tag(@vendor.logo_image.url(:large)) %>
+      </div>
+    </div>
+
+    <% if @vendor.primary_phone_number || @vendor.primary_email || @vendor.primary_website %>
+      <div class='section-wrap'>
+        <div class='subsection-label'>Primary Contact</div>
+        <div class='section-content'>
+          <% if @vendor.primary_phone_number %>
+            Phone: <%= @vendor.primary_phone_number %>
+            <br />
+          <% end %>
+          <% if @vendor.primary_email %>
+            Email: <%= mail_to(@vendor.primary_email, @vendor.primary_email) %>
+            <br />
+          <% end %>
+          <% if @vendor.primary_website %>
+            Web: <%= link_to(@vendor.primary_website, @vendor.primary_website) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @vendor.description %>
+      <div class='section-wrap-full'>
+        <div class='subsection-label'>About...</div>
+        <div class='section-content'>
+          <p>
+            <%= @vendor.description %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @vendor.locations.active.confirmed.account_valid.count > 0 %>
+    <%= render partial: '/map/small_horizontal_map', locals: {
+      locations: @vendor.locations.active.confirmed.account_valid,
+      show_pins: true,
+      index: false,
+      lock: false,
+      zoom_control: false,
+      zoom_scroll: false,
+      center: nil
+    } %>
+
+    <div class='inner'>
+      <div class='section-wrap-full'>
+        <div class='subsection-label'>Locations</div>
+        <div class='section-content'>
+          <div class='locations tree'>
+            <% @vendor.locations.active.confirmed.account_valid.by_state_ordered_by_city.each do |state, locations| %>
+              <div class='tree-level tree-level-0 state'>
+                <div class='tree-header'>
+                  <div class='tree-arrow'></div>
+                  <%= content_tag :div, full_state_name_from_abbreviation(state), class: 'tree-header-text state-name' %>
+                </div>
+                <div class='tree-items'>
+                  <div class='pagination' id='page_<%= state %>'></div>
+                  <%= javascript_tag defer: 'defer' do %>
+                    Pagination.init({
+                      id: '#page_<%= state %>',
+                      url: '<%= "/vendors/#{@vendor.id}/page_state" %>',
+                      data_func: function(page) {
+                        return {
+                          page: page || 0,
+                          state: '<%= state %>'
+                        };
+                      }
+                    });
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

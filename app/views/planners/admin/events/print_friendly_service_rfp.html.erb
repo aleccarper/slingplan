@@ -1,0 +1,10 @@
+<h1>Event Details</h1>
+<div style='padding-left: 24px;'>
+  <%= render partial: 'print_friendly_event', locals: { event: event } %>
+</div>
+
+<br>
+
+<h1>Service RFP Details (<%= service_rfp.service.name %>)</h1>
+<%= render partial: 'print_friendly_service_rfp', locals: { service_rfp: service_rfp } %>
+

@@ -1,0 +1,98 @@
+.pagination {
+  position: relative;
+  padding: 6px 0;
+  text-align: center;
+  width: 100%;
+
+  .pagination-first, .pagination-next, .pagination-prev, .pagination-last {
+    @extend .btn;
+    background: $palette-blue-light;
+    margin: 0 6px;
+    position: relative;
+
+    &.disabled {
+      background: $palette-gray-dark;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .fa {
+      font-size: 29px;
+      display: none;
+    }
+  }
+
+  .pagination-first {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+  }
+
+  .pagination-last {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+  }
+
+  .pagination-page-wrap {
+    width: 100%;
+  }
+
+  .pagination-prev, .pagination-page, .pagination-next {
+    border-radius: 0 !important;
+  }
+
+  .pagination-page {
+    @extend .btn-dark;
+    @include transition(color .25s ease-in-out);
+    color: $palette-gray-medium;
+    position: relative;
+    padding: 6px 8px;
+    text-decoration: none;
+    font-size: $font-size-large;
+    z-index: 2;
+
+    &:hover {
+      font-weight: bolder;
+      background: $white !important;
+      color: $black !important;
+    }
+
+    &.pagination-current-page {
+      background: $palette-green-light;
+      color: $white;
+      font-weight: bolder;
+      pointer-events: none;
+    }
+  }
+
+  .pagination-contents {
+    position: relative;
+    clear: both;
+    text-align: left;
+  }
+
+
+
+  @include breakpoint(440px) {
+    .pagination-first, .pagination-next, .pagination-prev, .pagination-last, .pagination-page {
+      font-size: 17px !important;
+      padding: 3px 7px;
+
+      .text {
+        display: none !important;
+      }
+
+      .fa {
+        display: inline !important;
+        font-size: 17px !important;
+
+        .fa:before {
+          font-size: 17px !important;
+        }
+      }
+    }
+  }
+}

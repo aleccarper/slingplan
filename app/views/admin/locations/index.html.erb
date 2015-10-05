@@ -1,0 +1,22 @@
+<%= section_wrap_full({
+  title: "Locations",
+  subtitle: "Seed Locations",
+  class: 'short'
+}) do %>
+  <%= link_to "<i class='left fa fa-plus'></i>New Location".html_safe, new_admin_location_path, class: 'f-left btn btn-new-location' %>
+  <%= link_to "<i class='left fa fa-file'></i>Upload Seed File".html_safe, admin_locations_seed_path, class: 'f-left btn' %>
+  <%= admin_location_claims_link %>
+<% end %>
+
+<div class='inner locations'>
+  <% if current_admin.locations.blank? %>
+    <div class='nothing-here'>No locations yet created.</div>
+  <% else %>
+    <%
+      # render partial: 'admin/locations/locations', locals: {
+      #   unconfirmed: {},
+      #   states: current_admin.locations.by_state_ordered_by_city
+      # }
+    %>
+  <% end %>
+</div>

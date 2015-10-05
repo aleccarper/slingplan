@@ -1,0 +1,141 @@
+.signin {
+
+  .sign-in-area {
+    &.vendor {
+      .role.vendor {
+        @extend .btn-green;
+      }
+    }
+    &.staffer {
+      .role.staffer {
+        @extend .btn-green;
+      }
+    }
+    &.planner {
+      .role.planner {
+        @extend .btn-green;
+      }
+    }
+  }
+
+  .choose-role {
+    h3 {
+      text-align: center;
+      margin: $margin / 2 0;
+    }
+
+    .roles {
+      height: 100px;
+    }
+
+    .role {
+      float: left;
+      height: 100px;
+      margin: 0 1%;
+      width: 31%;
+    }
+  }
+
+  .sign-in-forms-wrapper {
+    height: 210px;
+  }
+
+  .sign-in-form-wrapper {
+    position: absolute;
+    display: none;
+
+    &.selected {
+      display: inline;
+      z-index: 1000;
+    }
+  }
+
+  .sign-in-forms, .account-info {
+    display: block;
+    position: relative;
+    margin-top: $margin * 2;
+    width: 100%;
+  }
+
+  .sign-up {
+    margin-top: $margin / 4;
+  }
+
+  .page-header {
+    text-align: center;
+  }
+
+  .account-info {
+    margin-top: $margin;
+    padding-top: 20px;
+    border-top: 5px solid $palette-green-medium;
+
+    h1, h3, .subsection-label {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #planner-info {
+      padding-right: 40px;
+    }
+
+    #vendor-info {
+      padding-left: 40px;
+    }
+
+    section {
+      padding-top: $margin;
+      text-align: center;
+    }
+
+    .section-content {
+      height: 250px;
+      text-align: justify;
+      padding: 0 $margin / 2;
+    }
+  }
+
+  .controls {
+    width: 100%;
+    height: $margin * 2;
+    position: relative;
+
+    a {
+      top: 11px;
+      position: relative;
+      font-size: $font-size-small;
+    }
+
+    .submit {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  @include breakpoint(861px) {
+    .account-info {
+      padding-left: 10px;
+      padding-right: 10px;
+
+      #planner-info {
+        padding-right: 10px;
+      }
+
+      #vendor-info {
+        padding-left: 10px;
+      }
+    }
+  }
+
+  @include breakpoint(767px) {
+    .half {
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      width: 100%;
+    }
+  }
+}

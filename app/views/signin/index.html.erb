@@ -1,0 +1,44 @@
+<%= section_wrap_full({
+  title: "Sign In",
+  subtitle: sign_in_call_to_action,
+  class: 'short'
+}) do; end %>
+
+
+<div class='inner'>
+  <div class='sign-in-area'>
+    <% roles = [:planner, :vendor, :staffer] %>
+    <div class="subsection-wrap">
+      <div class='choose-role'>
+        <h3>Sign In as...</h3>
+        <div class='roles'>
+          <% roles.each do |role| %>
+            <input type='button' value='<%= role.to_s.titleize %>' class='btn btn-blue btn-large role <%= role %>' data-role='<%= role %>'/>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class='sign-in-forms-wrapper'>
+      <% roles.each do |role| %>
+        <div class="subsection-wrap sign-in-form-wrapper" data-role='<%= role %>'>
+
+          <%= responsive_form_for(role, url: session_path(role), html: { id: "new_#{role}" }) do |f| %>
+
+            <%= f.text_field :email, validate: false %>
+            <%= f.password_field :password, validate: false %>
+
+            <div class='options'>
+              <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+            </div>
+
+            <div class='controls'>
+              <%= link_to "Forgot your password?", new_password_path(role) %>
+              <%= f.submit 'Sign In' %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

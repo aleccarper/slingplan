@@ -1,0 +1,14 @@
+<%= content_for :javascript do %>
+  <%= javascript_tag defer: 'defer' do %>
+    setTimeout(function() {
+      SseStream.init({
+        source: '<%= j source %>',
+        destination: '<%= j destination %>',
+
+        <% if defined?(callback) %>
+          callback: <%= j callback %>
+        <% end %>
+      });
+    }, 1);
+  <% end %>
+<% end %>

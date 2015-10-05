@@ -1,0 +1,66 @@
+<%= section_wrap_full({
+  title: "Profile",
+  subtitle: "Define yourself for prospective contractors."
+}) do %>
+  Keeping this information detailed and up to date will help businesses learn about and communicate with you, as well as boost your search rankings.
+<% end %>
+
+
+
+<div class='inner'>
+  <%= responsive_form_for(@staffer, url: staffers_admin_profile_path(current_staffer.id), method: :patch, validate_submit: true) do |f| %>
+
+    <div class='subsection-wrap'>
+      <div class='subtitle'>Who you are</div>
+      <div class='section-content'>
+        <div class='hint'>
+          Future customers will use this information to contact you.
+        </div>
+        <%= f.text_field :name, required: true %>
+        <%= f.text_field :address1 %>
+        <%= f.text_field :address2 %>
+        <%= f.text_field :city, required: true %>
+        <%= f.select :state, collection: us_states, required: true %>
+        <%= f.text_field :zip, required: true %>
+        <%= f.text_field :primary_phone_number %>
+        <%= f.text_field :primary_email %>
+        <%= f.text_field :primary_website %>
+      </div>
+    </div>
+
+    <div class='subsection-wrap'>
+      <div class='subtitle'>What you do</div>
+      <div class='section-content'>
+        <div class='hint'>
+          Please fill out a description of what it is you do.
+        </div>
+
+        <%= f.text_area :description %>
+      </div>
+    </div>
+
+    <div class='subsection-wrap'>
+      <div class='subtitle'>Misc</div>
+      <div class='section-content'>
+        <%= f.time_zone_select :time_zone,
+          ActiveSupport::TimeZone.us_zones,
+          default: 'Central Time (US & Canada)'
+        %>
+        <%= f.file_field :logo_image, name: 'staffer[logo_image]', label: 'Portrait' %>
+        <%= image_tag @staffer.logo_image.url(:medium) %>
+        <%= f.file_field :resume, name: 'staffer[resume]' %>
+        <% unless f.object.resume.blank? %>
+          <div class='subsection-wrap'>
+            <%= link_to 'View Current Resume', f.object.current_resume_url, target: '_blank', class: 'btn btn-small' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='subsection-wrap'>
+      <%= link_to 'Change Password', edit_staffer_registration_path, class: 'btn btn-dark' %>
+      <%= submit_tag 'Update Profile', class: 'btn f-right' %>
+    </div>
+
+  <% end %>
+</div>

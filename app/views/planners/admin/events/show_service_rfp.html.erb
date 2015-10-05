@@ -1,0 +1,123 @@
+<%= section_wrap_full({
+  title: "Event Management",
+  subtitle: "Below you will find all the Requests for Proposal attached to this event organized under which service type they represent.",
+  class: "section-manage-event #{@service_rfp.service.name.parameterize} "
+}) do %>
+  <%= render partial: "/planners/admin/events/crumbs", locals: { event: @event, page: 'manage-event' } %>
+<% end %>
+
+
+<div class='inner'>
+
+  <div class='event'>
+    <%= hidden_field_tag :id, @event.id %>
+    <%= hidden_field_tag :lat, @event.latitude %>
+    <%= hidden_field_tag :lng, @event.longitude %>
+
+    <div class='subsection-wrap'>
+      <h2><%= content_tag :div, @event.name, class: 'event-name' %></h2>
+
+      <div class='section-content'>
+        <div class='dates'>
+          <span><%= prettify_date_short(@event.start_date.to_i) %>
+          <% if @event.end_date %>
+            - <%= prettify_date_short(@event.end_date.to_i) %>
+          <% end %>
+          </span>
+        </div>
+
+        <%= location_list_address(@event) %>
+
+        <div class='event-controls'>
+          <%= link_to "/planners/admin/events/#{@event.id}/print_friendly", target: '_blank', class: 'btn btn-print-friendly-event' do %>
+            Printable Event <%= icon('print') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  <div class='subsection-wrap'>
+    <form>
+      <div class='select-service-rfp-area'>
+        <h3>Currently Viewing RFPs For:</h3>
+        <div class='subtitle'>
+          <%= hidden_field_tag :srfp_selected, value: @service_rfp.id %>
+          <%= select_tag 'show_service_rfps', options_from_collection_for_select(@event.service_rfps, "id", "service_name", @service_rfp.id) %>
+        </div>
+      </div>
+    </form>
+  </div>
+
+    <%= responsive_form_for(@service_rfp, url: '', class: "new-service-rfp #{@service_rfp.has_outside_arrangements? ? 'outside-arrangements-made' : ''}") do |f| %>
+
+      <%= content_tag :div, class: 'service-rfp', data: { id: @service_rfp.id } do %>
+
+        <div class='subsection-wrap'>
+          <h2><%= f.object.service.name %></h2>
+
+          <div class='section-content'>
+            <div class='service-rfp-budget'>
+              Budget:
+              <strong>
+                <%= @service_rfp.budget.blank? ? '[No budget provided]' : @service_rfp.budget %>
+              </strong>
+            </div>
+
+            <div class='service-rfp-notes'>
+              Notes:
+              <strong>
+                <%= @service_rfp.notes.blank? ? '[No notes provided]' : @service_rfp.notes %>
+              </strong>
+            </div>
+          </div>
+
+          <div class='subsection-label'>
+            Requests for Proposal
+          </div>
+          <div class='section-content'>
+            <%= paginate "page_service_rfp_#{@service_rfp.id}", "/planners/admin/events/#{@event.id}/page_service_rfp", {
+              service_rfp_id: @service_rfp.id
+            } %>
+          </div>
+
+          <div class='service-rfp-controls'>
+            <div>
+              <%= link_to "/planners/admin/events/#{@event.id}/service_rfps/#{@service_rfp.id}/print_friendly", target: '_blank', class: 'btn btn-print-friendly-service-rfp' do %>
+                Printable Service RFP <%= icon('print') %>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+
+      <% end %>
+
+
+      <div class='hint outside-arrangements'>
+        <div class='heading'>Outside Arrangements</div>
+        <p>Notify eligible Vendors under a particular service if you have made arrangements outside of SlingPlan.</p>
+        <br>
+        <p>If you make outside arrangements...</p>
+        <ol>
+          <li>The service will be closed and completed for this Event.</li>
+          <li>Vendors with open RFPs for the service will be notified the service is not longer needed for this Event.</li>
+          <li>Any approved bids for the service will be revoked.</li>
+          <li>In the future you may reverse this option to reopen the RFP, and Vendors will be notified so they may resume negotiation.</li>
+        </ol>
+        <div class='hint hint-cancel-outside-agreements'>
+          You previously closed RFPs for <%= @service_rfp.service.name %> due to arrangements made outside SlingPlan.  Clicking below will reopen RFPs for this service and notify all associated Vendors within the negotiations attached.
+          <%= link_to "Reopen negotiations for this service", nil, class: 'btn btn-red btn-cancel-outside-arrangements' %>
+        </div>
+        <div>
+          <%= link_to "I've made outside arrangements", nil, class: 'btn btn-red btn-make-outside-arrangements' %>
+        </div>
+      </div>
+
+
+    <% end %>
+
+    <div class='controls'>
+      <%= link_to 'Back', '/planners/admin/events/', class: 'btn btn-green f-right' %>
+    </div>
+  </div>
+</div>

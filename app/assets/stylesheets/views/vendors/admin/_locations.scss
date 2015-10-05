@@ -1,0 +1,242 @@
+.vendors-admin-locations,
+.planners-admin-events,
+.admin-locations,
+.vendors .section-wrap-full {
+
+  .page-header.locations-index {
+    height: 160px;
+  }
+
+  .location-crumbs {
+    a.step {
+      width: 35%;
+
+      &:first-child {
+        width: 30%;
+      }
+
+      @include breakpoint(500px) {
+        padding-top: 8px;
+      }
+    }
+  }
+  .location-edit-crumbs {
+    width: 100% !important;
+
+    a.step {
+      width: 33.33% !important;
+    }
+  }
+
+  .location-claims {
+    .confirm-preview, .confirm-conflicts {
+      .heading {
+        margin: $margin / 4 0 $margin / 2;
+      }
+
+      .notice {
+        margin: $margin / 4 0 $margin / 2;
+      }
+    }
+
+    .claim-location {
+      position: absolute;
+      bottom: 0;
+      right: $margin / 4;
+      cursor: pointer;
+    }
+
+    .confirm-conflicts {
+      margin: $margin 0 $margin * 2;
+    }
+
+    @include breakpoint(890px) {
+      .location-list-item {
+        max-width: 49.5%;
+      }
+    }
+
+    @include breakpoint(560px) {
+      .location-list-item {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .claimed {
+    .claim-success {
+      padding: $margin / 4;
+      height: 400px;
+
+      h1 {
+        margin-bottom: $margin;
+      }
+
+      .links {
+        @include center;
+      }
+
+      .btn-view-claims, .btn-back-to-locations {
+        margin: $margin / 4 0;
+        position: relative;
+      }
+    }
+  }
+
+  .controls {
+    float: right;
+  }
+
+  .location-claims-count {
+    @include button-count-bubble;
+  }
+
+  .tree-header .state-name {
+    font-size: $font-size-large;
+  }
+
+  .location-list-item, .event-list-item {
+    display: inline-block;
+    padding: $margin / 2;
+    position: relative;
+    width: 100%;
+    background: $color-sub-container-background-solid;
+    border-radius: 10px;
+
+    &.unconfirmed {
+      .footer {
+        margin-bottom: $margin / 2;
+      }
+    }
+
+    &:not(:nth-child(3n+2)) {
+      margin-left: 0;
+    }
+
+    &.active {
+      border: 1px solid $palette-green-medium;
+    }
+
+    .controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      a {
+        display: block;
+        height: 28px;
+        width: 28px;
+        padding: $margin / 6;
+        text-align: center;
+        float: right;
+        text-decoration: none;
+
+
+        &.btn-edit, &.btn-manage, &.btn-clone {
+          color: $white;
+          //padding-top: $margin / 5;
+
+          &:hover {
+            color: $black;
+            background: $white;
+          }
+        }
+        &.btn-remove {
+          color: $white;
+
+          &:hover {
+            background: $palette-red-medium;
+            color: $white;
+          }
+        }
+      }
+    }
+
+    .new-messages {
+      background-color: rgba(22, 135, 70, 0.2);
+      margin-top: 8px;
+      padding: 8px;
+    }
+
+    .location-header, .event-header {
+      @import 'components/slider';
+      color: $white;
+      background: transparent;
+      height: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: 'Oswald';
+
+      .event-name {
+        display: inline-block;
+        padding-top: 6px;
+      }
+    }
+
+    .contents {
+      position: relative;
+      padding-left: 8px;
+    }
+
+    .sub-contents {
+      padding-top: 4px;
+      height: auto;
+      width: 100%;
+      padding-left: 8px;
+    }
+
+    .footer {
+      height: 40px;
+      background: transparent;
+      position: relative;
+      text-align: right;
+
+      .location-active, .btn-complete {
+        float: right;
+        display: inline-block;
+        border-radius: 5px;
+      }
+
+      @include breakpoint(348px) {
+        .slider {
+
+          &.inactive {
+            .switch {
+              left: 81px;
+            }
+          }
+        }
+      }
+    }
+
+    .location-status-tally {
+      text-align: center;
+      margin: $margin 0;
+
+      .total {
+        font-weight: bold;
+      }
+
+      .total-active-locations {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .locations {
+    width: 100%;
+
+    &.max-allowed {
+      .location-list-item, .event-list-item {
+        .slider.inactive:hover {
+          cursor: not-allowed !important;
+        }
+      }
+    }
+  }
+}
+
+.btn-back-to-locations {
+  float: left;
+}

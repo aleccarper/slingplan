@@ -1,0 +1,330 @@
+.holding-container,
+.maintenance-container,
+.errors-container,
+.beta-container,
+.legal-container {
+  color: $white;
+  overflow-x: hidden;
+  min-height: 100%;
+
+  .inner-container {
+    position: relative;
+  }
+
+  .container {
+    @include center;
+    background: transparent;
+    float: none;
+    left: auto;
+    padding: $margin $margin $margin * 2;
+    margin-top: $margin;
+    margin-bottom: $margin * 4;
+    position: relative;
+
+    @include breakpoint(785px) {
+     padding: 24px 10px $margin * 2;
+    }
+
+    @include breakpoint(500px) {
+     padding: 24px 10px $margin * 5;
+    }
+  }
+
+  .backdrop-top {
+    background: $color-sub-container-background-solid;
+    height: 130px;
+    position: relative;
+
+    @include breakpoint(500px) {
+      height: 110px;
+    }
+  }
+
+  .backdrop-bottom {
+    background: rgba(0, 0, 0, 0.4);
+    margin-top: $margin * 4;
+    position: relative;
+
+    .title {
+      padding-bottom: $margin * 1.5;
+      border-bottom: 2px solid rgba(22, 135, 70, 0.5);
+    }
+  }
+
+  .logo {
+    border-bottom: 4px solid $palette-green-medium;
+    font-size: 96px;
+    line-height: 0.25em;
+    padding: 45px 24px 28px;
+
+    a {
+      line-height: 0;
+      text-decoration: none;
+    }
+
+    @include breakpoint(500px) {
+      font-size: 66px;
+      line-height: 0;
+      border-bottom: 2px solid $palette-green-medium;
+    }
+  }
+
+  .title {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    line-height: 1.1;
+    margin: 24px 0;
+    text-align: center;
+
+    @include breakpoint(500px) {
+      font-size: 50px;
+    }
+  }
+
+  .subtitle {
+    color: $palette-gray-light;
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: $margin;
+    border-bottom: 2px solid rgba(22, 135, 70, 0.5);
+    line-height: 1.2;
+
+    @include breakpoint(500px) {
+      font-size: 25px;
+    }
+  }
+
+  .description {
+    font-size: 29px;
+    line-height: 1.2;
+    margin: $margin 0;
+    font-weight: 100;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding-bottom: $margin;
+    border-bottom: 2px solid rgba(22, 135, 70, 0.5);
+
+    &.sub {
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    @include breakpoint(500px) {
+      font-size: 20px;
+
+      &.sub {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .call-to-action {
+    color: $palette-gray-light;
+    font-size: $font-size-large;
+    padding-bottom: $margin / 2;
+    text-align: center;
+  }
+
+  .reassurance {
+    font-size: $font-size-small;
+    margin: $margin / 2 0 0;
+    font-style: italic;
+  }
+
+  .already-subscribed, .just-subscribed {
+    text-align: center;
+    padding-bottom: $margin;
+
+    .already-subscribed-description {
+      font-size: $font-size-base;
+      color: $palette-gray-light;
+      margin-top: $margin / 2;
+    }
+  }
+
+  form {
+    @include center;
+    margin-top: $margin;
+    max-width: 800px;
+
+    .field, .submit {
+      display: inline-block;
+
+      input {
+        font-size: 28px !important;
+      }
+    }
+
+    .field {
+      margin-right: 2%;
+      width: 73%;
+    }
+
+    .errorlist {
+      position: absolute;
+      top: 68px;
+    }
+
+    .indicator:after {
+      top: 14px !important;
+      right: 16px !important;
+    }
+
+    .submit {
+      width: 24%;
+      top: 3px;
+
+      input {
+        padding: 6px;
+      }
+    }
+
+    &.invalid {
+      .submit input {
+        background: $color-container-background-solid !important;
+      }
+    }
+
+    @include breakpoint(785px) {
+      .field {
+        width: 63%;
+      }
+
+      .submit {
+        width: 33%;
+      }
+    }
+
+
+    @include breakpoint(500px) {
+      .field {
+        width: 100%;
+      }
+
+      .submit {
+        width: 100%;
+      }
+    }
+  }
+
+  .demo {
+    position: relative;
+    padding-bottom: $margin * 2;
+    width: 100%;
+
+    .caption {
+      @include position(relative, 0, 0);
+      background: rgba(0, 0, 0, 0.6);
+      padding: $margin / 4 $margin / 4 0;
+      height: $margin * 1.5;
+      z-index: 2;
+    }
+
+    .video {
+      margin-bottom: -6px;
+      z-index: 1;
+      float: left;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+
+
+.beta-container {
+  display: none;
+
+  form {
+    width: 70%;
+  }
+
+  .field {
+    float: none !important;
+    width: 100% !important;
+  }
+
+  .submit {
+    @include center;
+    width: 210px !important;
+    float: none !important;
+    text-align: center;
+    clear: both;
+  }
+
+  .beta-nav {
+    margin-top: $margin;
+
+    .btn, .btn {
+      margin-right: 5%;
+      margin-left: 5%;
+    }
+  }
+}
+
+
+
+.maintenance-container {
+  .subtitle {
+    margin-top: $margin * 2;
+  }
+
+  .plus, .equals {
+    color: $palette-gray-medium;
+  }
+
+  .fa-gears {
+    color: $white
+  }
+
+  .fa-wrench {
+    color: $palette-green-medium;
+  }
+
+  .fa-heart {
+    color: $palette-red-medium;
+  }
+}
+
+
+
+.errors-container {
+  .container {
+    margin-bottom: 0;
+  }
+
+  .title {
+    font-size: 160px;
+  }
+
+  .subtitle {
+    font-size: 80px;
+  }
+
+  .fa-warning {
+    color: $palette-yellow-light;
+  }
+
+  @include breakpoint(600px) {
+    .title {
+      font-size: 120px;
+    }
+
+    .subtitle {
+      font-size: 60px;
+    }
+  }
+
+  @include breakpoint(400px) {
+    .title {
+      font-size: 90px;
+    }
+
+    .subtitle {
+      font-size: 40px;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.vendors-admin-locations-claims {
+
+  .page-header {
+    position: relative;
+    .title {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      text-align: center;
+    }
+  }
+
+  .btn-back-to-locations {
+    position: relative;
+    z-index: 10;
+  }
+
+
+  .nothing-here {
+    font-size: $font-size-large;
+    padding: $margin / 2;
+  }
+
+
+}

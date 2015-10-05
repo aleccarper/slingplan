@@ -1,0 +1,43 @@
+<%= section_wrap_mini({
+  title: "Email Bookmarks"
+}) do; end %>
+
+
+<div class='export-email'>
+  <div class='btn btn-back-to-export'>Back to Export
+    <i class='fa fa-right'></i>
+  </div>
+
+  <p>Enter the email you'd like to send your bookmarks to.</p>
+
+  <%= responsive_form_for BookmarkListEmail.new, url: '' do |f| %>
+    <%= f.email_field :email, class: 'tbx-export-email' %>
+    <%= f.submit 'Send' %>
+  <% end %>
+
+  <div class='bookmarks-list'>
+    <% if bookmark_list.nil? %>
+      <% for location in Location.find(get_cookie_bookmarks) %>
+        <%= render partial: 'map/service_result',
+          locals: {
+            location: location,
+            bookmark_list: nil,
+            vendor_profile: false,
+            for_bookmarks: true
+          }
+        %>
+      <% end %>
+    <% else %>
+      <% for location in bookmark_list.bookmarks.map(&:location) %>
+        <%= render partial: 'map/service_result',
+          locals: {
+            location: location,
+            bookmark_list: nil,
+            vendor_profile: false,
+            for_bookmarks: true
+          }
+        %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

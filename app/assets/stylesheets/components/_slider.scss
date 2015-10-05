@@ -1,0 +1,78 @@
+.slider {
+  @include transition(all 0.25s ease);
+  background: $palette-green-medium;
+  cursor: pointer;
+  position: relative;
+  color: white;
+  font-size: $font-size-base;
+  font-family: 'Oswald';
+  text-transform: uppercase;
+  margin: 5px 5px;
+  padding: 0px 24px;
+  height: 30px;
+  width: 114px;
+  text-align: center;
+  overflow: hidden;
+  @include transition(all 0.25ss ease);
+  border: 2px solid;
+  border-color: $black;
+
+  .active-text, .inactive-text {
+    @include transition(all 0.5s ease);
+    @include noselect;
+    position: absolute;
+  }
+
+  .active-text {
+    left: 10px;
+    top: 2px;
+  }
+
+  .inactive-text {
+    top: 200px;
+    left: 23px;
+  }
+
+  &:hover {
+    background-color: $black;
+  }
+
+  /*
+
+  .switch {
+    @include transition(all 0.25s ease);
+    background: white;
+    position: absolute;
+    top: 3px;
+    left: 96px;
+    height: 12px;
+    width: 12px;
+    box-shadow: 0px 0px 3px black;
+  }
+  */
+
+
+  &.inactive {
+    background: $black;
+    border-color: $palette-green-medium;
+
+    &:hover {
+      background-color: $palette-green-medium;
+    }
+
+    /*
+    .switch {
+      left: 4px;
+      top: 3px;
+    }
+    */
+
+    .active-text {
+      top: -200px;
+    }
+
+    .inactive-text {
+      top: 2px;
+    }
+  }
+}

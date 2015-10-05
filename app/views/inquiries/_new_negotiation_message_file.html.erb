@@ -1,0 +1,14 @@
+<div class='new-message-file'>
+  <%= responsive_form_for NegotiationMessage.new(negotiation: inquiry),
+    url: '/inquiries/create_negotiation_message' do |f| %>
+
+    <%= f.hidden_field :negotiation_id, value: inquiry.id %>
+    <%= f.hidden_field :action, value: 'file' %>
+
+    <%= f.file_field :file_attachment, label: false %>
+
+    <div class='controls'>
+      <%= submit_tag 'Upload', class: 'f-right btn' %>
+    </div>
+  <% end %>
+</div>

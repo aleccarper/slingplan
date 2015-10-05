@@ -1,0 +1,361 @@
+.planners-admin-events,
+.vendors-admin-locations,
+.vendors-admin-locations-events,
+.admin-locations,
+.home.vendor-signed-in,
+.home.planner-signed-in {
+
+  h3 {
+    margin-top: $margin / 2;
+  }
+
+  &.vendors-admin-locations {
+    .crumbs {
+      width: 400px;
+
+      a.step {
+        width: 50%;
+      }
+    }
+    .section-manage-location {
+      .crumbs {
+        width: 360px;
+
+        a.step {
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  &.vendors-admin-locations-events {
+    .crumbs {
+      width: 600px;
+
+      a.step {
+        width: 33.3333%;
+      }
+    }
+  }
+
+  &.planners-admin-events {
+    .section-manage-event {
+      .crumbs {
+        width: 320px;
+
+        a.step {
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  .tab-content {
+    .nothing-here {
+      margin: 40px;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: $font-size-large;
+    }
+
+    .btn-print-friendly-event,
+    .btn-print-friendly-location,
+    .btn-print-friendly-service-rfp {
+      .fa:before {
+        top: -1px;
+        margin-left: $margin / 4;
+        position: relative;
+      }
+    }
+
+    .btn-manage, .btn-clone {
+      float: right;
+    }
+
+    .btn-clone {
+      background-color: $palette-blue-light;
+    }
+
+    .tree-items {
+      margin-left: 0;
+    }
+
+    .save-wrap {
+      margin-top: $margin / 2;
+      height: $margin * 2;
+
+      input {
+        top: $margin;
+      }
+    }
+
+    .crumbs {
+      .step:not(.current) {
+        background: $color-sub-container-background-solid;
+
+        &:after {
+          border-left-color: $color-sub-container-background-solid;
+        }
+      }
+    }
+
+    .unconfirmed-events,
+    .unconfirmed-locations {
+      padding: $margin / 2 $margin / 2 0;
+    }
+
+    form {
+      .service-selection {
+        h4 {
+          margin: $margin 0 $margin / 2;
+        }
+
+        .errors {
+          @extend .hint;
+          @extend .hint.red;
+          display: none;
+        }
+
+        .field-wrapper {
+          margin-top: 0;
+        }
+
+        .check-boxes {
+          margin: 0;
+
+          input, input ~ label {
+            color: $white;
+            font-weight: bold;
+            margin: 0;
+            cursor: pointer;
+          }
+          label {
+            margin: 0;
+          }
+
+          @include breakpoint(400px) {
+            input, input ~ label, label:before {
+              font-size: $font-size-base;
+            }
+          }
+        }
+        .section-content {
+          padding: 0;
+        }
+
+        @include breakpoint(660px) {
+          font-size: $font-size-base !important;
+        }
+      }
+    }
+  }
+
+  .location-totals-wrapper, .event-totals-wrapper {
+    padding: 0 $margin / 2;
+    width: 100%;
+
+    .location-totals, .event-totals {
+      background: $color-total-background;
+      //border: 1px solid rgba(255, 255, 255, 0.1);
+      display: block;
+      font-size: $font-size-large;
+      height: $margin * 1.2;
+      margin: $margin / 2 0 $margin / 4;
+      padding: $margin / 8;
+      position: relative;
+      width: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      color: $color-text-light;
+
+      .current-max {
+        font-weight: bold;
+      }
+
+      .used {
+        @include transition(right 0.25s ease);
+        background: $color-total-used;
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .text {
+        bottom: 0;
+        left: 0;
+        padding: $margin / 8;
+        position: absolute;
+        text-align: center;
+        right: 0;
+        top: 4px;
+        z-index: 1001;
+        line-height: 0.9em;
+      }
+    }
+  }
+
+  .tree .tree-items {
+    border: none;
+    padding-left: 0;
+  }
+
+  .tree-item {
+    margin-bottom: 0px;
+    margin-right: 2px;
+    margin-left: 2px;
+    width: 49%;
+    display: inline-block;
+  }
+
+  .location-list-item, .event-list-item {
+    display: inline-block;
+    padding: $margin / 2;
+    position: relative;
+    width: 100%;
+    background: $color-sub-container-background-solid;
+    border-radius: 10px;
+
+    &.unconfirmed {
+      .footer {
+        margin-bottom: $margin / 2;
+      }
+    }
+
+    &:not(:nth-child(3n+2)) {
+      margin-left: 0;
+    }
+
+    .controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      a {
+        display: block;
+        height: 28px;
+        width: 28px;
+        padding: $margin / 6;
+        text-align: center;
+        float: right;
+        text-decoration: none;
+
+
+        &.btn-edit, &.btn-manage, &.btn-clone {
+          color: $white;
+          //padding-top: $margin / 5;
+
+          &:hover {
+            background: $white;
+
+            .fa {
+              color: $black !important;
+            }
+          }
+        }
+        &.btn-remove {
+          color: $white;
+
+          &:hover {
+            background: $palette-red-medium;
+            color: $white;
+          }
+        }
+      }
+    }
+
+    .new-messages {
+      background-color: rgba(22, 135, 70, 0.2);
+      margin-top: 8px;
+      padding: 8px;
+    }
+
+    .location-header, .event-header {
+      @import 'components/slider';
+      color: $white;
+      background: transparent;
+      height: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: 'Oswald';
+
+      .event-name {
+        display: inline-block;
+        padding-top: 6px;
+      }
+    }
+
+    .contents {
+      position: relative;
+      padding-left: 8px;
+      margin-bottom: $margin / 4;
+    }
+
+    .sub-contents {
+      padding-top: 4px;
+      height: auto;
+      width: 100%;
+      padding-left: 8px;
+    }
+  }
+
+  .footer {
+    height: 40px;
+    background: transparent;
+    position: relative;
+    text-align: right;
+
+    .location-active, .btn-complete {
+      float: right;
+      display: inline-block;
+      border-radius: 5px;
+    }
+
+    @include breakpoint(348px) {
+      .slider {
+        &.inactive {
+          .switch {
+            left: 81px;
+          }
+        }
+      }
+    }
+  }
+
+  .location-status-tally {
+    text-align: center;
+    margin: $margin 0;
+
+    .total {
+      font-weight: bold;
+    }
+
+    .total-active-locations {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+
+  .btn-confirm {
+    @include center;
+    display: block;
+    width: 100%;
+    margin: 28px 0 0;
+  }
+
+  @include breakpoint(600px) {
+    .tree-item {
+      width: 99.3%;
+    }
+  }
+
+  @include breakpoint(460px) {
+    .btn-confirm {
+      padding: $margin / 4;
+      font-size: 20px !important;
+    }
+  }
+}

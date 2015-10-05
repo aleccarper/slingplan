@@ -1,0 +1,26 @@
+<%= section_wrap_full({
+  title: "Profile",
+  subtitle: "Change your password using the form below."
+}) do %>
+  <%= link_to 'Back to Profile', staffers_admin_profile_index_path, class: 'btn btn-large' %>
+<% end %>
+
+
+<div class='inner'>
+  <%= responsive_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= devise_error_messages! %>
+
+    <%= f.email_field :email, autofocus: true %>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <%= f.password_field :password, validate: false %>
+    <%= f.password_field :password_confirmation, validate: false %>
+
+    <%= f.password_field :current_password, validate: false %>
+
+    <%= f.submit "Update" %>
+  <% end %>
+</div>

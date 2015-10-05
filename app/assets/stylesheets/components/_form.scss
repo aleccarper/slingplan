@@ -1,0 +1,466 @@
+form {
+  @include fontawesome-checkboxes;
+  margin: 0 auto;
+  position: relative;
+
+  .parens {
+    color: $palette-gray-light;
+    font-style: italic;
+  }
+
+  .subtitle {
+    padding: $margin / 2;
+    font-size: $font-size-giant;
+  }
+
+  input[type=text],
+  input[type=number],
+  input[type=email],
+  input[type=tel],
+  input[type=password],
+  select,
+  textarea {
+    background: none;
+    border: none;
+    // border-bottom: 1px dotted $palette-green-medium;
+    border-radius: 0;
+    color: $white;
+    font-size: $font-size-base;
+    margin: none;
+    outline: none;
+    padding: $margin / 4;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  input[type=file] {
+    margin: $margin / 4;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .select-dropdown:after {
+    // position: absolute;
+    // right: 0;
+    // top: 9px;
+    // display: block;
+    // content: '\f0d7';
+    // font-family: 'FontAwesome';
+    // font-size: 16px;
+    // width: 20px;
+    // height: 20px;
+  }
+
+  select {
+    margin-left: 0;
+    width: 100%;
+
+    option {
+      background: $color-container-background-solid;
+    }
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  input[type=submit], input[type=submit]:focus {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+  }
+
+  .inline {
+    float: left;
+    width: 50%;
+  }
+
+  .datepicker {
+    font-size: $font-size-large;
+
+    .field-wrapper {
+      padding-bottom: 12px;
+    }
+
+    .ui-datepicker {
+      padding: $margin / 4;
+      position: relative;
+    }
+
+    .ui-datepicker-header {
+      @include center;
+      position: relative;
+      max-width: 500px;
+      height: 74px;
+    }
+
+    .ui-datepicker-title {
+      font-size: $font-size-huge;
+      font-weight: bold;
+      margin: $margin / 2 auto;
+      padding: $margin / 4;
+      position: relative;
+      text-align: center;
+    }
+
+    .ui-datepicker-prev,
+    .ui-datepicker-next {
+      color: $palette-gray-light;
+      z-index: 10000;
+      top: 39px;
+      position: relative;
+
+      & > span {
+        top: 3px;
+        display: inline-block;
+        position: relative;
+      }
+
+      &:before, &:after {
+        display: inline-block;
+        font-size: 48px;
+        font-family: 'FontAwesome';
+        height: 18px;
+        position: absolute;
+        top: 4px;
+        width: 18px;
+      }
+
+      &:hover {
+        color: $white;
+      }
+
+      &.ui-datepicker-prev {
+        padding-left: $margin * 1.5;
+
+        &:before {
+          content: '\f100';
+          left: 0;
+        }
+      }
+
+      &.ui-datepicker-next {
+        float: right;
+        padding-right: $margin * 1.5;
+
+        &:after {
+          content: '\f101';
+          right: $margin / 2;
+        }
+      }
+    }
+
+    .ui-datepicker-calendar {
+      margin: 0 auto;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .ui-datepicker-other-month {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: transparent;
+      display: hidden;
+    }
+
+    td, th {
+      height: 100px;
+      font-size: $font-size-huge;
+      text-align: center;
+      width: 14%;
+
+      & > a {
+        font-weight: 100;
+      }
+    }
+
+    th> span {
+      font-size: $font-size-huge;
+      font-weight: bold;
+    }
+
+    td {
+      // @include transition(color 0.25s ease, background 0.25s ease);
+      border: 1px solid $palette-gray-dark;
+      pointer-events: none;
+
+      a {
+        // @include transition(color 0.25s ease, background 0.25s ease);
+        color: $palette-gray-medium;
+        text-decoration: none;
+      }
+
+      &.before-today, &.today {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      &.today {
+        background: $palette-blue-light;
+        & > a {
+          color: $white;
+          font-weight: bold;
+        }
+      }
+
+      &.after-today {
+        pointer-events: all;
+        cursor: pointer;
+
+        & > a {
+          color: $white;
+        }
+
+        &:hover {
+          background: $white;
+
+          & > a {
+            color: $black;
+          }
+        }
+      }
+
+      &.before-event {
+        & > a {
+          pointer-events: none;
+        }
+      }
+
+      &.after-event {
+        & > a {
+          pointer-events: none;
+        }
+      }
+
+      &.event {
+        background: $palette-green-medium;
+        &.start {
+        }
+        &.end {
+
+        }
+      }
+    }
+
+    @include breakpoint(360px) {
+      .ui-datepicker {
+        margin-top: -44px;
+      }
+
+      .ui-datepicker-header {
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  .check-boxes {
+    margin: $margin / 8 0;
+
+    input, label {
+      font-size: $font-size-large;
+      padding: $margin / 4;
+      cursor: pointer;
+    }
+  }
+
+  .options {
+    .field-wrapper {
+      border: none;
+    }
+  }
+
+  .submit {
+    @include transition(background 0.25s ease);
+    border-radius: 5px;
+    margin-bottom: 6px;
+    margin-top: $margin;
+    margin-top: 6px;
+    position: relative;
+    text-align: right;
+    transform: translateZ(0);
+
+    &:hover {
+      input {
+        background: $palette-green-light;
+      }
+    }
+
+    input {
+      -webkit-appearance: none !important;
+      background: $palette-green-medium;
+      color: $white;
+      cursor: pointer;
+      display: inline-block;
+      font-family: 'Oswald', Helvetica,Arial,sans-serif;
+      font-size: $font-size-huge;
+      letter-spacing: 0.025em;
+      padding: 0 6px;
+      text-transform: uppercase;
+    }
+  }
+
+  .field {
+    font-size: $font-size-large * 0.75;
+    right: $margin / 2;
+    top: 172px;
+    clear: both;
+    transform: translateZ(0);
+
+    &.inline {
+      display: inline-block;
+    }
+
+    & > label > span:after {
+      display: inline-block;
+      font-size: $font-size-large;
+      font-family: 'FontAwesome';
+      height: 18px;
+      position: absolute;
+      margin-left: $margin / 4;
+      top: 1px;
+      width: 18px;
+    }
+
+    &.error {
+      .field-wrapper {
+        background: rgba(214, 85, 72, 0.3);
+        border-bottom: 1px solid $palette-red-medium;
+        border-left: 1px solid $palette-red-medium;
+      }
+
+      & > label > span:after {
+        color: $palette-red-medium;
+        content: '\f071';
+      }
+    }
+
+    &.valid {
+      .field-wrapper {
+        background: rgba(22, 135, 85, 0.2);
+      }
+
+      & > label > span:after {
+        color: $palette-green-medium;
+        content: '\f00c';
+      }
+    }
+
+    &.required label span:after {
+      content: '*';
+      position: absolute;
+      top: 3px;
+      right: -24px;
+      font-size: $font-size-large;
+      color: $palette-red-medium;
+    }
+  }
+
+  label {
+    display: block;
+    margin-top: $margin / 2;
+    font-weight: normal;
+    position: relative;
+    width: 100%;
+
+    & > span {
+      display: inline-block;
+      font-size: $font-size-big;
+      position: relative;
+      //text-transform: uppercase;
+    }
+  }
+
+  .field-wrapper {
+    border-bottom: 1px solid rgba(22, 135, 70, 0.5);
+    border-left: 1px solid rgba(22, 135, 70, 0.5);
+    margin-top: $margin / 2;
+    padding: $margin / 8;
+    position: relative;
+  }
+
+  .forgot-password {
+    position: absolute;
+    right: 12px;
+    top: 173px;
+    font-size: $font-size-giant;
+  }
+
+  ul.errorlist {
+    overflow: hidden;
+
+    li {
+      color: lighten($palette-red-medium, 10%);
+    }
+  }
+
+  #error_explanation {
+    @include drop-shadow(inset, 0, 0, 3px, #000);
+    background: rgba(192, 57, 43, 0.5);
+    padding: $margin / 2;
+
+    h3 {
+      padding: $margin / 2 0;
+    }
+
+    li {
+      font-style: italic;
+      padding: $margin / 4 $margin;
+      list-style: outside none none;
+    }
+  }
+}
+
+
+@include breakpoint(720px) {
+  form .datepicker {
+    td, th {
+      height: 80px;
+    }
+  }
+}
+
+@include breakpoint(570px) {
+  form .datepicker {
+    td, th {
+      height: 60px;
+    }
+  }
+}
+
+@include breakpoint(420px) {
+  form {
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=password],
+    select,
+    textarea {
+      font-size: $font-size-base;
+    }
+    .datepicker {
+      td, th, th > span {
+        font-size: $font-size-base;
+        height: 40px;
+      }
+    }
+  }
+}
+
+@include breakpoint(360px) {
+  form .datepicker {
+    td, th, th > span {
+      height: 30px;
+    }
+  }
+}
+
+@include breakpoint(597px) {
+  form {
+    .subtitle {
+      font-size: $font-size-large;
+    }
+  }
+}

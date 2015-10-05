@@ -1,0 +1,16 @@
+<div class='new-message'>
+  <%= responsive_form_for InquiryMessage.new(inquiry: inquiry), url: '/admin/inquiries/create_message' do |f| %>
+
+    <%= f.hidden_field :inquiry_id, value: inquiry.id %>
+
+    <h3>Create Response</h3>
+
+    <%= f.text_area :content, class: 'new-message-area', label: false %>
+
+    <div class='controls'>
+      <%= render partial: 'new_message_buttons', locals: {
+        inquiry: inquiry
+      } %>
+    </div>
+  <% end %>
+</div>

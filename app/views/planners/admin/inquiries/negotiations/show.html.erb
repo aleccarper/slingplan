@@ -1,0 +1,27 @@
+<%= content_tag :div, class: classes_for_inquiry(@negotiation) do %>
+
+  <div class='vendor-rfp-wrapper'>
+    <%= render partial: '/inquiries/vendor_rfp', locals: { rfp: @negotiation.vendor_rfp } %>
+  </div>
+
+  <div class='subsection-wrap'>
+    <div class='responses'>
+      <h2>Negotiation</h2>
+      <%= render partial: 'negotiation_message_list', locals: { inquiry: @negotiation } %>
+    </div>
+
+    <%= render partial: '/inquiries/new_negotiation_message', locals: { inquiry: @negotiation } %>
+  </div>
+<% end %>
+
+<%= render partial: '/partials/sse_stream', locals: {
+  source: "/planners/admin/inquiries/#{@negotiation.id}/stream_vendor_rfp",
+  destination: '.vendor-rfp-wrapper',
+  callback: 'Planners.Admin.Events.init_crumbs'
+} %>
+
+<%= render partial: '/partials/sse_stream', locals: {
+  source: "/planners/admin/inquiries/#{@negotiation.id}/stream_negotiation",
+  destination: '.message-list',
+  callback: 'Negotiations.scroll'
+} %>

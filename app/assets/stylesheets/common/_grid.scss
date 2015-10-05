@@ -1,0 +1,23 @@
+.half, .third, .quarter { 
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.half {
+  width: 49%;
+}
+
+.third {
+  width: 32%;
+}
+
+.quarter {
+  width: 24%;
+}
+
+@include breakpoint(600px) {
+  .half, .third, .quarter {
+    width: 100%;
+  }
+}

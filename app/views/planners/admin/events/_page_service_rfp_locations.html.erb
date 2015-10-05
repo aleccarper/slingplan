@@ -1,0 +1,10 @@
+<div class='locations'>
+  <% page.each do |location| %>
+    <div class='tree-item'>
+      <%= render partial: '/planners/admin/events/location', locals: {
+        location: location,
+        show_hide_from_service_rfp_button: true
+      } %>
+    </div>
+  <% end %>
+</div>

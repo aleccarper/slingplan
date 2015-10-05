@@ -1,0 +1,13 @@
+<%= pages_for "page_#{state}", pages, i_page do %>
+  <% locations.each do |location| %>
+    <div class='tree-item'>
+      <%= render partial: '/vendors/admin/locations/location', locals: {
+        location: location,
+        hide_edit_button: true,
+        hide_delete_button: true,
+        hide_active_slider: true,
+        show_claim_button: false
+      } %>
+    </div>
+  <% end %>
+<% end %>

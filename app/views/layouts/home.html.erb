@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+  <%= render partial: 'partials/head' %>
+
+  <%= body_tag do %>
+
+    <% if ENV['MAINTENANCE'] == 'true' %>
+      <%= render partial: 'partials/maintenance' %>
+
+    <% else %>
+
+      <% if ENV['HOLDING'] != 'true' %>
+        <%= render partial: 'partials/header' %>
+      <% end %>
+
+      <% if ENV['BETA'] == 'true' %>
+        <%= render partial: 'partials/beta' %>
+      <% else %>
+        <%= flash_background %>
+      <% end %>
+
+      <%= yield %>
+
+    <% end %>
+
+    <%= render partial: 'partials/footer' %>
+
+    <%= overlay %>
+
+  <% end %>
+
+</html>

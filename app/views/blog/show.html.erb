@@ -1,0 +1,32 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+
+<%= section_wrap_full({
+  title: "SlingPlan Blog",
+  subtitle: "Thoughts and news about SlingPlan and our role in Event Planning",
+  class: 'blog short'
+}) do; end %>
+
+<div class='inner'>
+  <div class='blog-post subsection-wrap'>
+    <div class='heading'>
+      <%= link_to @post.title, blog_path(@post.id), class: 'title' %>
+      <%= content_tag :div, @post.created_at.strftime(
+        'Posted on <strong>%-m/%-d/%Y</strong>').html_safe, class: 'date' %>
+      <%= social_media_block(blog_path(@post.id), "Check out this blog post: #{@post.title}") %>
+    </div>
+
+    <%= content_tag :div, @post.content.html_safe, class: 'content' %>
+  </div>
+</div>
+

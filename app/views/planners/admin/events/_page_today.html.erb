@@ -1,0 +1,12 @@
+<div class='tree-items'>
+  <% page.each do |event| %>
+    <div class='tree-item'>
+      <%= render partial: '/planners/admin/events/event', locals: {
+        event: event,
+        hide_delete_button: false,
+        hide_view_button: false,
+        show_complete_button: false
+      } %>
+    </div>
+  <% end %>
+</div>

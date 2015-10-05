@@ -1,0 +1,110 @@
+.tree {
+  min-height: 100%;
+
+  .tree-level {
+    position: relative;
+    max-height: auto;
+    padding-top: $margin / 4;
+
+
+    &:not(.tree-level-0) {
+      border-left: 1px dotted gray;
+      margin-left: 12px;
+      padding-left: 11px;
+    }
+  }
+
+  .tree-header {
+    @include noselect;
+    display: inline-block;
+    font-family: "Oswald";
+    font-size: $font-size-large;
+    padding-left: 4px;
+    padding-right: 0;
+    padding-top: 0;
+    text-transform: uppercase;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .tree-arrow {
+    float: left;
+    text-align: center;
+    width: $margin / 1.4;
+    height: $margin / 1.4;
+    margin-top: 3px;
+
+    &:before, &:after {
+      bottom: 4px;
+      font-family: 'FontAwesome';
+      font-size: 19px;
+      position: relative;
+    }
+
+    &:before {
+      content: '\f147';
+    }
+  }
+
+  .tree-header-text {
+    display: inline-block;
+    padding: 0 0 0 $margin / 4;
+  }
+
+  .tree-items {
+    border-left: 1px dotted gray;
+    padding: 0 0 0 $margin / 2;
+    margin-left: $margin / 2;
+  }
+
+  .tree-item {
+    display: inline-block;
+    margin: $margin / 4 0 0;
+    width: 100%;
+    vertical-align: top;
+  }
+
+  .placeholder, .none-found {
+    position: relative;
+    height: $margin * 4;
+    margin: 0 0 0 7px;
+    width: 273px;
+  }
+
+  .none-found {
+    color: $palette-gray-light;
+    height: 34px;
+    padding: $margin / 4;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+  }
+
+  .tree-level.empty {
+    .none-found {
+      display: block;
+    }
+  }
+
+  .tree-collapsed {
+
+    .tree-level {
+      max-height: $margin / 2;
+    }
+
+    .placeholder, .none-found  {
+      display: none !important;
+    }
+
+    .tree-arrow {
+      &:before {
+        content: '\f196';
+      }
+    }
+
+    .tree-level, .tree-items, .tree-item {
+      display: none;
+    }
+  }
+}

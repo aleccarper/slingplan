@@ -1,0 +1,13 @@
+<div class='portrait'>
+  <%= image_tag(message.owner.logo_image.url(:small)) %>
+</div>
+
+<%= content_tag :div, time_for_inquiry(message), class: 'time' %>
+<%= content_tag :strong, message.owner.name, class: 'author' %>
+<%= content_tag :div, simple_format(message.content) %>
+
+<% if message.action == 'closed' %>
+  <%= render partial: 'closed' %>
+<% elsif message.action == 'open' %>
+  <%= render partial: 'open' %>
+<% end %>

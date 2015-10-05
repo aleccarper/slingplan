@@ -1,0 +1,37 @@
+<%= section_wrap_full({
+  title: "Help",
+  subtitle: "We are not happy unless you are.  Tell us what's on your mind."
+}) do %>
+  <% unless admin_signed_in? %>
+    <% path_start = "new_#{role}s_admin_" %>
+
+    <%= link_to send("#{path_start}inquiries_suggestion_path"), class: 'btn btn-large' do %>
+      New Suggestion <%= icon('lightbulb-o') %>
+    <% end %>
+    <%= link_to send("#{path_start}inquiries_question_path"), class: 'btn btn-large' do %>
+      New Question <%= icon('question') %>
+    <% end %>
+    <%= link_to send("#{path_start}inquiries_bug_report_path"), class: 'btn btn-large' do %>
+      New Bug Report <%= icon('bug') %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+<% if admin_signed_in? %>
+  <% paging_path = "/admin/inquiries" %>
+<% else %>
+  <% paging_path = "/#{role}s/admin/inquiries" %>
+<% end %>
+
+<div class='inner inquiries'>
+  <h2>Open</h2>
+  <div class='inquiry-list subsection-wrap'>
+    <%= paginate 'page_open', "#{paging_path}/page_open" %>
+  </div>
+
+  <h2>Closed</h2>
+  <div class='inquiry-list subsection-wrap'>
+    <%= paginate 'page_closed', "#{paging_path}/page_closed" %>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<%= section_wrap_full({
+  title: "Events",
+  subtitle: "Define and schedule your events, clone previous events, and negotiate with eligible vendors."
+}) do %>
+  <% unless has_max_active_events?(current_planner) %>
+    <%= link_to new_planners_admin_event_path, class: 'btn btn-large' do %>
+     New Event <%= icon('plus') %>
+    <% end %>
+  <% else %>
+    <h1>You've been busy!</h1>
+    You have the maximum number of current and future events.
+  <% end %>
+<% end %>
+
+
+
+<div class='inner'>
+  <%= events_area do %>
+
+    <%= hidden_field_tag :max_active_allowed, @max_active_allowed %>
+
+    <% unless @max_active_allowed == 'Unlimited' %>
+      <%= render partial: '/planners/admin/events/event_totals' %>
+    <% end %>
+
+    <% if current_planner.events.blank? %>
+      <div class='nothing-here'>No events yet created.</div>
+    <% else %>
+      <%= render partial: 'events' %>
+    <% end %>
+
+  <% end %>
+</div>

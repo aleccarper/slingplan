@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <%= render partial: 'partials/head' %>
+
+  <%= body_tag do %>
+    <%= render partial: 'partials/header' %>
+
+    <%= content_tag :div, nil, class: 'container' do %>
+      <%= render partial: 'partials/admin_tabs' %>
+
+      <div class='tab-content'>
+        <%= yield %>
+
+        <%= flash_background %>
+
+        <%= render partial: 'partials/footer' %>
+      </div>
+    <% end %>
+
+    <%= overlay %>
+  <% end %>
+</html>

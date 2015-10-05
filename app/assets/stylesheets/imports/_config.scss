@@ -1,0 +1,19 @@
+// Sizing and Dimensions
+$margin: 24px;
+$skew: 20deg;
+
+// Layout
+$global-max-width: 768px;
+$header-height: golden(in, $global-max-width, 6);
+$section-wrap-full-height: golden(in, $global-max-width);
+
+// Tabs
+$tabs-width: golden(in, $global-max-width, 3);
+$tab-height: golden(in, $tabs-width, 3);
+$tab-padding: golden(in, $tab-height, 2);
+$subtab-padding: golden(in, $tab-height);
+
+// Indexing
+$z-index-low: 100;
+$z-index-medium: 500;
+$z-index-high: 1000;

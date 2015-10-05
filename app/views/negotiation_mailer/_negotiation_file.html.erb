@@ -1,0 +1,6 @@
+<% unless @message.file_attachment.blank? %>
+  <p><%= @message.owner.name %> uploaded:</p>
+  <div style='padding-left: 8px;'>
+    <%= link_to @message.file_attachment_file_name, "https://www.slingplan.com/negotiations/#{@message.id}/download_attachment", target: '_blank' %>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+$sprites: sprite-map('sprites/*.png');
+
+@mixin sprite-background($name) {
+  background-image: sprite-url($sprites);
+  background-position: 0 ceil(nth(sprite-position($sprites, $name), 2) / 2);
+  background-repeat: no-repeat;
+  background-size: floor(image-width(sprite-path($sprites)) / 2) auto;
+}
+
+@mixin sprite($name) {
+  @include replace-text;
+  @include sprite-background($name);
+  display: inline-block;
+  height: floor(image-height(sprite-file($sprites, $name)) / 2);
+  margin: 0;
+  vertical-align: top;
+  width: floor(image-width(sprite-file($sprites, $name)) /2);
+}

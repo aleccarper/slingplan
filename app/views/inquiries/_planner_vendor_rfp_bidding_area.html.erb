@@ -1,0 +1,37 @@
+<%= responsive_form_for NegotiationMessage.new(negotiation: rfp.negotiation),
+  url: '/inquiries/create_negotiation_message', remote: true do |f| %>
+  <%= f.hidden_field :negotiation_id, value: rfp.negotiation.id %>
+
+
+  <% if rfp.negotiation.is_open? and not rfp.has_bid? %>
+
+    <div class='status'>Your request for proposal has been sent, but the vendor has yet to propose a bid.  No action is required by you at this time.</div>
+
+
+
+  <% elsif rfp.negotiation.is_open? and rfp.has_bid? %>
+
+    <%= f.hidden_field :action, value: 'approve' %>
+
+    <div class='status'>The vendor has proposed a bid and is awaiting your confirmation.  Once you confirm a bid, all other <%= rfp.service_rfp.service.name %> bids for this event will be closed and will remain closed unless the confirmed bid is revoked by either party.</div>
+
+    <div class='bid-area'>
+      <span>Vendor placed a $<strong><%= rfp.current_bid %></strong> bid.</span>
+      <%= submit_tag 'Approve', class: 'f-right btn' %>
+    </div>
+
+
+
+  <% elsif rfp.negotiation.is_closed? %>
+
+    <%= f.hidden_field :action, value: 'revoke' %>
+
+    <div class='status'>You and the originator of the Request for Proposal are in agreement about rendering of services defined within this proposal.</div>
+    <div class='bid-area'>
+      <span>You approved a $<strong><%= rfp.current_bid %></strong></span> bid.
+      <%= submit_tag 'Revoke', class: 'f-right btn btn-red', data: { confirm: 'Are you sure you want to revoke your bid?' } %>
+    </div>
+
+  <% end %>
+
+<% end %>

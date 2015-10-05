@@ -1,0 +1,51 @@
+<%= section_wrap_mini({
+  title: "Export"
+}) do; end %>
+
+
+
+<%= hidden_field_tag :bookmark_list_name, bookmark_list.nil? ? nil : bookmark_list.name %>
+<%= hidden_field_tag :bookmark_list_id, bookmark_list.nil? ? nil : bookmark_list.id %>
+
+<div class='export'>
+  <div class='btn btn-back-to-bookmarks'>Back
+    <i class='fa fa-right'></i>
+  </div>
+
+  <br />
+
+  <div class='btn btn-email'>Email
+    <i class='fa fa-share fa-right'></i>
+  </div>
+
+  <div class='btn btn-print-friendly'>Print Friendly
+    <i class='fa fa-print fa-right'></i>
+  </div>
+
+
+    <div class='bookmarks-list'>
+    <% if bookmark_list.nil? %>
+      <% for location in Location.find(get_cookie_bookmarks) %>
+        <%= render partial: 'map/service_result',
+          locals: {
+            location: location,
+            bookmark_list: nil,
+            vendor_profile: false,
+            for_bookmarks: true
+          }
+        %>
+      <% end %>
+    <% else %>
+      <% for location in bookmark_list.bookmarks.map(&:location) %>
+        <%= render partial: 'map/service_result',
+          locals: {
+            location: location,
+            bookmark_list: nil,
+            vendor_profile: false,
+            for_bookmarks: true
+          }
+        %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

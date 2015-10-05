@@ -1,0 +1,32 @@
+<% if @vendor %>
+  <h1>Vendor</h1>
+  <div class="vendor">
+    <% if @vendor.logo_image? %>
+      <%= image_tag @vendor.logo_image.url(:medium), class: 'vendor-logo' %>
+    <% end %>
+    <%= content_tag :div, @vendor.name, class: 'vendor-name' %>
+    <%= content_tag :div, @vendor.description, class: 'vendor-description' %>
+  </div>
+<% end %>
+
+<% unless @locations.blank? %>
+  <h2>Locations in area</h2>
+  <div class="locations-in-area">
+    <ul>
+      <% for loc in @locations || [] %>
+        <%= content_tag :li, loc.name %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% unless @locations_outside_area.blank? %>
+  <h2>Locations outside area</h2>
+  <div class="locations-outside-area">
+    <ul>
+      <% for loc in @locations_outside_area || [] %>
+        <%= content_tag :li, loc.name %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

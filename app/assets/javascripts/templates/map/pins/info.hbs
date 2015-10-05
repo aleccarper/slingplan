@@ -1,0 +1,61 @@
+<div class='map-info-window' data-id='{{id}}'>
+  <h4>{{name}}</h4>
+
+  {{#unless is_staffer }}
+    {{#unless vendor_id}}
+      <i>NOT YET USING SLINGPLAN</i>
+    {{/unless}}
+  {{/unless}}
+
+  <p>
+    {{address1}} {{address2}}
+    <br />
+    {{city}}, {{state}} {{zip}}
+  </p>
+
+  <p>
+    {{#if phone_number}}
+      <a href='tel:{{phone_number}}'>{{phone_number}}</a>
+    {{/if}}
+    {{#if primary_phone_number}}
+      <a href='tel:{{primary_phone_number}}'>{{primary_phone_number}}</a>
+    {{/if}}
+
+    {{#if is_staffer }}
+      {{#if primary_email}}
+        <br />
+        <a href='mailto:{{primary_email}}'>{{primary_email}}</a>
+      {{/if}}
+    {{else}}
+      {{#if email}}
+        <br />
+        <a href='mailto:{{email}}'>{{email}}</a>
+      {{/if}}
+    {{/if}}
+
+    {{#if website}}
+      <br />
+      <a href='{{website}}' target='_blank'>Website</a>
+    {{/if}}
+    {{#if primary_website}}
+      <br />
+      <a href='{{primary_website}}' target='_blank'>Website</a>
+    {{/if}}
+  </p>
+
+  <div class='controls'>
+    {{#unless is_staffer }}
+      {{#unless hide_buttons}}
+        <input type='button' value='Bookmark' class='btn btn-default btn-small add-bookmark-from-infowindow' />
+
+        {{#if claimable_by_current_vendor}}
+          <input type='button' value='Claim Location' class='btn-claim btn btn-default btn-small' />
+        {{else}}
+          {{#if claimed_by_current_vendor}}
+            <input type='button' value='Cancel Claim' class='btn-cancel-claim btn btn-default btn-small' />
+          {{/if}}
+        {{/if}}
+      {{/unless}}
+    {{/unless}}
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class='errors-container'>
+  <div class='inner-container'>
+
+    <div class='container'>
+
+      <div class='title'>
+        <i class='fa fa-warning'></i>500
+      </div>
+      <div class='subtitle'>Internal Error</div>
+
+      <div class='description'>
+        <p>
+          Our apologies.  Something went wrong, but rest assured that we have been alerted of this error and are working to resolve it.
+        </p>
+      </div>
+
+      <div class='call-to-action'>
+        <% if planner_signed_in? %>
+          <%= link_to 'Go to your account', planners_admin_events_path, class: 'btn' %>
+        <% elsif vendor_signed_in? %>
+          <%= link_to 'Go to your account', vendors_admin_locations_path, class: 'btn' %>
+        <% elsif vendor_signed_in? %>
+          <%= link_to 'Go to your account', admin_locations_path, class: 'btn' %>
+        <% end %>
+      </div>
+
+      <div class='call-to-action'>
+        <%= link_to 'Return to the home page', root_path, class: 'btn' %>
+      </div>
+
+    </div>
+
+  </div>
+</div>

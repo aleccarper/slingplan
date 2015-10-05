@@ -1,0 +1,11 @@
+<% for location in Location.find(@ids) %>
+  <div class='location-info'>
+    <%= content_tag :strong, location.name, class: 'title' %>
+    <%= content_tag :div, "#{location.address1} #{location.address2}" %>
+    <%= content_tag :div, "#{location.city}, #{location.state} #{location.zip}" %>
+    <%= content_tag :div, location.phone_number %>
+    <%= content_tag :div, mail_to(location.email) %>
+    <%= content_tag :div, link_to(location.website, location.website, target: '_blank') %>
+  </div>
+  <br />
+<% end %>

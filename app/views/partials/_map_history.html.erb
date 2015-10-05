@@ -1,0 +1,16 @@
+<% if current_page?('/map') %>
+  <div class='history <%= if anyone_signed_in? then 'signed-in' end %>'>
+    <div class="map-control map-back">
+      <a href="#" class="btn-map-back"><%= icon('backward') %> Back</a>
+    </div>
+    <div class="map-control map-around">
+      <a href="#" class="btn-map-around-me"><%= icon('home') %> Find Me</a>
+    </div>
+    <div class="map-control map-home">
+      <a href="#" class="btn-map-home"><%= icon('refresh') %> Reset</a>
+    </div>
+    <div class="map-control map-forward">
+      <a href="#" class="btn-map-forward"><%= icon('forward') %> Forward</a>
+    </div>
+  </div>
+<% end %>

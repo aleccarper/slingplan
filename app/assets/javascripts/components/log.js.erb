@@ -1,0 +1,37 @@
+var Log = (function($, m) {
+
+  var client_events = [];
+  var event_type_whitelist = [
+    'click'
+  ];
+
+  var send_event_batch_to_server = function() {
+    $.post('/log/client_events', {
+      client_events: JSON.stringify(client_events)
+    }, function() {
+      client_events = [];
+    });
+  };
+
+
+
+  m.log = function(e) {
+    client_events.push({
+      time: new Date().toString(),
+      path: window.location.pathname,
+      html_id: $(this).attr('id'),
+      html_class: $(this).attr('class'),
+      event_type: e.type
+    });
+  };
+
+  m.init = function(locations) {
+    <% unless Rails.env.development? %>
+      // $('.analyze').on(event_type_whitelist.join(' '), m.log);
+      // setInterval(send_event_batch_to_server, 10000);
+    <% end %>
+  };
+
+  return m;
+}(jQuery, Log || {}));
+

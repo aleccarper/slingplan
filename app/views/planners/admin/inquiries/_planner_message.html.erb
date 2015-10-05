@@ -1,0 +1,9 @@
+<div class='portrait'>
+  <%= image_tag(current_planner.logo_image.url(:medium)) %>
+</div>
+
+<%= content_tag :strong, message.owner.name, class: 'author' %>
+<%= content_tag :div, time_for_inquiry(message), class: 'time' %>
+<%= content_tag :div, simple_format(message.content) %>
+
+<%= render partial: '/inquiries/message_action', locals: { message: message } %>

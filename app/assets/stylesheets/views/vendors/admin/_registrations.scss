@@ -1,0 +1,22 @@
+.vendors-admin-registrations,
+.planners-admin-registrations,
+.staffers-admin-registrations {
+  form > .hint {
+    margin: $margin 0;
+  }
+
+
+  .payment-errors {
+    display: none;
+  }
+}
+
+.planners-admin-registrations {
+  .plan-0 {
+    // free plan
+    .price {
+      padding-bottom: 6px !important;
+    }
+  }
+}
+

@@ -1,0 +1,6 @@
+<%= submit_tag 'Reply', name: 'reply', class: 'f-right btn' %>
+<% if inquiry.is_open? %>
+  <%= submit_tag 'Reply and Close', name: 'closed', class: 'f-right btn' %>
+<% else %>
+  <%= submit_tag 'Reply and Reopen', name: 'open', class: 'f-right btn' %>
+<% end %>

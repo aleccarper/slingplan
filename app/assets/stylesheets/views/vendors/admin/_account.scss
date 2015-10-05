@@ -1,0 +1,47 @@
+.vendors-admin-account {
+
+  .invoice-summary{
+    p {
+      margin: 0;
+    }
+  }
+
+  .invoice-line-items {
+    .invoice-line {
+
+    }
+  }
+
+  .charge-item{
+    padding: 8px;
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.vendors-admin-account-tab-content {
+  position: relative;
+  height: auto;
+  overflow: hidden;
+}
+
+
+.subscription-info-block-wrap {
+  margin-bottom: 20px;
+  .subscription-info-block{
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px;
+    h4 {
+
+    }
+    h5 {
+
+    }
+    ul {
+
+    }
+
+  }
+}

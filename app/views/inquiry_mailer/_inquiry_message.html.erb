@@ -1,0 +1,10 @@
+<% if defined? @message %>
+  <% unless @message.nil? %>
+    <% unless @message.content.blank? %>
+      <p><%= @message.owner.name %> said:</p>
+      <div style='padding-left: 8px;'>
+        <%= content_tag :strong, simple_format(@message.content) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

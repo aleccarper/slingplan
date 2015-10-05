@@ -1,0 +1,13 @@
+<%= form_tag("/#{role}s/admin/account/billing/create_subscription",
+  url: "/#{role}s/admin/account/billing/create_subscription",
+  role: 'form',
+  class: 'choose-plan',
+  authenticity_token: true) do %>
+
+  <%= render(partial: 'billing/plans') %>
+
+  <div class='submit'>
+    <%= submit_tag 'Start Plan' %>
+  </div>
+<% end %>
+

@@ -1,0 +1,144 @@
+// tab groups
+.tabs, .subtabs {
+  bottom: 0;
+  border-right: 2px solid $palette-green-medium;
+  font-family: "Oswald";
+  text-transform: uppercase;
+  width: $tabs-width;
+  z-index: 2000;
+}
+
+.tabs {
+  @include transition(all .25s ease);
+  @include shadow(0px, 0px, 24px, 0px, rgba(0, 0, 0, 0.5));
+  background-color: $color-container-background-solid;
+  border-radius: 0;
+  min-height: 100%;
+  position: fixed;
+  top: $header-height;
+}
+
+.subtabs {
+  position: relative;
+}
+
+
+
+// tab links
+.tab, .subtab {
+  left: 0;
+  padding-left: $tab-padding;
+  position: relative;
+  text-align: left;
+  width: 100%;
+
+  &, & *, &:after {
+    @include transition(all .25s ease-in-out);
+  }
+
+  & > a {
+    @include vertical-center;
+    color: #7c7c7c;
+    display: block;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  &:after {
+    border-bottom: $tab-height / 4 solid transparent;
+    border-left: $tab-height / 4 solid $palette-green-medium;
+    border-top: $tab-height / 4 solid transparent;
+    content: '';
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    right: -10px;
+    top: $tab-height / 4;
+    width: 0;
+  }
+
+  &.active:after {
+    opacity: 1;
+  }
+
+  &:not(.active):hover {
+    cursor: pointer;
+
+    a {
+      color: $white;
+    }
+  }
+}
+
+.tab {
+  height: $tab-height;
+
+  & > a {
+    font-size: $font-size-large;
+    top: 28px;
+  }
+
+  &.active {
+    background-color: $color-active-tab-background;
+
+    & > a {
+      color: $white;
+    }
+
+    &.has-subtabs:after {
+      border-right: $tab-height / 4 solid transparent;
+      border-left: $tab-height / 4 solid transparent;
+      border-top: $tab-height / 4 solid $palette-green-medium;
+      left: 106px;
+      top: 42px;
+      z-index: 5000;
+    }
+  }
+}
+
+.subtab {
+  background: $color-container-background-solid;
+  height: $tab-height;
+  padding-left: 32px;
+
+  & > a {
+    font-size: $font-size-base;
+    top: 33px;
+  }
+
+  &.active {
+    background-color: $color-active-sub-tab-background;
+
+    & > a {
+      color: $white;
+    }
+
+    &:after {
+      border-left: $tab-height / 4 solid $palette-blue-light;
+    }
+  }
+}
+
+.tab-content {
+  @include transition(margin-left .25s ease);
+  margin-left: $tabs-width;
+  position: relative;
+}
+
+
+@include breakpoint(920px) {
+  body.tabs-collapsed {
+    .tabs {
+      transform: translateX(-$tabs-width);
+
+      .tab:after, .subtab:after {
+        display: none;
+      }
+    }
+  }
+
+  .tab-content {
+    margin-left: 0;
+  }
+}

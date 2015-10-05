@@ -1,0 +1,9 @@
+<%= content_tag :span, 'Card', class: 'title' %>
+
+<%= content_tag :span, class: 'info' do %>
+  <%= content_tag :div, card_info, class: 'details' %>
+  <%= content_tag :div, next_payment_date, class: 'next-payment-date' %>
+  <%= content_tag :div, next_payment_amount, class: 'next-payment-amount' %>
+<% end %>
+
+<%= link_to 'Change Card', '/vendors/admin/account/billing/card', class: 'btn btn-default' %>

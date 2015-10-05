@@ -1,0 +1,15 @@
+<% if anyone_signed_in? %>
+  <div class='notifications'>
+    <div class='notifications-container'>
+      <%= render partial: 'notifications/notifications', locals: {
+        notifications: non_admin_signed_in? ? authenticated_instance.notifications.unread : []
+      } %>
+    </div>
+
+    <%= render partial: '/partials/sse_stream', locals: {
+      source: "/notifications/stream",
+      destination: '.notifications-container',
+      callback: 'Notifications.set_notification_priority'
+    } %>
+  </div>
+<% end %>

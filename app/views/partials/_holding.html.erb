@@ -1,0 +1,55 @@
+<div class='holding-container'>
+  <div class='inner-container'>
+
+    <div class='backdrop-top'>
+      <div class='logo'>
+        <a href='/'>SlingPlan</a>
+      </div>
+    </div>
+
+    <div class='container'>
+
+      <div class='title'>Search. Schedule. Done.</div>
+
+      <div class='subtitle'></div>
+
+      <div class='description'>
+        <p>SlingPlan allows you to quickly schedule your events, find the vendors you need, and negotiate pricing directly. Our intuitive map allows you to explore and bookmark vendors by services and location. Creating your event using our step-by-step process painlessly puts you in contact with the best-suited vendors.</p>
+      </div>
+
+      <%= responsive_form_for(LaunchSubscriber.new, method: :post, url: '/launch_subscriber/create', validate_submit: true) do |f| %>
+
+        <% unless (email = get_cookie('launch_subscribed_email')).nil? %>
+
+          <% if flash[:just_subscribed] %>
+            <div class='just-subscribed'>
+              Thanks <strong><%= email %></strong>,
+              <div class='already-subscribed-description'>we will let you know as soon as we launch!</div>
+            </div>
+          <% else %>
+            <div class='already-subscribed'>
+              Hey <strong><%= email %></strong>,
+              <div class='already-subscribed-description'>It looks like you've already subscribed to be notified, but if this isn't your email address you can provide us with the correct one below, just to be sure.</div>
+            </div>
+          <% end %>
+
+        <% else %>
+
+          <div class='call-to-action'>
+            Provide us with your email and we will notify you when we launch.
+            <div class='reassurance'>
+              <span class='promise'>We <strong>promise</strong></span> you will not receive any other emails unless you sign up.
+            </div>
+          </div>
+
+        <% end %>
+
+        <%= f.email_field :email, autofocus: true, placeholder: 'Email', label: false %>
+
+        <%= f.submit 'Notify Me' %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

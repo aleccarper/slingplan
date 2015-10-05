@@ -1,0 +1,12 @@
+<ul class='tabs planners-admin-tabs'>
+  <% # planner_admin_tab 'overview' %>
+  <%= planner_admin_tab 'events' %>
+  <%= planner_admin_tab 'account' do %>
+    <ul class='subtabs vendor-admin-subtabs'>
+      <%= planner_admin_account_tab 'profile' %>
+      <%#= planner_admin_account_tab 'billing' %>
+      <%= planner_admin_account_tab 'settings' %>
+    </ul>
+  <% end %>
+  <%= planner_admin_tab 'inquiries', 'Help' %>
+</ul>

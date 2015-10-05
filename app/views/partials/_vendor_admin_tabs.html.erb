@@ -1,0 +1,12 @@
+<ul class='tabs vendors-admin-tabs'>
+  <% #= vendor_admin_tab 'map' %>
+  <%= vendor_admin_tab 'locations' %>
+  <%= vendor_admin_tab 'account' do %>
+    <ul class='subtabs vendor-admin-subtabs'>
+      <%= vendor_admin_account_tab 'profile' %>
+      <%= vendor_admin_account_tab 'billing' %>
+      <%= vendor_admin_account_tab 'settings' %>
+    </ul>
+  <% end %>
+  <%= vendor_admin_tab 'inquiries', 'Help' %>
+</ul>

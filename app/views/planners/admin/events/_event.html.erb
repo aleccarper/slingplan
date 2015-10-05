@@ -1,0 +1,78 @@
+<div class='event-list-item' id='event-<%= event.id %>' data-event-id='<%= event.id %>'>
+  <div class='event-header'>
+    <%= content_tag :div, event.name, class: 'event-name' %>
+  </div>
+
+  <div class='contents'>
+    <% if event.start_date %>
+      <div class='dates'>
+        <span>
+          <%= prettify_date_short(event.start_date.to_i) %>
+          <% if event.end_date %>
+            - <%= prettify_date_short(event.end_date.to_i) %>
+          <% end %>
+        </span>
+
+        <span class='from-or-ago'>
+          (<%= event.date_from_or_ago_in_words %>)
+        </span>
+      </div>
+    <% end %>
+
+    <%= location_list_address(event) %>
+  </div>
+
+
+  <% if event.has_unread_messages?(:vendor) %>
+    <div class='contents new-messages'>
+      <strong>New Messages</strong>
+      <ul>
+        <% event.unread_message_links(:vendor).each { |m| %>
+          <li class='new-message'>
+            <span><strong><%= truncate_with_ellipsis(m.keys[0], 30) %></strong> - <a class='btn btn-small' href='<%= m.values[0] %>'>View</a></span>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% unless hide_delete_button %>
+   <div class='controls'>
+      <%= link_to planners_admin_event_path(event),
+        method: :delete,
+        class: 'btn-remove tip',
+        data: {
+          confirm: 'Are you sure?',
+          dir: 'n',
+          msg: 'delete-event'
+        } do %>
+        <i class='fa fa-times'></i>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if event.has_any_rfps? %>
+    <div class='event-status'>
+    <% if event.all_service_rfps_completed? %>
+      <%= icon('check') %> All RFPs Completed
+    <% else %>
+      <%= icon('warning') %> <%= "#{event.service_rfps_completed}/#{event.service_rfps.count}" %> RFPs Completed
+    <% end %>
+    </div>
+  <% end %>
+
+  <% unless hide_view_button %>
+    <%= link_to 'Manage', "/planners/admin/events/#{event.id}/service_rfp", class: 'btn-manage btn btn-green' %>
+    <%= link_to 'Clone', planners_admin_event_path(event) << '/clone', class: 'btn-clone btn btn-green' %>
+  <% end %>
+
+  <% if defined? show_complete_button %>
+    <% if show_complete_button %>
+      <div class='footer'>
+        <div class='btn-complete'>
+          <%= link_to 'Complete', edit_planners_admin_event_path(event), class: 'btn btn-medium' %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

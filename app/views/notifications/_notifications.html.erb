@@ -1,0 +1,25 @@
+<% if notifications.blank? %>
+  <p class='no-notifications'>No Notifications</p>
+<% else %>
+  <% notifications.each do |notification| %>
+    <div class='notification' data-id='<%= notification.id %>' data-read='<%= notification.read %>' data-priority='<%= notification.priority %>'>
+      <div class='remove js-remove-notification'>X</div>
+      <div class='notification-header'>
+        <h5>
+          <%= notification.title %>
+        </h5>
+      </div>
+      <div class='notification-body'>
+        <div class='notification-message'>
+          <% unless notification.message.blank? %>
+            <p><%= truncate_with_ellipsis(notification.message, 100) %></p>
+          <% end %>
+        </div>
+        <div class='notification-link js-notification-link'>
+          <a href='<%= notification.link %>' class='btn btn-small'>Check It Out</a>
+        </div>
+      </div>
+      <div class='notification-footer'><%= distance_of_time_in_words(notification.created_at, Time.now) %> ago</div>
+    </div>
+  <% end %>
+<% end %>

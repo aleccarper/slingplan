@@ -1,0 +1,33 @@
+<%= render partial: 'inquiry_header' %>
+
+
+
+<div class='inner'>
+  <%= content_tag :div, class: classes_for_inquiry(@bug_report) do %>
+
+    <%= content_tag :div, class: 'controls' do %>
+      <%= back_to_staffer_inquiries %>
+    <% end %>
+
+    <%= content_tag :h1, @bug_report.subject, class: 'heading' %>
+
+    <%= content_tag :div, time_for_inquiry(@bug_report), class: 'time' %>
+
+    <%= content_tag :div, simple_format(@bug_report.body), class: 'body' %>
+
+    <div class='responses'>
+      <h2>Responses</h2>
+      <div class='message-list inquiry-message-list'>
+        <%= render partial: 'message_list', locals: { inquiry: @bug_report } %>
+      </div>
+    </div>
+
+    <%= render partial: '/inquiries/new_message', locals: { inquiry: @bug_report } %>
+
+  <% end %>
+</div>
+
+<%= render partial: '/partials/sse_stream', locals: {
+  source: "/staffers/admin/inquiries/#{@bug_report.id}/stream",
+  destination: '.message-list'
+} %>

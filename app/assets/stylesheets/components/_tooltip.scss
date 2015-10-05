@@ -1,0 +1,28 @@
+// ToolTip stuff
+.tip {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.tooltip {
+  @include transition(opacity 0.05 ease);
+  background: #000;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  color: $white;
+  line-height: 1.2;
+  font-size: $font-size-small;
+  max-width: 200px;
+  opacity: 0;
+  padding: 5px;
+  pointer-events: none;
+  position: absolute;
+  transform: translateZ(1);
+  transform: translateY(1px);
+  z-index: 200000;
+
+  &.shown {
+    opacity: 1;
+  }
+}

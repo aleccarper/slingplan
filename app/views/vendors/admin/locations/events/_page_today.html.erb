@@ -1,0 +1,10 @@
+<div class='tree-items'>
+  <% page.each do |event| %>
+    <div class='tree-item'>
+      <%= render partial: '/vendors/admin/locations/events/event', locals: {
+        event: event,
+        location: location
+      } %>
+    </div>
+  <% end %>
+</div>

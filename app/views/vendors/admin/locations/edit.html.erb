@@ -1,0 +1,16 @@
+<%= section_wrap_full({
+  title: "Edit Location",
+  subtitle: "Double check the accuracy of this information.  We will use it to determine what if the location is eligible for events."
+}) do %>
+  <%= render partial: "/vendors/admin/locations/edit/crumbs", locals: { location: @location, page: @page } %>
+<% end %>
+
+
+
+<%= javascript_tag defer: 'defer' do %>
+  var current_location_services = <%= j @location.services.map(&:id).to_s %>;
+<% end %>
+
+<div class='inner'>
+  <%= render partial: "/vendors/admin/locations/edit/#{@page}" %>
+</div>

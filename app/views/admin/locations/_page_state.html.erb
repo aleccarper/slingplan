@@ -1,0 +1,11 @@
+<% page.each do |location| %>
+  <div class='tree-item'>
+    <%= render partial: 'location', locals: {
+      location: location,
+      hide_edit_button: false,
+      hide_delete_button: false,
+      hide_active_slider: false,
+      show_claim_button: false
+    } %>
+  </div>
+<% end %>

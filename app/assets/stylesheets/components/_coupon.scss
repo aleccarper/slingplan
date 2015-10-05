@@ -1,0 +1,120 @@
+.coupon {
+  display: inline-block;
+  margin: $margin / 8 $margin / 8 $margin / 2;
+  width: 32.2%;
+
+  .coupon-header {
+    color: $white;
+    background: $palette-gray-dark;
+    border: 1px solid black;
+    padding: $margin / 3;
+
+    .live, .valid {
+      display: inline-block;
+      float: right;
+      font-size: $font-size-small;
+      padding: 0 $margin / 4 $margin / 4 0;
+      margin-left: $margin / 2;
+      position: relative;
+
+      &:before {
+        border-radius: 50%;
+        content: '';
+        display: inline-block;
+        position: relative;
+        top: 2px;
+        right: 2px;
+        height: 14px;
+        width: 14px;
+      }
+      &.true:before {
+        background: $palette-green-medium;
+      }
+      &.false:before {
+        background: $palette-red-medium;
+      }
+    }
+  }
+
+  .contents {
+    position: relative;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    height: 76px;
+    font-weight: bold;
+    padding-left: $margin / 8;
+  }
+
+  .sub-contents {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid $black;
+    padding-top: 4px;
+    height: 30px;
+    width: 100%;
+
+    div {
+      display: block;
+      text-align: center;
+      float: left;
+      padding-left: $margin / 3;
+      text-align: center;
+    }
+  }
+
+  .amount-off {
+    .symbol {
+      margin: $margin / 5;
+      float: left;
+      font-size: 36px;
+    }
+    .amount {
+      line-height: 1;
+      float: left;
+      font-size: 70px;
+    }
+    .right {
+      padding-left: $margin / 8;
+      float: left;
+    }
+    .cents {
+      line-height: 1.35;
+      float: left;
+      font-size: 36px;
+    }
+    .off {
+      line-height: 0.48;
+      clear: left;
+      float: left;
+      font-size: 24px;
+    }
+  }
+
+  .footer {
+    background: $palette-gray-dark;
+    border: 1px solid black;
+    height: 30px;
+
+    .expiration {
+      color: $palette-gray-light;
+      display: inline-block;
+      font-size: $font-size-small;
+      padding: $margin / 4 0 0 $margin / 3;
+    }
+
+    a {
+      color: $white;
+      background: $palette-red-medium;
+      display: block;
+      width: 30%;
+      padding: $margin / 6;
+      text-align: center;
+      float: right;
+      text-decoration: none;
+
+      &:hover {
+        background: lighten($palette-red-medium, 10%);
+      }
+    }
+  }
+}

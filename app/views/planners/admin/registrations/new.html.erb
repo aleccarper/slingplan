@@ -1,0 +1,69 @@
+<%= section_wrap_full({
+  title: "Planner Account",
+  subtitle: ("Do you already have a SlingPlan account?&nbsp;&nbsp;" + link_to("Sign in", new_session_path(resource_name), class: 'btn sign-in')).html_safe,
+  class: 'short'
+}) do; end %>
+
+
+
+<div class='inner devise'>
+  <%= responsive_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class='hint'>
+      <h4>Bringing it all together</h4>
+      <br />
+      A Planner account will let you easily seek out and communicate directly with the vendors you need to make your event a success! We've refined the process of creating an event to a step-by-step process that will save you time, energy, and money.  Planning with us will put you in direct contact with the vendors your event needs and let them bid for your business.
+    </div>
+
+    <div class='subsection-wrap'>
+      <div class='subtitle'>Account Credentials</div>
+      <div class='section-content'>
+        <div class='hint'>
+          This is the log in information you will use to sign into SlingPlan.
+        </div>
+        <%= f.email_field :email, required: true %>
+        <%= f.password_field :password, autocomplete: "off", required: true %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", required: true %>
+      </div>
+    </div>
+
+    <div class='subsection-wrap'>
+      <div class='subtitle'>Contact</div>
+      <div class='section-content'>
+        <div class='hint'>
+          You will be able to share this information while sending Requests For Proposals to vendors.
+        </div>
+
+        <%= f.text_field :first_name, required: true %>
+        <%= f.text_field :last_name, required: true %>
+        <%= f.text_field :company_name %>
+        <%= f.text_field :primary_phone_number %>
+        <%= f.text_field :primary_email %>
+        <%= f.text_field :primary_website %>
+        <%= f.file_field :logo_image, name: 'planner[logo_image]', label: 'Logo Image (.jpg, .png, .gif, .bmp)' %>
+      </div>
+    </div>
+
+    <div class='subsection-wrap'>
+      <div class='subtitle'>Misc</div>
+      <%= f.time_zone_select :time_zone,
+        ActiveSupport::TimeZone.us_zones,
+        default: 'Central Time (US & Canada)'
+      %>
+    </div>
+
+    <div class='accept-tos-wrap'>
+      <span>
+        <%= f.check_box :accepted_terms_of_service %>
+        <%= f.label :accepted_terms_of_service, 'Accept ' %>
+      </span>
+
+      <span>
+        <a href='/legal/terms' target='_blank'>Terms of Service</a>
+      </span>
+    </div>
+
+    <%= f.submit "Sign up" %>
+  <% end %>
+</div>

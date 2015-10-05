@@ -1,0 +1,262 @@
+.credit-card-wrapper {
+  $golden-ratio: 1.618;
+  $card-height: 240px;
+  $card-width: $card-height * $golden-ratio;
+  $focused-color: #3d89b8;
+  $unfocused-color: #337099;
+
+  @include center;
+  padding: $margin $margin / 2;
+  position: relative;
+  width: 270 + $card-width;
+  height: $card-height * 1.3;
+
+  .credit-card {
+    @include transition(all 0.25s ease);
+    background: $focused-color;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    height: $card-height;
+    transform: translateZ(0);
+    width: $card-width;
+
+    &.unfocused {
+      background: $unfocused-color;
+    }
+
+    input, select {
+      -webkit-appearance: none;
+      -webkit-border-radius: 0;
+      border: 0;
+      border-radius: 0;
+      outline: none;
+    }
+  }
+
+  .front {
+    left: 8%;
+    z-index: 2;
+
+    .card-title {
+      font-size: 18px;
+      font-weight: bolder;
+      margin: $margin 0 0 $margin;
+    }
+
+    .accepted-cards {
+      width: 230px;
+      height: 24px;
+      background-image: image-url('accepted_cards.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      position: absolute;
+      right: 7px;
+      top: 24px;
+    }
+
+    .card-number {
+      padding: $margin / 2 $margin 0;
+
+      .card-number-label {
+        margin: $margin / 8 0 $margin / 4;
+      }
+
+      input {
+        background: darken(#3d89b8, 10%);
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        color: white;
+        font-size: 27px;
+        margin: 0 $margin / 8 0 0;
+        padding: 3px 3px 3px $margin / 4;
+        width: 340px;
+      }
+    }
+
+    .card-expiration {
+      padding: $margin / 2 $margin $margin;
+
+      & > div {
+        float: left;
+        padding: $margin / 8;
+      }
+
+      .card-expiration-label {
+        padding-top: $margin * 1.35;
+      }
+
+      .card-expiration-month, .card-expiration-year {
+        &:after {
+          position: absolute;
+          bottom: 24px;
+          font-family: 'FontAwesome';
+          content: '\f063';
+          pointer-events: none;
+        }
+      }
+
+      .card-expiration-month:after {
+        left: 126px;
+      }
+
+      .card-expiration-year:after {
+        left: 228px;
+      }
+
+
+
+      .card-expiration-month-label {
+        margin-bottom: $margin / 4;
+      }
+
+      .card-expiration-year-label {
+        margin-bottom: $margin / 4;
+      }
+
+      .card-expiration-slash {
+        font-size: 32px;
+        padding: $margin * 1.2 $margin / 4;
+        position: relative;
+        top: 12px;
+      }
+
+      select {
+        background: darken(#3d89b8, 10%);
+        border-radius: 4px;
+        border: 1px solid gray;
+        color: white;
+        font-size: 30px;
+        padding: $margin / 4 $margin / 2 $margin / 8 $margin / 3;
+        width: 70px;
+      }
+    }
+  }
+
+  .back {
+    top: 60px;
+    left: 36%;
+    z-index: 1;
+
+    .magnetic-strip {
+      background: #111;
+      margin-top: $margin;
+      height: 60px;
+      width: 100%;
+    }
+
+    .credit-card-ccv {
+       text-align: right;
+
+      .credit-card-ccv-label {
+        padding: $margin / 2 $margin $margin / 4;
+      }
+
+      .credit-card-ccv-strip {
+        margin: 0 $margin;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      .credit-card-ccv-prefix {
+        color: black;
+        float: right;
+        font-size: 24px;
+        letter-spacing: 2.5px;
+        padding: $margin / 1.7 $margin;
+        @include transform(skew(10deg, 0));
+      }
+
+      .credit-card-ccv-box {
+        background: white;
+        position: absolute;
+        top: 131px;
+        right: $margin + 5px;
+        content: '';
+        border-radius: 4px;
+        border: 1px solid gray;
+        height: 46px;
+        width: 80px;
+      }
+
+      input {
+        position: relative;
+        left: -$margin / 2;
+        float: right;
+        background: transparent;
+        border-radius: 4px;
+        color: black;
+        font-size: 26px;
+        margin: $margin / 4 0 0 0;
+        padding: $margin / 3 0 0 $margin / 3;
+        width: 70px;
+        @include transform(skew(10deg, 0));
+      }
+    }
+  }
+}
+
+
+
+@include breakpoint(750px) {
+  .credit-card-wrapper {
+    width: 80%;
+    height: 420px;
+
+    .front {
+      left: 0;
+    }
+    .back {
+      top: 155px;
+      left: 14%;
+    }
+  }
+}
+
+@include breakpoint(597px) {
+  .credit-card-wrapper {
+    height: 360px;
+    width: 320px;
+    position: relative;
+
+    .credit-card {
+      @include transform(scale(0.9));
+    }
+
+    .front {
+      top: 5px;
+      left: -45px;
+    }
+
+    .back {
+      top: 136px;
+      left: -25px;
+    }
+  }
+}
+
+@include breakpoint(455px) {
+  .credit-card-wrapper {
+    width: 100%;
+    height: 330px;
+    position: relative;
+    left: -21px;
+
+    .credit-card {
+      @include transform(scale(0.55));
+    }
+
+    .front {
+      top: 5px;
+      left: -77px;
+    }
+
+    .back {
+      top: 120px;
+      left: auto;
+      right: -117px;
+    }
+  }
+}

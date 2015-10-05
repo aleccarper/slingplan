@@ -1,0 +1,10 @@
+.vendors-admin-recent-changes {
+  .change {
+    .attr-name, .from, .to {
+      font-weight: bold;
+    }
+    .content {
+      padding-left: $margin;
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<%= location_list_item location do %>
+
+  <div class='controls'>
+    <% unless hide_delete_button %>
+      <%= link_to vendors_admin_location_path(location),
+        method: :delete,
+        class: 'btn-remove tip',
+        data: {
+          confirm: 'Are you sure?',
+          dir: 'n',
+          msg: 'delete-location'
+        } do %>
+        <i class='fa fa-times'></i>
+      <% end %>
+    <% end %>
+
+    <% unless hide_edit_button %>
+      <%= link_to edit_vendors_admin_location_path(location),
+        class: 'btn-edit tip',
+        data: {
+          dir: 'n',
+          msg: 'edit-location'
+        } do %>
+        <i class='fa fa-edit'></i>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class='location-header'>
+    <%= content_tag :div, truncate_with_ellipsis(location.name,20), class: 'location-name' %>
+  </div>
+
+  <div class='contents'>
+    <%= location_list_address(location) %>
+  </div>
+
+  <div class='sub-contents'>
+    <%= content_tag :div, "Phone: <strong>#{location.phone_number}</strong>".html_safe, class: 'location-phone' %>
+    <% if !location.website.blank? %>
+      <%= content_tag :div, "Web: <strong>#{location.website}</strong>".html_safe %>
+    <% end %>
+    <% if !location.email.blank? %>
+      <%= content_tag :div, "Email: <strong>#{location.email}</strong>".html_safe %>
+    <% end %>
+  </div>
+
+
+
+  <div class='footer'>
+    <% if show_claim_button %>
+      <div class='btn claim-location btn-green'>Claim</div>
+    <% end %>
+    <% unless hide_active_slider %>
+      <%= location_slider(location) do %>
+        <div class='switch'></div>
+        <div class='active-text'>Deactivate</div>
+        <div class='inactive-text'>Activate</div>
+      <% end %>
+    <% end %>
+
+    <% if defined? show_manage_button %>
+      <% if show_manage_button %>
+        <div class='btn-manage'>
+          <%= link_to 'Manage', "/vendors/admin/locations/#{location.id}", class: 'btn btn-medium' %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if defined? show_complete_button %>
+      <% if show_complete_button %>
+        <div class='btn-complete'>
+          <%= link_to 'Complete', "/vendors/admin/locations/complete/#{location.id}", class: 'btn btn-medium' %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if defined? show_hide_from_service_rfp_button %>
+      <% if show_hide_from_service_rfp_button %>
+        <%= link_to 'Hide Location', '#', class: 'hide-location btn btn-red btn-medium' %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,1 @@
+<%= content_tag :div, LaunchSubscriber.all.map(&:email).uniq.join(', ') %>

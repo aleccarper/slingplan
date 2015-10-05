@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+  <%= render partial: 'partials/head' %>
+
+  <%= body_tag do %>
+
+    <% if ENV['BETA'] == 'true' and get_cookie('beta_tester_email').blank? %>
+
+      <%= render partial: 'partials/beta' %>
+
+    <% elsif ENV['MAINTENANCE'] == 'true' %>
+
+      <%= render partial: 'partials/maintenance' %>
+
+    <% else %>
+
+      <%= render partial: 'partials/header' %>
+      <%= flash_background %>
+
+      <div class='sidebar left'>
+        <div class='sidebar-controls'>
+          <div class='back'>
+            <i class='fa fa-2x fa-arrow-circle-o-left'></i>
+            <i class='fa fa-2x fa-arrow-circle-left'></i>
+          </div>
+
+          <div class='expand tip' data-dir='n' data-msg='expand'>
+            <i class='fa fa-2x fa-search-plus'></i>
+          </div>
+          <div class='collapse tip' data-dir='n' data-msg='collapse'>
+            <i class='fa fa-2x fa-search-minus'></i>
+          </div>
+        </div>
+
+        <%= hidden_field_tag :selected_service, nil, value: get_cookie('selected-service') %>
+        <%= hidden_field_tag :selected_model, nil, value: get_cookie('selected-model') %>
+        <div class='view-states-wrapper'>
+          <div class='view-states'>
+            <div class='current'>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class='sidebar right collapsed'>
+        <div class='sidebar-controls'>
+          <div class='expand tip' data-dir='n' data-msg='expand'>
+            <i class='fa fa-2x fa-bookmark'></i>
+          </div>
+          <div class='collapse tip' data-dir='n' data-msg='collapse'>
+            <i class='fa fa-2x fa-bookmark'></i>
+          </div>
+
+          <div class='btn-export tip' data-dir='n' data-msg='export'>
+            <i class='fa fa-2x fa-save'></i>
+          </div>
+        </div>
+
+        <div class='view-states-wrapper'>
+          <div class='view-states'>
+            <div class='current'>
+              <%= render partial: 'bookmarks/bookmarks', locals: { bookmark_list: nil } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='map-container'>
+        <div id='map'></div>
+      </div>
+
+      <%= render partial: '/partials/map_history' %>
+
+      <%= overlay %>
+
+      <%= content_for :javascript %>
+
+    <% end %>
+
+    <%= javascript_include_tag 'map' %>
+
+  <% end %>
+
+</html>

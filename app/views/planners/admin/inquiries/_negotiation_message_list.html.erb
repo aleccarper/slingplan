@@ -1,0 +1,27 @@
+<div class='message-list negotiation-message-list'>
+  <ul>
+    <% if inquiry.messages.blank? %>
+      <div class='nothing-here'>No responses as of yet...</div>
+    <% else %>
+
+      <% for message in inquiry.messages.order(created_at: :asc) %>
+        <% @cls = (message.owner.class == Vendor and !message.read?) ? 'unread' : '' %>
+
+        <%= content_tag :li, data: { id: message.id }, class: @cls do %>
+
+          <% if message.owner.class == Planner %>
+            <div class="me">
+              <%= render partial: 'planner_negotiation_message', locals: { message: message } %>
+            </div>
+          <% elsif message.owner.class == Vendor %>
+            <div class="them">
+              <%= render partial: 'vendor_negotiation_message', locals: { message: message } %>
+            </div>
+          <% end %>
+
+        <% end %>
+      <% end %>
+
+    <% end %>
+  </ul>
+</div>

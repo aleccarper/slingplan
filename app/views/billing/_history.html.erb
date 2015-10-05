@@ -1,0 +1,14 @@
+<div class='billing-history'>
+  <h3>History</h3>
+
+  <div class='charges section-content'>
+    <% if @charges && @charges[:data].length > 0  %>
+      <% @charges.each do |charge| %>
+        <%= build_charge(charge) %>
+      <% end %>
+    <% else %>
+      No charges have been made.
+    <% end %>
+  </div>
+
+</div>

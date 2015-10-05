@@ -1,0 +1,10 @@
+<ul class='tabs staffers-admin-tabs'>
+  <%= staffer_admin_tab 'profile' %>
+  <%= staffer_admin_tab 'inquiries', 'Help' %>
+  <%= staffer_admin_tab 'account' do %>
+    <ul class='subtabs staffer-admin-subtabs'>
+      <%= staffer_admin_account_tab 'billing' %>
+      <%= staffer_admin_account_tab 'settings' %>
+    </ul>
+  <% end %>
+</ul>

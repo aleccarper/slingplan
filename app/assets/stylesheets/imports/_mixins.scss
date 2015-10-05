@@ -1,0 +1,189 @@
+// Position shorthand
+@mixin position($position, $top: false, $right: false, $bottom: false, $left: false) {
+  position: $position;
+
+  @if $top and $right and $bottom and $left {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+  }
+
+  @if $top and $right and $bottom and not $left {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $right;
+  }
+
+  @if $top and $right and not $bottom and not $left {
+    top: $top;
+    right: $right;
+    bottom: $top;
+    left: $right;
+  }
+
+  @if $top and not $right and not $bottom and not $left {
+    top: $top;
+    right: $top;
+    bottom: $top;
+    left: $top;
+  }
+}
+
+
+
+@mixin vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+
+@mixin noselect {
+  user-select: none;
+}
+
+
+
+// Easy pixel breakpoints
+@mixin breakpoint($max-width) {
+  @media only screen and (max-width: $max-width) {
+    @content;
+  }
+}
+
+
+
+@mixin shadow($h, $v, $blur, $spread, $color) {
+  box-shadow: $h $v $blur $spread $color;
+}
+
+
+
+// Retina image sprite
+@mixin retina-sprite($image, $width, $height) {
+  @extend %replace-text;
+  background: asset-url($image) no-repeat left top;
+  background-size: $width $height;
+  display: inline-block;
+  height: $height;
+  width: $width;
+}
+
+
+
+@mixin animate($what, $duration, $type) {
+  animation: $what $duration $type;
+}
+
+@mixin transition($transitions...) {
+  transition: $transitions;
+}
+
+@mixin transform($transformations...) {
+  transform: $transformations;
+}
+
+
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+
+
+@mixin drop-shadow($h, $v, $blur, $spread, $color) {
+  box-shadow: $h $v $blur $spread $color;
+}
+
+
+
+@mixin fontawesome-checkboxes {
+  label {
+    @include noselect;
+  }
+  input[type=checkbox] + label:before {
+    content: "\f096";
+    display: inline-block;
+    font-family: FontAwesome;
+    font-size: 22px;
+    letter-spacing: 8px;
+    position: relative;
+    top: 1px;
+  }
+  input[type=checkbox] {
+    display: none;
+  }
+  input[type=checkbox]:checked + label:before {
+    content: "\f046";
+    letter-spacing: 5px;
+  }
+}
+
+
+
+// Input placeholder styling
+@mixin placeholders() {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+
+
+// Better text replacement
+@mixin replace-text() {
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+
+
+// Shorthand for div that contains floats
+@mixin float-container() {
+  position: relative;
+
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+
+@mixin center {
+  margin: 0 auto;
+}
+
+
+// Shorthand for center max-width containers
+@mixin max-width-center() {
+  @include center;
+  max-width: $global-max-width;
+}

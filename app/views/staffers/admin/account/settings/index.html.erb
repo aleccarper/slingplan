@@ -1,0 +1,25 @@
+<%= section_wrap_full({
+  title: "Settings",
+  subtitle: "Make SlingPlan work just the way you'd like."
+}) do %>
+  Settings and customizations will evolve as we build consensus of what users really want based on feedback.
+<% end %>
+
+
+
+<div class='inner'>
+  <%= responsive_form_for(@settings, url: staffers_admin_account_settings_path, method: :patch) do |f| %>
+    <label for='email_frequency'>
+      <span>Email Frequency</span>
+    </label>
+    <div class='hint'>
+       How often would you like to receive bids and messages from planners, as well as responses to support tickets?
+    </div>
+    <%= f.select :email_frequency,
+      collection: Settings.email_frequencies.keys.map { |f| [f.titleize, f] },
+      label: false
+    %>
+
+    <%= f.submit 'Save' %>
+  <% end %>
+</div>

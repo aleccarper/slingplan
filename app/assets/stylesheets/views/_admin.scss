@@ -1,0 +1,48 @@
+.admin-locations,
+.admin-blog,
+.admin-stripe,
+.admin-inquiries {
+
+  .container {
+    @include breakpoint(690px) {
+      .tabs li a {
+        font-size: $font-size-giant * 0.9;
+      }
+    }
+
+    @include breakpoint(640px) {
+      .tabs li a {
+        padding-top: $margin / 1.4;
+        font-size: $font-size-giant * 0.8;
+      }
+    }
+
+    @include breakpoint(570px) {
+      .tabs li a {
+        padding-top: $margin / 1.3;
+        font-size: $font-size-giant * 0.7;
+      }
+    }
+
+    @include breakpoint(530px) {
+      .tabs li a {
+        padding-top: $margin / 1.2;
+        font-size: $font-size-giant * 0.6;
+      }
+    }
+
+    @include breakpoint(470px) {
+      .tabs li a {
+        padding-top: $margin / 1.1;
+        font-size: $font-size-giant * 0.5;
+      }
+    }
+
+    @include breakpoint(420px) {
+      .tabs li a {
+        padding-top: $margin;
+        font-size: $font-size-giant * 0.4;
+      }
+    }
+  }
+}

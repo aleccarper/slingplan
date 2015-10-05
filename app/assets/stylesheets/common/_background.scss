@@ -1,0 +1,114 @@
+$section-backdrops: (
+  "&.signin":                               "convention-center.jpg",
+  // Admin
+  "&.admin-sessions":                       "convention-center.jpg",
+  "&.admin-locations":                      "vendors-admin-locations-background.jpg",
+  "&.admin-blog":                           "vendors-admin-locations-background.jpg",
+  "&.admin-coupons":                        "vendors-admin-locations-background.jpg",
+  "&.admin-messages":                       "vendors-admin-locations-background.jpg",
+  "&.admin-inquiries":                      "vendors-admin-inquiries-background.jpg",
+  "&.admin-inquiries-suggestions":          "vendors-admin-inquiries-background.jpg",
+  "&.admin-inquiries-questions":            "vendors-admin-inquiries-background.jpg",
+  "&.admin-inquiries-bug_reports":          "vendors-admin-inquiries-background.jpg",
+  // Vendors
+  "&.vendors-admin-sessions":               "convention-center.jpg",
+  "&.vendors-admin-registrations":          "convention-center.jpg",
+  "&.vendors-admin-passwords":              "convention-center.jpg",
+  "&.home.vendor-signed-in":                "vendors-admin-overview-background.jpg",
+  "&.vendors-admin-locations":              "vendors-admin-locations-background.jpg",
+  "&.vendors-admin-locations-events":       "vendors-admin-locations-background.jpg",
+  "&.vendors-admin-locations-claims":       "vendors-admin-locations-background.jpg",
+  "&.vendors-admin-account-profile":        "vendors-admin-account-profile-background.jpg",
+  "&.vendors-admin-account-billing":        "vendors-admin-account-billing-background.jpg",
+  "&.vendors-admin-account-settings":       "vendors-admin-account-settings-background.jpg",
+  "&.vendors-admin-inquiries":              "vendors-admin-inquiries-background.jpg",
+  "&.vendors-admin-inquiries-suggestions":  "vendors-admin-inquiries-background.jpg",
+  "&.vendors-admin-inquiries-questions":    "vendors-admin-inquiries-background.jpg",
+  "&.vendors-admin-inquiries-bug_reports":  "vendors-admin-inquiries-background.jpg",
+  // Planners
+  "&.planners-admin-sessions":              "convention-center.jpg",
+  "&.planners-admin-registrations":         "convention-center.jpg",
+  "&.planners-admin-passwords":              "convention-center.jpg",
+  "&.home.planner-signed-in":               "vendors-admin-overview-background.jpg",
+  "&.planners-admin-events":                "planners-admin-events-background.jpg",
+  "&.planners-admin-account-profile":       "vendors-admin-account-profile-background.jpg",
+  "&.planners-admin-account-billing":       "vendors-admin-account-billing-background.jpg",
+  "&.planners-admin-account-settings":      "vendors-admin-account-settings-background.jpg",
+  "&.planners-admin-inquiries":             "vendors-admin-inquiries-background.jpg",
+  "&.planners-admin-inquiries-suggestions": "vendors-admin-inquiries-background.jpg",
+  "&.planners-admin-inquiries-questions":   "vendors-admin-inquiries-background.jpg",
+  "&.planners-admin-inquiries-bug_reports": "vendors-admin-inquiries-background.jpg",
+  // Staffers
+  "&.staffers-admin-sessions":              "convention-center.jpg",
+  "&.staffers-admin-registrations":         "convention-center.jpg",
+  "&.staffers-admin-passwords":              "convention-center.jpg",
+  "&.staffers-admin-inquiries":             "vendors-admin-inquiries-background.jpg",
+  "&.staffers-admin-inquiries-suggestions": "vendors-admin-inquiries-background.jpg",
+  "&.staffers-admin-inquiries-questions":   "vendors-admin-inquiries-background.jpg",
+  "&.staffers-admin-inquiries-bug_reports": "vendors-admin-inquiries-background.jpg",
+  "&.staffers-admin-profile":               "vendors-admin-account-profile-background.jpg",
+  "&.staffers-admin-account-billing":       "vendors-admin-account-billing-background.jpg",
+  "&.staffers-admin-account-settings":      "vendors-admin-account-settings-background.jpg",
+);
+
+body {
+  &.holding {
+  	background-image: url(image-path('earth.jpg'));
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-position: center center;
+  }
+
+  @each $root-selector, $background-file-name in $section-backdrops {
+    #{$root-selector} {
+      // http://stackoverflow.com/questions/5287272/css-select-first-element-with-a-certain-class/5293095#5293095
+      .section-wrap-full {
+        background-image: image-url($background-file-name);
+      }
+      .section-wrap-full ~ .section-wrap-full {
+        background-image: none;
+      }
+    }
+  }
+
+  .section-wrap-full {
+    &.blog {
+      background-image: image-url('vendors-admin-overview-background.jpg')
+    }
+
+    // services
+    &.catering {
+      background-image: image-url('catering.jpg');
+    }
+    &.entertainment {
+      background-image: image-url('entertainment.jpg');
+    }
+    &.event-rental-and-decor {
+      background-image: image-url('event-rental-and-decor.jpg');
+    }
+    &.floral {
+      background-image: image-url('floral.jpg');
+    }
+    &.lodging {
+      background-image: image-url('lodging.jpg');
+    }
+    &.photographers {
+      background-image: image-url('photographers.jpg');
+    }
+    &.production-and-audio-visual {
+      background-image: image-url('production-and-audio-visual.jpg');
+    }
+    &.recreation-and-activities {
+      background-image: image-url('recreation-and-activities.jpg');
+    }
+    &.security {
+      background-image: image-url('security.jpg');
+    }
+    &.transportation {
+      background-image: image-url('transportation.jpg');
+    }
+    &.venues-and-event-space {
+      background-image: image-url('venues-and-event-space.jpg');
+    }
+  }
+}

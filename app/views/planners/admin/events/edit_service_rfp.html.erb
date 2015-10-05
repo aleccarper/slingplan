@@ -1,0 +1,105 @@
+<%= section_wrap_full({
+  title: "Edit Event",
+  subtitle: "Double check the accuracy of this information.  We will use it to determine what vendor locations should be included in negotiations.",
+  class: @service_rfp.service.name.downcase.parameterize
+}) do %>
+  <%= render partial: "/planners/admin/events/edit/crumbs", locals: { event: @event, page: 'service-rfps' } %>
+<% end %>
+
+
+
+<%= hidden_field_tag :id, @event.id %>
+<%= hidden_field_tag :lat, @event.latitude %>
+<%= hidden_field_tag :lng, @event.longitude %>
+
+<%= javascript_tag defer: 'defer' do %>
+  var current_event_services = <%= j @event.services.map(&:id).to_s %>;
+<% end %>
+
+<div class='inner'>
+  <div class='hint'>
+    <div class='heading'>Event Specification</div>
+    Below, you will find all vendors relevant to your event organized by service.  Fill out each section with event details pertinent to how vendors can accomodate your event depending on the services they provide.  Upon completion of this page, all eligible vendors in proximity to your event will receive a summary of the event as seen above, as well as an outline of any specific details you provide below.
+  </div>
+
+  <%= responsive_form_for(@service_rfp,
+    url: "/planners/admin/events/#{@event.id}/edit/service_rfp/#{@service_rfp.id}",
+    class: "new-service-rfp #{@service_rfp.service.name.downcase.parameterize}") do |f|
+  %>
+    <%= f.hidden_field :id, value: @service_rfp.id %>
+    <%= f.hidden_field :radius, value: @service_rfp.radius %>
+
+    <div class='subsection-content'>
+      <div class='select-service-rfp-area'>
+        <div class='subsection-label'>Select Service RFP:</div>
+        <div class='subtitle'>
+          <%= hidden_field_tag :srfp_selected, value: @service_rfp.id %>
+          <%= select_tag 'service_rfps', options_from_collection_for_select(@event.service_rfps, "id", "service_name", @service_rfp.id) %>
+        </div>
+      </div>
+      <div class='hint'>
+        <div class='heading'>Notes</div>
+        Specify in detail your <%= f.object.service.name %> event requirements including things like schedules, quantities, and special accomodations you may need.  The more detailed you are, the faster and more accurately vendors will be able to produce a bid for you.
+      </div>
+      <%= f.text_area :notes, label: false %>
+
+      <div class='hint budget-hint'>
+        <div class='heading'>Budget (optional)</div>
+        Do you have a limit for how much you'd like to spend on <%= f.object.service.name %>?  If so, you may create a service budget below and it will represent the maximum a vendor may bid within the negotiation.  This can save you time in the negotiation process but you may ultimately end up receiving a more expensive first bid, so choose wisely!
+      </div>
+        <div class='budget'>
+          <%= f.number_field :budget, label: false, min: 0 %>
+        </div>
+
+      <div class='hint'>
+        <div class='heading'>Eligibility Radius</div>
+        How far from your event's location would you like us to go when bringing eligible <%= f.object.service.name %> vendors into the negotiation?  Looking further can give you more options, but note that some vendors may have service area restrictions that we don't know about.  The list of eligible vendors below the map will update as you change the radius.
+        <div class='eligibility-radius-wrapper'>
+          <div class='near'>Near</div>
+          <div class='far'>Far</div>
+          <%= content_tag :div, id: "eligibility-radius", class: "dragdealer" do %>
+            <div class='handle tip' data-dir='s' data-msg='drag-to-adjust'>
+              <div class='value'></div>
+              <div class='handle-inner'>
+                <%= icon('bars') %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <%= render partial: '/map/small_horizontal_map', locals: {
+          locations: @service_rfp_locations_in_maximum_range,
+          show_pins: true,
+          lock: false,
+          index: false,
+          zoom_control: true,
+          zoom_scroll: false,
+          center: {
+            latitude: @event.latitude,
+            longitude: @event.longitude,
+            radius: 0 # miles
+          }
+        } %>
+      </div>
+
+      <%= paginate 'page_service_rfp_locations', '/planners/admin/events/page_service_rfp_locations', {
+        event_id: @event.id,
+        service_rfp_id: @service_rfp.id
+      } %>
+    </div>
+    <div>
+      <%= submit_tag 'Save', name: 'save', class: 'btn f-right btn-save' %>
+      <%= submit_tag 'Back', name: 'back', class: 'btn f-right btn-back' %>
+    </div>
+
+    <% unless @event.confirmed %>
+      <div class='confirm-hint hint red'>
+        <div class='heading'>Listen Up!</div>
+        Confirming this page immediately alerts all vendors listed and attaches the event specification as you defined above.  Please review all information you provide before confirming.
+        <br />
+        <br />
+        <%= submit_tag 'Confirm and Broadcast', name: 'confirm', class: 'btn btn-large btn-green btn-confirm' %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

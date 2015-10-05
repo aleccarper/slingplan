@@ -1,0 +1,47 @@
+<%= section_wrap_full({
+  title: "Locations",
+  subtitle: "Create and activate your locations to become visible to planners organizing events nearby."
+}) do %>
+  <%= link_to new_vendors_admin_location_path, class: 'btn btn-large' do %>
+    New Location <%= icon('plus') %>
+  <% end %>
+  <%= link_to vendors_admin_locations_claims_path, class: 'btn btn-large' do %>
+    View Claims <%= icon('files-o') %>
+  <% end %>
+<% end %>
+
+
+
+<div class='inner'>
+  <%= locations_area do %>
+
+    <%= hidden_field_tag :max_active_allowed, @max_active_allowed %>
+
+    <% unless @max_active_allowed == 'Unlimited' %>
+      <%= render partial: '/vendors/admin/locations/location_totals' %>
+    <% end %>
+
+    <% if current_vendor.locations.blank? %>
+      <div class='nothing-here'>No locations yet created.</div>
+    <% else %>
+      
+      <% if !vendor_subscription %>
+        <div class='hint red'>
+          You must have an active subscription to activate your locations.
+          <br />
+          <%= link_to("Sign up as Planner", vendors_admin_account_billing_index_path, class: 'btn') %>
+        </div>
+      <% else %>
+        <div class='hint'>
+          <div class='heading'>Locations currently in negotiations</div>
+          <%= paginate 'page_negotiating', '/vendors/admin/locations/page_negotiating' %>
+        </div>
+      <% end %>
+
+      <%= render partial: 'locations', locals: {
+        unconfirmed: current_vendor.locations.unconfirmed,
+        states: current_vendor.locations.confirmed.by_state_ordered_by_city
+      } %>
+    <% end %>
+  <% end %>
+</div>

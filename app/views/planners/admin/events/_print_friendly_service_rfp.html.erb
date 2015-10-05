@@ -1,0 +1,61 @@
+<div style='padding-left: 24px;'>
+  <% unless service_rfp.budget.blank? %>
+    <div>
+      <strong>Budget: </strong>
+      <span>$<%= service_rfp.budget %></span>
+    </div>
+  <% end %>
+  <div>
+    <strong>Outside Arrangements: </strong>
+    <span><%= service_rfp.has_outside_arrangements? ? 'YES' : 'NO' %></span>
+  </div>
+  <div>
+    <strong>Vendor Eligibility Radius: </strong>
+    <span><%= service_rfp.radius %> miles</span>
+  </div>
+  <div>
+    <strong>Notes: </strong>
+    <div style='padding-left: 12px; font-style: italic;'>
+      <%= service_rfp.notes.blank? ? 'None' : simple_format(service_rfp.notes) %>
+    </div>
+  </div>
+
+  <br>
+
+  <h3>Vendor RFPs</h3>
+  <% service_rfp.vendor_rfps.each do |vendor_rfp| %>
+    <div style='padding-left: 24px;'>
+      <div>
+        <strong>Name: </strong>
+        <span><%= vendor_rfp.location.name %></span>
+      </div>
+      <div>
+        <strong>Address: </strong>
+        <span><%= vendor_rfp.location.full_address %></span>
+      </div>
+      <div>
+        <strong>Email: </strong>
+        <span><%= vendor_rfp.location.email %></span>
+      </div>
+      <div>
+        <strong>Phone: </strong>
+        <span><%= vendor_rfp.location.phone_number %></span>
+      </div>
+      <% unless vendor_rfp.location.website.blank? %>
+        <div>
+          <strong>Website: </strong>
+          <%= link_to vendor_rfp.location.website, vendor_rfp.location.website, target: '_blank' %>
+        </div>
+      <% end %>
+      <div>
+        <strong>Negotiation Status: </strong>
+        <span><%= vendor_rfp.negotiation.status %></span>
+      </div>
+      <div>
+        <strong>Negotiation Bid: </strong>
+        <span><%= vendor_rfp.current_bid.nil? ? 'None' : "$#{vendor_rfp.current_bid}" %></span>
+      </div>
+    </div>
+    <br>
+  <% end %>
+</div>

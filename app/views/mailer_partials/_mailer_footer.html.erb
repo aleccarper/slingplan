@@ -1,0 +1,9 @@
+<br/>
+<hr/>
+<% if defined? @page_path %>
+  <% unless @page_path.nil? %>
+    <%= link_to 'View on SlingPlan', with_host_url(@page_path), target: '_blank' %>
+  <% end %>
+<% end %>
+
+

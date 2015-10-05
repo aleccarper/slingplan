@@ -1,0 +1,16 @@
+<div class='small-horizontal-map'>
+  <% @map_id = index ? "map_#{index}" : 'map' %>
+  <%= content_tag :div, id: @map_id, class: 'map' do %>
+    <%= javascript_tag defer: 'defer' do %>
+      SmallMap.init_map(
+        '<%= ".small-horizontal-map ##{@map_id}" %>',
+        <%= raw locations.to_json %>,
+        <%= raw show_pins %>,
+        <%= raw lock %>,
+        <%= raw zoom_control %>,
+        <%= raw zoom_scroll %>,
+        <%= raw center.to_json %>
+      );
+    <% end %>
+  <% end %>
+</div>

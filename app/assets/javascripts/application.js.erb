@@ -1,0 +1,138 @@
+//= require jquery
+//= require jquery_ujs
+//= require jquery-ui
+//= require jquery.numeric.min
+//= require underscore
+//= require handlebars
+//= require d3
+//= require dragdealer
+//= require autofill-event
+//= require fastclick
+//= require moment
+//= require transit.min
+//= require perfect-scrollbar.jquery.min
+//= require maskedinput
+
+//= require handlebars/helpers
+//= require_tree ./extensions
+
+//= require_tree ./templates
+//= require_tree ./components
+
+//= require views/sitemap
+//= require views/overview
+//= require views/admin
+//= require views/signin
+//= require views/admin/locations
+//= require views/planners
+//= require views/planners/admin
+//= require views/planners/admin/events
+//= require views/vendors
+//= require views/vendors/admin
+//= require views/vendors/admin/locations
+//= require views/vendors/admin/account
+//= require views/vendors/admin/inquiries
+//= require views/staffers
+//= require views/staffers/admin
+//= require views/staffers/admin/account
+
+//= require views/beta
+//= require views/home
+//= require views/map/map_styles
+
+
+var deviceAgent = navigator.userAgent.toLowerCase();
+
+var isTouchDevice = (deviceAgent.match(/(iphone|ipod|ipad)/) ||
+deviceAgent.match(/(android)/)  ||
+deviceAgent.match(/(iemobile)/) ||
+deviceAgent.match(/iphone/i) ||
+deviceAgent.match(/ipad/i) ||
+deviceAgent.match(/ipod/i) ||
+deviceAgent.match(/blackberry/i) ||
+deviceAgent.match(/bada/i));
+
+$(document).on('ready', function() {
+  new FastClick(document.body);
+
+  // common
+  Loading.init();
+  Validation.init();
+  Sitemap.init();
+  Overview.init();
+  Beta.init();
+
+  $(document).on('click', '.hide-intro', function() {
+    $.ajax({
+      type: 'POST',
+      url: '/hide_intro'
+    }).done(function() {
+      $('.intro').fadeOut().remove();
+    });
+  });
+
+  $(document).on('click', '.link-register', function(e) {
+    var which = $('.register-which');
+    if(which.hasClass('expanded')) {
+      which.removeClass('expanded');
+    } else {
+      which.addClass('expanded');
+    }
+
+    e.preventDefault();
+  });
+
+  <% if ENV['MAINTENANCE'] == 'true' %>
+    // holding and maintenance pages
+    //Footer.init(true);
+
+  <% else %>
+    // live routes
+    var path = window.location.pathname;
+
+    $('input[type=number]').numeric();
+    $(document).on('paste contextmenu', 'input[type=number]', function(e) {
+      e.preventDefault();
+    });
+
+    SignIn.init();
+    Plans.init();
+    CreditCard.init();
+    Coupon.init();
+    FlashBackground.init();
+    Tree.init();
+    Inquiries.init();
+    Negotiations.init();
+    Notifications.init();
+    ToolTips.init();
+    Log.init();
+    Home.init();
+    Tabs.init();
+
+    // routes
+    if(path.indexOf('/map') === 0) {
+      Map.init();
+      MapHistory.init();
+      MapBookmarks.init();
+    }
+
+    if(path.indexOf('/vendors/admin') === 0
+    || path.indexOf('/planners/admin') === 0
+    || path.indexOf('/staffers/admin') === 0) {
+      Vendors.Admin.init();
+    }
+
+    if(path.indexOf('/staffers/admin') === 0) {
+      Staffers.Admin.init();
+    }
+
+    if(path.indexOf('/planners/admin') === 0) {
+      Planners.Admin.init();
+    }
+
+    if(path.indexOf('/admin') === 0) {
+      Vendors.init();
+    }
+  <% end %>
+
+});

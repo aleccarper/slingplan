@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+  <%= render partial: 'partials/head' %>
+
+  <%= body_tag do %>
+    <div class='beta-container'>
+      <div class='beta-inner-container'>
+        <div class='container'>
+
+          <div class='title'>Ahoy!</div>
+
+          <div class='description'>Welcome to the SlingPlan Documentation</div>
+
+          <div class='subtitle'>What would would like to know about?
+            <%= beta_nav %>
+          </div>
+
+          <div class='how-to'>
+            <%= yield %>
+          </div>
+
+          <%= render partial: 'partials/footer' %>
+
+        </div>
+      </div>
+    </div>
+
+    <%= overlay %>
+  <% end %>
+</html>

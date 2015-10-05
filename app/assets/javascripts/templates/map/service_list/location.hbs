@@ -1,0 +1,26 @@
+{{#each locations}}
+  <div class='location-list-item' data-location-id='{{location.id}}'>
+    <h5 class='location-list-item-name'>{{name}}</h5>
+    <div class='location-info'>
+      <p><a href='{{website}}' target='_blank'>{{website}}</a></p>
+      <p>{{address1}} {{address2}}</p>
+      <p>{{city}}, {{state}} {{zip}}</p>
+      <p>{{email}}</p>
+      <p>{{phone_number}}</p>
+    </div>
+    <div class='controls'>
+      <div>
+        <a href='#' class='btn btn-default find-location'>Find Location
+          <i class='fa fa-crosshairs'></i>
+        </a>
+      </div>
+      {{#if vendor_id}}
+        <div>
+          <a href='/vendors/{{vendor_id}}' class='btn btn-default view-profile'>View Company
+            <i class='fa fa-arrow-right'></i>
+          </a>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+{{/each}}

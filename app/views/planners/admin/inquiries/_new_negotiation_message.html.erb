@@ -1,0 +1,16 @@
+<div class='new-message'>
+  <%= responsive_form_for NegotiationMessage.new(negotiation: inquiry), url: '/planners/admin/inquiries/create_message' do |f| %>
+
+    <%= f.hidden_field :planner_id, value: current_planner.id %>
+    <%= f.hidden_field :negotiation_id, value: inquiry.id %>
+
+    <%= f.text_area :content, class: 'new-message-area', label: 'Create Response' %>
+
+    <div class='controls'>
+      <%= render partial: 'new_negotiation_message_buttons', locals: {
+        inquiry: inquiry
+      } %>
+    </div>
+
+  <% end %>
+</div>

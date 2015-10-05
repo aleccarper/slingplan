@@ -1,0 +1,52 @@
+.map-info-window {
+  color: $black;
+  line-height: 1em !important;
+
+  .btn-default {
+    color: $white;
+    &:hover {
+      color: $white;
+    }
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    color: $black;
+  }
+
+  p {
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    line-height: 1em;
+    padding-left: $margin / 2;
+
+    a {
+      color: $black !important;
+      &:hover {
+        color: $palette-green-medium;
+      }
+    }
+  }
+
+  h4 {
+    font-size: 16px;
+    border-bottom: 1px solid $palette-green-medium;
+    margin-bottom: 3px;
+  }
+
+  i {
+    color: $palette-gray-dark;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bolder;
+  }
+
+  .controls {
+    border-top: 1px solid $palette-green-medium;
+    padding-top: 3px;
+  }
+}
+
+.gm-style-cc {
+  display: none;
+}

@@ -1,0 +1,16 @@
+<%= section_wrap_full({
+  title: "Edit Event",
+  subtitle: "Double check the accuracy of this information.  We will use it to determine what vendor locations should be included in negotiations."
+}) do %>
+  <%= render partial: "/planners/admin/events/edit/crumbs", locals: { event: @event, page: @page } %>
+<% end %>
+
+
+
+<%= javascript_tag defer: 'defer' do %>
+  var current_event_services = <%= j @event.services.map(&:id).to_s %>;
+<% end %>
+
+<div class='inner'>
+  <%= render partial: "/planners/admin/events/edit/#{@page}" %>
+</div>

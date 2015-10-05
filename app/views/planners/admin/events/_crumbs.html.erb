@@ -1,0 +1,20 @@
+<%= hidden_field_tag :crumbs_step, page %>
+
+<div class='crumbs event-crumbs'>
+  <%= link_to planners_admin_events_path, class: 'step step-events' do %>
+    <%= icon('calendar') %>
+    <span>Events</span>
+  <% end %>
+
+  <%= link_to "#{planners_admin_event_path(event)}/service_rfp/#{@service_rfp.id}", class: 'step step-manage-event' do %>
+    <%= icon('gears') %>
+    <span>Manage Event</span>
+  <% end %>
+
+  <% unless @vendor_rfp.blank? %>
+    <%= link_to @vendor_rfp.planner_path, class: 'step step-rfp' do %>
+      <%= icon('users') %>
+      <span>RFP</span>
+    <% end %>
+  <% end %>
+</div>

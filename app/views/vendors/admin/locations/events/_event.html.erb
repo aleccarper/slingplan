@@ -1,0 +1,44 @@
+<div class='event-list-item' id='event-<%= event.id %>' data-event-id='<%= event.id %>'>
+  <div class='event-header'>
+    <%= content_tag :div, event.name, class: 'event-name' %>
+  </div>
+
+  <div class='contents'>
+    <% if event.start_date %>
+      <div class='dates'>
+        <span>
+          <%= prettify_date_short(event.start_date.to_i) %>
+          <% if event.end_date %>
+            - <%= prettify_date_short(event.end_date.to_i) %>
+          <% end %>
+        </span>
+
+        <span class='from-or-ago'>
+          (<%= event.date_from_or_ago_in_words %>)
+        </span>
+      </div>
+    <% end %>
+
+    <%= location_list_address(event) %>
+  </div>
+
+
+  <% if event.has_unread_messages?(:planner) %>
+    <div class='hint new-messages'>
+      <strong>New Messages</strong>
+      <ul>
+        <% event.unread_message_links(:planner).each { |m| %>
+          <li class='new-message'>
+            <span>&nbsp;&nbsp;<%= truncate_with_ellipsis(m.keys[0], 30) %> -
+            <a class='btn btn-small' href='<%= m.values[0] %>'>View Negotiation</a></span>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='footer'>
+    <%= link_to 'View Event', "/vendors/admin/locations/#{location.id}/events/#{event.id}/manage", class: 'btn f-right btn-manage' %>
+  </div>
+
+</div>

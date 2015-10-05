@@ -1,0 +1,33 @@
+<div class='subsection-wrap'>
+  <h1>Location Details</h1>
+  <div class='section-content'>
+    <%= f.text_field :name, required: true, label: 'Location Name' %>
+    <%= f.text_field :address1 %>
+    <%= f.text_field :address2 %>
+    <%= f.text_field :city, required: true %>
+    <%= f.select :state, collection: us_states, required: true %>
+    <%= f.text_field :zip, required: true %>
+    <%= f.country_select :country_code,
+      placeholder: 'Country',
+      as: :country,
+      locale: 'en',
+      only: ['US'],
+      selected: 'US',
+      autofocus: true
+    %>
+  </div>
+</div>
+
+<div class='subsection-wrap'>
+  <h1>Contact Details</h1>
+  <div class='section-content'>
+    <%= f.telephone_field :phone_number, required: true %>
+    <%= f.text_field :email %>
+    <%= f.text_field :website %>
+  </div>
+</div>
+
+<div class='save-wrap'>
+  <%= submit_tag 'Next', name: 'next', class: 'btn f-right btn-next' %>
+  <%= submit_tag 'Save', name: 'save', class: 'btn f-right btn-save' %>
+</div>

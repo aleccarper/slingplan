@@ -1,0 +1,30 @@
+<%= responsive_form_for(@location, url: admin_location_path(@location)) do |f| %>
+
+  <%= f.text_field :name %>
+  <%= f.text_field :email %>
+  <%= f.text_field :website %>
+  <%= f.text_field :address1 %>
+  <%= f.text_field :address2 %>
+  <%= f.text_field :city %>
+  <%= f.select :state, collection: us_states %>
+  <%= f.country_select :country_code,
+    placeholder: 'Country',
+    as: :country,
+    locale: 'en',
+    only: ['US'],
+    selected: 'US',
+    autofocus: true
+  %>
+  <%= f.text_field :zip %>
+  <%= f.telephone_field :phone_number %>
+  <%= f.collection_check_boxes(:service_ids, Service.all, :id, :name) do |c| %>
+    <div>
+      <%= c.check_box %>
+      <%= c.label %>
+    </div>
+  <% end %>
+
+  <%= f.submit 'Update' %>
+  <%= link_to 'Cancel', admin_locations_path %>
+
+<% end %>

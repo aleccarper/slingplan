@@ -1,0 +1,23 @@
+
+<p>
+	Thanks for signing up for SlingPlan!  
+</p>
+
+<p>
+	If you have any comments, suggestions, or need any help please contact us <%= link_to 'here', with_host_url('/staffers/admin/inquiries'), target: '_blank' %>.
+</p>
+<p>
+	To login just go <%= link_to 'here', with_host_url('/signin'), target: '_blank' %> with your username which is <%= @staffer.email %>.
+</p>
+
+<% if @blog_post_url %>
+	<p>
+		Please check out our maiden <%= link_to 'blog post', with_host_url(@blog_post_url), target: '_blank' %>.
+	</p>
+<% end %>
+
+
+<br />
+Thanks!
+
+The SlingPlan Team

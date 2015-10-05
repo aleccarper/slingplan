@@ -1,0 +1,30 @@
+.map-vendor {
+  @include position(absolute, $header-height, 0, 0, 0);
+  font-size: $font-size-large;
+  padding: $margin / 2 0 0;
+  height: auto;
+  border-top: 1px solid $palette-gray-medium;
+
+  .vendor-logo {
+    margin: 0 $margin / 2;
+  }
+
+  .vendor-name {
+    margin: $margin / 2 0 0;
+    border-top: 1px solid $palette-gray-medium;
+    border-bottom: 1px solid $palette-gray-medium;
+
+    h1 {
+      margin: $margin / 2;
+    }
+  }
+
+  .vendor-description {
+    padding: $margin / 2;
+    border-bottom: 1px solid $palette-gray-medium;
+  }
+
+  .contact-info {
+    padding: $margin / 2;
+  }
+}

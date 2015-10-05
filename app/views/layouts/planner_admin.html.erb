@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <%= render partial: 'partials/head' %>
+
+  <%= body_tag do %>
+    <%= render partial: 'partials/header' %>
+
+    <div class='container'>
+      <%= render partial: 'partials/planner_admin_tabs' %>
+
+      <div class='tab-content'>
+        <% if anyone_signed_in? %>
+          <%= feedback_prompt %>
+        <% end %>
+
+        <%= yield %>
+
+        <%= flash_background %>
+
+        <%= render partial: 'partials/footer' %>
+      </div>
+    </div>
+
+    <%= overlay %>
+  <% end %>
+</html>

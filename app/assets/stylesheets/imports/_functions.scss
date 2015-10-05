@@ -1,0 +1,35 @@
+// Returns a text color based on background color for best contrast
+@function contrast-text-color($color) {
+  @if (lightness($color) > 55) {
+    @return $black;
+  } @else {
+    @return $white;
+  }
+}
+
+
+
+// Return a lightened or darkend background color based on contrast
+@function contrast-hover-color($color) {
+  @if (lightness($color) > 45) {
+    @return desaturate(darken($color, $scale), $scale);
+  } @else {
+    @return desaturate(lighten($color, $scale), $scale);
+  }
+}
+
+
+
+// Golden ratio based calculations
+@function golden($direction, $base, $steps: 1) {
+  $golden-ratio: 1.618;
+  $proportion: $base;
+  @for $i from 1 through $steps {
+    @if $direction == 'in' {
+      $proportion: $proportion / $golden-ratio;
+    } @else if $direction == 'out' {
+      $proportion: $proportion * $golden-ratio;
+    }
+  }
+  @return $proportion;
+}

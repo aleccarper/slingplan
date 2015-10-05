@@ -1,0 +1,28 @@
+<div>
+  <strong>Name: </strong>
+  <span><%= event.name %></span>
+</div>
+<div>
+  <strong>Location: </strong>
+  <span><%= event.full_address %></span>
+</div>
+<div>
+  <strong>Start Date: </strong>
+  <span><%= date_mdy(event.start_date) %></span>
+</div>
+<% unless event.end_date.blank? %>
+  <div>
+    <strong>End Date: </strong>
+    <span><%= date_mdy(event.end_date) %></span>
+  </div>
+<% end %>
+<div>
+  <strong>Tentative: </strong>
+  <span><%= event.tentative ? 'YES' : 'NO' %></span>
+</div>
+<% unless event.contracted_by.blank? %>
+  <div>
+    <strong>Contracted By: </strong>
+    <span><%= event.contracted_by %></span>
+  </div>
+<% end %>

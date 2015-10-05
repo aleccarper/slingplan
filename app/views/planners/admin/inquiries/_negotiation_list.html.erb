@@ -1,0 +1,23 @@
+<div class='inquiry-list section-wrap-full'>
+
+  <% if inquiries.blank? %>
+
+    <div class='nothing-here'>Nothing here!</div>
+
+  <% else %>
+
+    <% for inquiry in inquiries %>
+      <%= content_tag :section, class: classes_for_inquiry(inquiry) do %>
+        <div class='heading'>
+          <%= content_tag :strong, inquiry.vendor_rfp.service_rfp.event.name, class: 'subject' %>
+          <%= content_tag :div, time_for_inquiry(inquiry), class: 'time' %>
+        </div>
+        <%= content_tag :div, truncate_with_ellipsis(simple_format(inquiry.vendor_rfp.service_rfp.notes).html_safe, 260), class: 'body' %>
+        <div class='controls'>
+          <%= link_to 'View', inquiry.planner_path, class: 'btn btn-medium btn-view' %>
+        </div>
+      <% end %>
+    <% end %>
+
+  <% end %>
+</div>

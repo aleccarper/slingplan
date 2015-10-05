@@ -1,0 +1,143 @@
+@mixin button-count-bubble {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  width: auto;
+  height: 20px;
+  padding-right: 5px;
+  padding-left: 6px;
+  border-radius: 10px;
+  background: $color-admin-location-claims-bubble-background;
+  color: $color-admin-location-claims-bubble;
+  text-align: center;
+  z-index: 1000;
+}
+
+a,
+div,
+input[type=submit],
+input[type=button] {
+  &.btn {
+    @extend .btn-green;
+    @include noselect;
+    @include transition(
+      background 0.25s ease,
+      color 0.25s ease);
+    border-radius: 5px;
+    border: none;
+    color: $white;
+    display: inline-block;
+    font-family: 'Oswald';
+    font-size: $font-size-large;
+    font-style: normal;
+    line-height: 1.2em;
+    margin: 0;
+    outline: none;
+    padding: $margin / 4 $margin / 3;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+
+    &.left {
+      left: $margin / 2;
+    }
+    &.f-left {
+      margin-right: $margin / 4 !important;
+      position: relative;
+      float: left;
+    }
+
+
+    &.right {
+      right: $margin / 2;
+    }
+    &.f-right {
+      margin-left: $margin / 4 !important;
+      position: relative;
+      float: right;
+    }
+
+
+    .fa.left {
+      margin: 0 $margin / 4 0 0;
+    }
+    .fa.right {
+      margin: 0 0 0 $margin / 4;
+    }
+
+
+    &.btn-small {
+      font-size: $font-size-small;
+      padding: $margin / 8 $margin / 6;
+    }
+    &.btn-medium {
+      font-size: $font-size-base;
+      padding: 12px;
+    }
+    &.btn-large {
+      font-size: $font-size-large;
+      padding: 12px;
+    }
+
+    &.btn-green {
+      background: $palette-green-medium;
+
+      &:hover {
+        background: $palette-green-light;
+      }
+    }
+
+    &.btn-red {
+      background: darken($palette-red-medium, 10%);
+
+      &:hover {
+        background: $palette-red-medium;
+      }
+    }
+
+    &.btn-gray {
+      background: darken($palette-gray-dark, 10%);
+
+      &:hover {
+        background: $palette-gray-dark;
+      }
+    }
+
+    &.btn-blue {
+      background: $palette-blue-light;
+
+      &:hover {
+        background: lighten($palette-blue-light, 5%);
+      }
+    }
+
+    &.btn-fake {
+      pointer-events: none;
+      margin: 0;
+      font-size: 11px;
+    }
+
+    @include breakpoint(420px) {
+      font-size: $font-size-small;
+    }
+  }
+}
+
+
+a,
+div,
+input[type=submit],
+input[type=button] {
+  &.btn-dark {
+    background-color: $black;
+
+    &:hover {
+      background: $palette-green-medium;
+    }
+  }
+}

@@ -1,0 +1,324 @@
+$plan-background: #337099;
+$plan-border-radius: 5px;
+$plan-height: 40px;
+$plan-magnitude: 1.2;
+$plan-header-background: #3d89b8;
+$plan-header-height: $plan-height * $plan-magnitude;
+$plan-header-width: 100px;
+$plan-selected-color: #3ab22e;
+$plan-width: 928px;
+
+$plan-primary-height: $plan-height * 1.1;
+$plan-primary-width: 100%;
+$plan-primary-background: #c1b44a ;
+$plan-primary-header-height: $plan-primary-height * $plan-magnitude;
+$plan-primary-header-width: $plan-header-width * $plan-magnitude;
+$plan-primary-header-background: #e0d04d;
+
+.plans-header {
+  padding-bottom: 18px;
+}
+
+.plans {
+  position: relative;
+  width: 100%;
+
+  .plan-wrapper {
+    height: $plan-height;
+    margin: 0 auto $margin;
+    position: relative;
+    width: 90%;
+
+    .plan {
+      @include transition(all 0.25s ease);
+      background: $plan-background;
+      border-radius: $plan-border-radius * 4;
+      color: darken(white, 5%);
+      height: $plan-height;
+      position: relative;
+      transform: translateZ(0);
+      width: 100%;
+      z-index: 1;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .plan-header {
+      @include transition(all 0.25s ease);
+      background: $plan-header-background;
+      border-radius: $plan-border-radius * 5;
+      position: absolute;
+      left: -$margin / 8;
+      top: -($plan-header-height - $plan-height) / 2;
+      width: $plan-header-width;
+      height: $plan-header-height;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: $font-size-big;
+      padding: 12px 0 0 16px;
+    }
+
+    .feature {
+      display: inline-block;
+      font-size: $font-size-large;
+      font-weight: bold;
+      position: absolute;
+      left: $plan-header-width + $margin / 2;
+      top: 7px;
+    }
+
+    .prices {
+      font-weight: bold;
+      display: inline-block;
+      float: right;
+      margin-right: $margin / 6;
+      position: absolute;
+      top: 3px;
+      right: 0;
+
+      div {
+        display: inline-block;
+      }
+
+      .price {
+        background: $white;
+        border-radius: $plan-border-radius * 4;
+        margin-left: 2px;
+        padding: 5px 7px 3px;
+        text-align: center;
+        width: 130px;
+      }
+
+      .amount {
+        color: black;
+        font-style: 16px;
+      }
+
+      .dollar {
+        font-size: 10px;
+        position: relative;
+        bottom: 6px;
+        color: gray;
+      }
+
+      .slash, .term {
+        color: gray;
+        font-size: 10px;
+      }
+    }
+
+    .select-term {
+      @include transition(all 0.25s ease);
+      @include shadow(0px, 0px, 8px, 2px, #000);
+      background: $plan-background;
+      border-bottom-left-radius: $plan-border-radius * 5;
+      border-bottom-right-radius: $plan-border-radius * 5;
+      bottom: $margin;
+      color: $white;
+      font-size: 18px;
+      font-weight: bold;
+      height: 0px;
+      padding: 0 52px 0 0;
+      position: relative;
+      text-align: right;
+      transform: translateZ(0);
+      z-index: -1;
+      overflow: hidden;
+
+      .prompt {
+        @include transition(all 0.25s ease);
+        bottom: 5px;
+        display: none;
+        padding: $margin / 1.8 0 0 $margin;
+        position: relative;
+        text-shadow: none;
+
+        &:after {
+          content: '\f062';
+          height: 0px;
+          font-family: 'FontAwesome';
+          padding-left: $margin / 3;
+          position: relative;
+        }
+      }
+    }
+
+    .plan.selected, .plan:hover {
+      background: lighten($plan-background, 5%);
+      color: $white;
+      cursor: pointer;
+      z-index: 1000;
+
+      &.selected {
+        z-index: 2000;
+      }
+
+      &:hover {
+        transform: scale(1.034);
+      }
+
+      &.selected {
+        transform: scale(1.068);
+      }
+
+      .plan-header {
+        background: lighten($plan-header-background, 5%);
+
+        .triangle {
+          border-color: transparent transparent transparent lighten($plan-header-background, 5%);
+        }
+      }
+    }
+
+    &.selected {
+
+      .plan .prices {
+
+        .price {
+          z-index: 5000;
+
+          &:hover, &.selected {
+            transform: scale(1.05);
+          }
+        }
+
+        .price.selected {
+          color: $white;
+          background: $palette-green-medium;//#26A229;
+
+          .slash, .term, .dollar {
+            color: $white;
+          }
+
+          .amount {
+            color: $white;
+          }
+        }
+      }
+
+      .select-term {
+        bottom: 0px;
+        height: $plan-height * 0.75;
+        z-index: 1500;
+
+        .prompt {
+          display: inline-block;
+          bottom: 11px;
+          text-shadow: 2px 2px 8px #000;
+          width: auto;
+        }
+      }
+    }
+
+    &.complete {
+      .select-term {
+        bottom: $margin + 10px;
+
+        .prompt {
+          text-shadow: none;
+        }
+      }
+    }
+  }
+
+
+  &.plan-selected {
+    .plan-wrapper {
+      .plan:not(.selected) {
+        background: #777777;
+
+        .plan-header {
+          background: $palette-gray-medium;
+        }
+      }
+    }
+  }
+}
+
+
+
+@include breakpoint(1200px) {
+  .plans {
+    .plan-wrapper {
+      .select-term {
+        padding-right: 55px;
+      }
+    }
+  }
+}
+
+@include breakpoint(992px) {
+  .plans {
+    .plan-wrapper {
+      .select-term {
+        padding-right: 60px;
+      }
+    }
+  }
+}
+
+@include breakpoint(880px) {
+  .plans {
+    .plan-wrapper {
+      margin-bottom: $margin * 2.5;
+
+      .plan {
+        height: $plan-height * 2;
+
+        .feature {
+          left: auto;
+          right: $margin / 2;
+          font-size: $font-size-giant;
+          font-weight: normal;
+        }
+
+        .prices {
+          top: $plan-height * 1.05;
+        }
+      }
+
+      .select-term {
+        padding-right: 72px;
+      }
+    }
+  }
+}
+
+@include breakpoint(580px) {
+  .plans {
+    .plan-wrapper {
+      .plan {
+        .plan-header {
+          height: $plan-header-height * 0.8;
+          width: $plan-header-width * 0.8;
+        }
+
+        .title {
+          font-size: 16px;
+          padding-left: 14px;
+          padding-top: $margin / 3;
+        }
+
+        .feature {
+          font-size: 20px;
+          top: 4px;
+        }
+      }
+
+      .select-term {
+        padding-right: 74px;
+
+        .prompt {
+          padding-top: 16px;
+          font-size: 16px;
+          width: 191px !important;
+        }
+      }
+    }
+  }
+}

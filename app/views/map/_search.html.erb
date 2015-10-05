@@ -1,0 +1,30 @@
+<div class='map-search'>
+  <div class='service-wrap'>
+    <%= section_wrap_mini({
+      title: "Search"
+    }) do; end %>
+
+
+    <div class='service-list'>
+      <ul>
+
+        <li class="staffer">
+          <div class='hint'>
+            <h6>Staffing</h6>
+            <div class='desc'>Need professionals to help manage your event?  Look no further.</div>
+          </div>
+        </li>
+
+        <% Service.all.sort_by(&:name).each do |s| %>
+          <%= content_tag :li, class: 'service', data: { id: s.id } do %>
+            <div class='hint'>
+              <h6><%= s.name %></h6>
+              <div class='desc'><%= s.description %></div>
+            </div>
+          <% end %>
+        <% end %>
+
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<h4><%= greeting %></h4>
+
+<hr/>
+
+<p>Inquiry:</p>
+<div style='padding-left: 8px;'>
+  <div>Type: <%= @inquiry.type.titleize %></div>
+  <div>Owner: <%= @inquiry.owner.name %></div>
+  <div>Subject: <%= @inquiry.subject %></div>
+  <div>Body: <%= simple_format(@inquiry.body) %></div>
+</div>
+
+<%= render partial: 'inquiry_message' %>

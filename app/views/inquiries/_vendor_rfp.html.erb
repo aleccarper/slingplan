@@ -1,0 +1,122 @@
+<%= content_tag :div, class: classes_for_vendor_rfp(rfp) do %>
+
+  <%= section_wrap_full({
+    title: "Request For Proposal",
+    subtitle: "Negotiate with the vendor, ask questions, upload files, and determine if they are right for your event.",
+    class: "#{rfp.service_rfp.service.name.parameterize}"
+  }) do %>
+    <% case current_authenticated_role when :vendor %>
+      <%= render partial: "/vendors/admin/locations/crumbs", locals: { location: @location, page: 'rfp' } %>
+    <% when :planner %>
+      <% render partial: "/planners/admin/events/crumbs", locals: { event: @event, page: 'rfp' } %>
+    <% end %>
+  <% end %>
+
+  <%= section_wrap_between do %>
+    <div class='status-area bidding-area section-content'>
+      <% if vendor_signed_in? %>
+        <%= render partial: '/inquiries/vendor_vendor_rfp_bidding_area', locals: { rfp: rfp } %>
+      <% elsif planner_signed_in? %>
+        <%= render partial: '/inquiries/planner_vendor_rfp_bidding_area', locals: { rfp: rfp } %>
+      <% end %>
+    </div>
+  <% end %>
+
+
+  <div class='subsection-wrap'>
+
+    <div class='subsection-label'>Details</div>
+    <p>Requested service: <strong><%= rfp.service_rfp.service.name %></strong></p>
+    <br />
+
+    <div class='half'>
+      <div class='subtitle'><strong>Planner</strong></div>
+      <%
+        @planner = rfp.service_rfp.event.planner
+        show_planner_company_name = (!rfp.service_rfp.event.contact_info_hidden_for?(:company_name) && !@planner.company_name.blank?)
+        show_planner_phone = (!rfp.service_rfp.event.contact_info_hidden_for?(:primary_phone_number) && !@planner.primary_phone_number.blank?)
+        show_planner_email = (!rfp.service_rfp.event.contact_info_hidden_for?(:primary_email) && !@planner.primary_email.blank?)
+        show_planner_web = (!rfp.service_rfp.event.contact_info_hidden_for?(:primary_website) && !@planner.primary_website.blank?)
+      %>
+      <div class='section-content'>
+        <% if show_planner_company_name %>
+          <p>Name: <strong><%= @planner.company_name %></strong></p>
+        <% end %>
+        <% if show_planner_phone %>
+          <p>Phone: <strong><%= @planner.primary_phone_number %></strong></p>
+        <% end %>
+        <% if show_planner_email %>
+          <p>Email: <strong><%= @planner.primary_email %></strong></p>
+        <% end %>
+        <% if show_planner_web %>
+          <p>Web: <strong><%= link_to @planner.primary_website, @planner.primary_website, target: '_blank' %></strong></p>
+        <% end %>
+
+        <% if !show_planner_company_name && !show_planner_phone && !show_planner_email && !show_planner_web %>
+          <p>No contact information provided</p>
+        <% end %>
+
+        <br />
+      </div>
+    </div>
+
+    <div class='half'>
+      <div class='subtitle'><strong>Vendor</strong></div>
+      <%
+        @vendor = rfp.location.owner
+        show_vendor_company_name = (!@vendor.name.blank?)
+        show_vendor_phone = (!@vendor.primary_phone_number.blank?)
+        show_vendor_email = (!@vendor.primary_email.blank?)
+        show_vendor_web = (!@vendor.primary_website.blank?)
+      %>
+      <div class='section-content'>
+        <% if show_vendor_company_name %>
+          <p>Name: <strong><%= @vendor.name %></strong></p>
+        <% end %>
+        <% if show_vendor_phone %>
+          <p>Phone: <strong><%= @vendor.primary_phone_number %></strong></p>
+        <% end %>
+        <% if show_vendor_email %>
+          <p>Email: <strong><%= @vendor.primary_email %></strong></p>
+        <% end %>
+        <% if show_vendor_web %>
+          <p>Web: <strong><%= link_to @vendor.primary_website, @vendor.primary_website, target: '_blank' %></strong></p>
+        <% end %>
+
+        <% if !show_vendor_company_name && !show_vendor_phone && !show_vendor_email && !show_vendor_web %>
+          <p>No contact information provided</p>
+        <% end %>
+
+        <br />
+      </div>
+    </div>
+
+    <div class='half'>
+      <div class='subtitle'><strong>When</strong></div>
+      <div class='section-content'>
+        <span><%= prettify_date_short(rfp.negotiation.vendor_rfp.service_rfp.event.start_date.to_i) %>
+        <% if rfp.negotiation.vendor_rfp.service_rfp.event.end_date %>
+          - <%= prettify_date_short(rfp.negotiation.vendor_rfp.service_rfp.event.end_date.to_i) %>
+        <% end %>
+        </span>
+      </div>
+
+      <br />
+
+      <div class='subtitle'><strong>Where</strong></div>
+      <div class='section-content'>
+        <%= location_list_address(rfp.negotiation.vendor_rfp.service_rfp.event) %>
+      </div>
+    </div>
+
+    <% unless rfp.service_rfp.notes.blank? %>
+      <div class='subtitle'>
+        <strong>Notes</strong>
+      </div>
+      <div class='section-content'>
+        <%= rfp.service_rfp.notes %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

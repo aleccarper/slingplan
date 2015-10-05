@@ -1,0 +1,17 @@
+<% page.each do |inquiry| %>
+  <%= content_tag :section, class: classes_for_inquiry(inquiry) do %>
+    <div class='heading'>
+      <%= content_tag :strong, inquiry.subject, class: 'subject' %>
+      <%= content_tag :div, time_for_inquiry(inquiry), class: 'time' %>
+    </div>
+    <%= content_tag :div, truncate_with_ellipsis(simple_format(inquiry.body), 260).html_safe, class: 'body' %>
+    <div class='controls'>
+      <% if inquiry.has_unread_messages_for?(current_authenticated_role) %>
+        <div class='unread-messages has-unread'><strong><%= inquiry.unread_messages_for(current_authenticated_role).count %></strong> unread messages</div>
+      <% else %>
+        <div class='unread-messages no-unread'>No unread messages...</div>
+      <% end %>
+      <%= link_to 'View', inquiry.send("#{current_authenticated_role.to_s}_path"), class: 'btn btn-medium btn-view' %>
+    </div>
+  <% end %>
+<% end %>

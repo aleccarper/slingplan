@@ -1,0 +1,66 @@
+
+<div class='content'>
+  <div class='page-header'>
+    <h1 class='title'><%= @location.name %></h1>
+  </div>
+
+  <%= render partial: '/map/small_horizontal_map', locals: {
+    locations: [@location],
+    show_pins: true,
+    index: false,
+    lock: false,
+    lock_zoom: false,
+    zoom_control: false,
+    zoom_scroll: false,
+    center: nil
+  } %>
+
+  <div class='inner'>
+    <section class='section-wrap-full'>
+      <% if @location.vendor_id %>
+        <a href='<%= vendor_path(@location.vendor_id) %>' class='btn'>Company Profile</a>
+      <% else %>
+        <h4>This company has not activated SlingPlan yet. </h4>
+      <% end %>
+    </section>
+
+
+    <div class='section-wrap'>
+      <div class='subsection-label'>Contact</div>
+      <div class='section-content'>
+        Phone: <%= @location.phone_number %>
+        <br />
+        Email: <%= mail_to(@location.email, @location.email) %>
+        <br />
+        Web: <%= link_to(@location.website, @location.website) %>
+      </div>
+    </div>
+
+    <div class='section-wrap'>
+      <div class='subsection-label'>Location</div>
+      <div class='section-content'>
+        <p><%= @location.address1 %></p>
+
+        <% if @location.address2 %>
+          <p><%= @location.address2 %></p>
+        <% end %>
+
+        <p>
+          <%= @location.city %>, <%= @location.state %>, <%= @location.zip %>
+        </p>
+
+        </div>
+    </div>
+
+    <div class='section-wrap-full'>
+      <div class='subsection-label'>Services</div>
+      <div class='section-content'>
+        <ul>
+          <% for svc in @services %>
+            <%= content_tag :li, svc, class: 'location-service_ids' %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

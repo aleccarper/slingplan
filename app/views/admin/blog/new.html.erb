@@ -1,0 +1,20 @@
+<%= section_wrap_full({
+  title: "New Blog Post",
+  subtitle: "Thoughts and news about SlingPlan and our role in Event Planning",
+  class: 'blog'
+}) do %>
+  <div class='page-header'>
+    <%= link_to "<i class='left fa fa-arrow-left'></i>Back".html_safe, admin_blog_index_path, class: 'left btn btn-back-to-blog' %>
+  </div>
+<% end %>
+
+
+<%= responsive_form_for @post, url: '/admin/blog' do |f| %>
+
+  <%= f.text_field :title %>
+  <%= f.text_area :description, rows: 25 %>
+  <%= f.text_area :content, rows: 100 %>
+
+  <%= f.submit 'Create Post' %>
+
+<% end %>

@@ -1,0 +1,11 @@
+<div class='new-message reply'>
+  <div class='new-message-tabs'>
+    <div class='new-message-tab-reply' data-tab='reply'>Reply</div>
+    <div class='new-message-tab-file' data-tab='file'>Upload File</div>
+  </div>
+
+  <div class='new-message-tab-contents'>
+    <%= render partial: '/inquiries/new_negotiation_message_reply', locals: { inquiry: inquiry } %>
+    <%= render partial: '/inquiries/new_negotiation_message_file', locals: { inquiry: inquiry } %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<% unless locations.blank? %>
+  <div class='hint red'>
+    <div class='heading'>Hold up!</div>
+      It looks like you need to complete the creation process a location.
+    <div class='locations tree'>
+      <div class='tree-level tree-level-0'>
+        <div class='tree-items'>
+          <%= paginate 'page_unconfirmed', '/vendors/admin/locations/page_unconfirmed' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,171 @@
+var Vendors = (function($, stripe, m) {
+
+  var working = false;
+
+  var init = function() {
+    // add or remove this comment and commit/push to update heroku grrrrrrrrrr
+    stripe.setPublishableKey("<%= Rails.application.secrets['stripe']['publish'] %>");
+
+    $('body').on('submit', '#credit-card-form', function(e) {
+      e.preventDefault();
+      if($('body').is('.planners-admin-registrations')) {
+        if($('#plan').val().trim() === 'tier1m') {
+          return submit($(this).serialize());
+        }
+      }
+      submit_credit_card(this, e);
+    });
+
+    Plans.on_completed(on_plan_completed);
+    CreditCard.on_changed(on_card_changed);
+
+    $("#vendor_primary_phone_number").mask("(999) 999-9999");
+  };
+
+  var on_plan_completed = function(current, selected) {
+    if(current !== selected) {
+      $('.change-plan .submit').removeClass('disabled');
+    } else {
+      $('.change-plan .submit').addClass('disabled');
+    }
+  };
+
+  var on_card_changed = function(current, selected) {
+    if(current !== selected) {
+      $('.credit-card-form .submit').removeClass('disabled');
+    } else {
+      $('.credit-card-form .submit').addClass('disabled');
+    }
+  };
+
+  var submit_credit_card = function(that, e) {
+    //early bail
+    if(working) return false;
+
+    $('.payment-errors').html('');
+
+    if(validate_submit(that) === false) return false;
+
+    var form = $(that);
+    form.find('button').attr('disabled', true);
+    stripe.card.createToken(form, stripeResponseHandler);
+    working = true;
+
+    Loading.show($('.container'));
+    return false;
+  };
+
+  var validate_submit = function(form) {
+    var valid = true;
+    var message = '';
+    //if there is a plan value it needs to be set, otherwise continue
+    if($(form).find('#plan').length != 0 && !$(form).find('#plan').attr('value')) {
+      valid = false;
+      message = 'Please select a plan.'
+    }
+
+    if(valid && $('body').is('.planners-admin-registrations')) {
+      if($('#plan').val().trim() !== 'tier1m') {
+        if($('#stripe_number').val().trim().length == 0
+        || $('#exp_month').val().trim().length == 0
+        || $('#exp_year').val().trim().length == 0
+        || $('#stripe_cvc').val().trim().length == 0) {
+          valid = false;
+          message = 'Please enter all your credit card information.'
+        }
+      }
+    }
+
+    // show errors
+    if(!valid) {
+      $('.payment-errors').html(HandlebarsTemplates['validation/payment-errors']({
+        error: message
+      })).show();
+    }
+
+    // scroll to top
+    $('body').animate({
+      scrollTop: 0
+    }, 250);
+
+    return valid;
+  };
+
+  var stripeResponseHandler = function(status, response) {
+    var form = $('#credit-card-form');
+
+    if (response.error) {
+      // Show the errors on the form
+      $('.payment-errors').html(HandlebarsTemplates['validation/payment-errors']({
+        error: response.error.message
+      })).show();
+      form.find('button').prop('disabled', false);
+      working = false;
+      Loading.hide($('.credit-card-wrapper'));
+      Loading.hide($('.container'));
+    } else {
+      var hidden_input = $('<input type="hidden" name="stripeToken" />').val(response.id);
+      if($('body').is('.planners-admin-registrations')) {
+        if($('#plan').val().trim() !== 'tier1m') {
+          form.append(hidden_input);
+        }
+      } else {
+        form.append(hidden_input);
+      }
+
+      submit();
+
+      return false;
+    }
+  };
+
+  var submit = function() {
+    var form = $('#credit-card-form');
+    var data = {
+      authenticity_token: $(form).find('[name="authenticity_token"]').val(),
+      stripeToken: $(form).find('[name="stripeToken"]').val(),
+      plan: $(form).find('[name="plan"]').val()
+    };
+
+    $.ajax({
+      url: form.attr('action'), //sumbits it to the given url of the form
+      data: data,
+      type: 'POST'
+    })
+    .done(function(data) {
+      if(!data.success) {
+        $('.subscribe').html(data.view);
+        working = false;
+        Loading.hide($('.container'));
+        return $('.payment-errors').html(HandlebarsTemplates['validation/payment-errors']({
+          error: data.message
+        })).show();
+      }
+
+      if(form.find('#success_redirect').length != 0) {
+        //do a specific redirect
+        window.location.replace(form.find('#success_redirect').attr('value'));
+      } else {
+        //do a general redirect
+        var m = window.location.pathname.match(/\/[a-zA-Z]*\//)[0];
+        switch(m) {
+          case '/vendors/':
+            window.location.replace('/vendors/admin/locations');
+            break;
+          case '/planners/':
+            window.location.replace('/planners/admin/events');
+            break;
+          case '/staffers/':
+            window.location.replace('/staffers/admin/profile');
+            break;
+        }
+      }
+    });
+  };
+
+  m.Admin.Account = {
+    init: init
+  };
+
+  return m;
+}(jQuery, Stripe, Vendors || {}));

@@ -1,0 +1,33 @@
+<%= hidden_field_tag :crumbs_step, page %>
+
+<div class='crumbs location-crumbs'>
+  <%= link_to vendors_admin_locations_path, class: 'step step-locations' do %>
+    <%= icon('map-marker') %>
+    <span>Locations</span>
+  <% end %>
+
+  <%= link_to vendors_admin_location_path(@location.id), class: 'step step-manage-location' do %>
+    <div>
+      <%= icon('bus') %>
+      <%= icon('bed') %>
+      <%= icon('music') %>
+      <%= icon('cutlery') %>
+    </div>
+    <span>Manage Location</span>
+  <% end %>
+
+  <% unless @event.blank? %>
+    <%= link_to "#{vendors_admin_location_path(@location.id)}/events/#{@event.id}/manage", class: 'step step-manage-event' do %>
+      <%= icon('check') %>
+      <span>View Event</span>
+    <% end %>
+
+    <% unless @vendor_rfp.blank? %>
+
+      <%= link_to @vendor_rfp.vendor_path, class: 'step step-rfp' do %>
+        <%= icon('check') %>
+        <span>RFP</span>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

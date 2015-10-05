@@ -1,0 +1,51 @@
+<% results.each do |state, cities| %>
+  <%= result_tree_level(expanded, nil, 0, 'state', state) do %>
+
+    <div class='tree-header'>
+      <div class='tree-arrow'></div>
+      <%= content_tag :div, full_state_name_from_abbreviation(state), class: 'tree-header-text state-name' %>
+    </div>
+
+    <% cities.each do |city, staffers| %>
+      <%= result_tree_level(expanded, nil, 1, 'city', state, city) do %>
+
+        <div class='tree-header'>
+          <div class='tree-arrow'></div>
+          <%= content_tag :div, city, class: 'tree-header-text city-name' %>
+        </div>
+
+        <div class='tree-items'>
+          <% staffers.each do |staffer| %>
+            <div class='tree-item'>
+              <%= staffer_result(staffer) do %>
+                <%= content_tag :div, truncate_with_ellipsis(staffer.name, 22), class: 'title' %>
+
+                <div class='location-info'>
+                  <%= content_tag :p, "#{staffer.address1} #{staffer.address2}" %>
+                  <%= content_tag :p, "#{staffer.city}, #{staffer.state} #{staffer.zip}" %>
+
+                  <% if staffer.primary_phone_number %>
+                    <p><%= staffer.primary_phone_number %></p>
+                  <% end %>
+
+                  <% if staffer.primary_email %>
+                    <p><%= staffer.primary_email %></p>
+                  <% end %>
+
+                  <% unless staffer.primary_website.blank? %>
+                    <p><a href='<%= staffer.primary_website %>' target='_blank'>Website</a></p>
+                  <% end %>
+                </div>
+
+                <div class='controls'>
+                  <i class='fa fa-crosshairs find-location'></i>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+  <% end %>
+<% end %>

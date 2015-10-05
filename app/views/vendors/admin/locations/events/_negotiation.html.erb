@@ -1,0 +1,25 @@
+<div class='subsection-wrap'>
+  <h4>
+    <%= negotiation.vendor_rfp.service_rfp.service.name %>
+  </h4>
+
+  <% if negotiation.vendor_rfp.service_rfp.budget %>
+    <p>Budget: <strong><%= "$#{negotiation.vendor_rfp.service_rfp.budget}" %></strong></p>
+  <% else %>
+    <p>Budget: <strong>[Not Set]</strong></p>
+  <% end %>
+
+  <% if !negotiation.vendor_rfp.service_rfp.notes.blank? %>
+    <p>Notes: <strong><%= "#{negotiation.vendor_rfp.service_rfp.notes}" %></strong></p>
+  <% else %>
+    <p>Notes <strong>[Not Set]</strong></p>
+  <% end %>
+
+  <% if negotiation.vendor_rfp.service_rfp.has_outside_arrangements? %>
+    <div class='hint red'>The Planner has made arrangements for this service outside SlingPlan, but you may still bid in case the negotiation reopens.</div>
+  <% end %>
+
+  <div class='footer'>
+    <%= link_to 'View RFP', negotiation.vendor_path, class: 'btn f-right' %>
+  </div>
+</div>

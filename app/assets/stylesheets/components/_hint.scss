@@ -1,0 +1,52 @@
+.hint {
+  @extend .section-wrap-between.mini;
+  background: $color-hint-main;
+  border-radius: 5px;
+  color: $color-text-light;
+  font-size: $font-size-base;
+  font-weight: 100;
+  height: auto !important;
+  padding: $margin / 2;
+  position: relative;
+  margin-bottom: 6px;
+
+  .heading {
+    font-family: 'Oswald', Helvetica,Arial,sans-serif;
+    font-size: $font-size-large;
+    margin: 0 0 $margin / 2;
+  }
+
+  ol {
+    list-style: disc;
+    margin-top: $margin / 4;
+  }
+
+  li:not(.location-list-item):not(.event-list-item) {
+    margin-left: $margin;
+    font-size: $font-size-small;
+    line-height: 1.4;
+    margin-bottom: $margin / 4;
+  }
+
+  &.green {
+    background: $color-hint-green;
+  }
+
+  &.yellow {
+    background: $color-hint-yellow;
+  }
+
+  &.red {
+    background: $color-hint-red;
+  }
+
+  @include breakpoint(667px) {
+    font-size: $font-size-small;
+    line-height: 1.4;
+    padding: 9px;
+
+    .heading {
+      font-size: $font-size-base;
+    }
+  }
+}

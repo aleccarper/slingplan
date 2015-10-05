@@ -1,0 +1,32 @@
+<li class='coupon'>
+  <div class='coupon-header'>
+    <%= content_tag :span, coupon[:id], class: 'coupon-id' %>
+    <%= content_tag :div, "Valid", class: "valid #{coupon[:valid]}" %>
+    <%= content_tag :div, 'Live', class: "live #{coupon[:livemode]}" %>
+  </div>
+
+  <% if coupon[:amount_off] %>
+    <div class='contents amount-off'>
+      <div class='symbol'>$</div>
+      <%= content_tag :div, "#{coupon[:amount_off]}", class: 'amount' %>
+      <div class='right'>
+        <div class='cents'>00</div>
+        <div class='off'>OFF</div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class='sub-contents'>
+    <%= content_tag :div, "Duration: <strong>#{coupon[:duration]}</strong> / Redeemed: <strong>#{coupon[:times_redeemed]}</strong>".html_safe %>
+  </div>
+
+  <div class='footer'>
+    <% unless coupon[:redeem_by].nil? %>
+      <%= content_tag :div, "Expires #{coupon[:redeem_by]}", class: 'expiration' %>
+    <% else %>
+      <div class='expiration'>No Expiration</div>
+    <% end %>
+
+    <%= link_to('Remove', '/admin/stripe/delete_coupon', method: :post, data: { id: coupon[:id] }) %>
+  </div>
+</li>

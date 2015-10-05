@@ -1,0 +1,6 @@
+<% if admin_signed_in? %>
+  <div class='admin-blog-buttons'>
+    <%= link_to 'Edit', edit_admin_blog_path(post.id), class: 'left btn btn-edit-blog-post' %>
+    <%= link_to 'Delete', admin_blog_path(post.id), method: :delete, class: 'right btn btn-delete-blog-post', data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>

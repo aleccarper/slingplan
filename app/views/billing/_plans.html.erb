@@ -1,0 +1,50 @@
+<h3 class='plans-header'>Subscription Plans</h3>
+
+<%= content_tag :div, class: plans_classes do %>
+
+  <%= hidden_field_tag :plan, @selected_plan || nil %>
+
+  <% @plans.each_with_index do |plan, i|  %>
+
+    <%= content_tag :div, class: plan_wrapper_classes(plan) do %>
+
+      <%= content_tag :div, class: plan_classes(plan, i) do %>
+
+        <div class="plan-header">
+          <%= content_tag :div, plan[:name], class: 'title' %>
+        </div>
+
+        <%= content_tag :div, class: 'feature' do %>
+          <% if staffer_signed_in? %>
+            Staffer Advertising
+          <% else %>
+            <%= plan[:feature] %>
+          <% end %>
+        <% end %>
+
+        <div class="prices">
+          <% if planner_signed_in? and i == 0 %>
+            <%= content_tag :div, class: price_classes(plan, plan[:prices][:m], :m), data: { id: "#{plan[:id]}m" } do %>
+              <div class="amount">Free</div>
+            <% end %>
+          <% else %>
+            <%= content_tag :div, class: price_classes(plan, plan[:prices][:m], :m), data: { id: "#{plan[:id]}m" } do %>
+              <div class="dollar">$</div><div class="amount"><%= plan[:prices][:m] %></div><div class="slash">/</div><div class="term">m</div>
+            <% end %>
+
+            <%= content_tag :div, class: price_classes(plan, plan[:prices][:y], :y), data: { id: "#{plan[:id]}y" } do %>
+              <div class="dollar">$</div><div class="amount"><%= plan[:prices][:y] %></div><div class="slash">/</div><div class="term">y</div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="select-term">
+        <div class="prompt">Choose your plan</div>
+      </div>
+
+    <% end %>
+
+  <% end %>
+
+<% end %>

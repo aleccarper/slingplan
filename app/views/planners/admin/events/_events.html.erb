@@ -1,0 +1,33 @@
+<% unless current_planner.events.unconfirmed.blank? %>
+  <div class='hint red unconfirmed-events'>
+    <div class='heading'>Hold up!</div>
+    You have events that haven't yet been completed.  Click the <a href='#' class='btn btn-small btn-fake'>Complete</a> button whenever you are ready to finish creating an event in order to begin negotiating with vendors.
+
+    <div class='locations tree'>
+      <div class='tree-level tree-level-0'>
+        <%= paginate 'page_unconfirmed', '/planners/admin/events/page_unconfirmed' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+<div class='locations tree'>
+  <% current_planner.events.confirmed.by_today_future_and_past.each do |k, set| %>
+    <div class='tree-level tree-level-0'>
+      <div class='tree-header'>
+        <div class='tree-arrow'></div>
+        <% if k == :today %>
+          <%= content_tag :div, "Today's Events (#{set.length})", class: 'tree-header-text' %>
+        <% elsif k == :future %>
+          <%= content_tag :div, "Future Events (#{set.length})", class: 'tree-header-text' %>
+        <% elsif k == :past %>
+          <%= content_tag :div, "Past Events (#{set.length})", class: 'tree-header-text' %>
+        <% end %>
+      </div>
+
+      <%= paginate "page_#{k.to_s}", "/planners/admin/events/page_#{k.to_s}" %>
+    </div>
+  <% end %>
+</div>

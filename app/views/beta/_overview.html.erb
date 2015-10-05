@@ -1,0 +1,90 @@
+<h1>Overview</h1>
+
+<p>From our splash page:</p>
+<blockquote>
+  SlingPlan allows you to quickly schedule your events, find the vendors you need, and negotiate pricing directly. Our intuitive map allows you to explore and bookmark vendors by services and location. Creating your event using our step-by-step process painlessly puts you in contact with the best-suited vendors.
+</blockquote>
+
+
+<section class='section-wrap-full'>
+  <h4>The Inquiry System</h4>
+  <p>This is the first thing we are covering because this is how you will submit Questions, Suggestions, and Bug Reports while using SlingPlan BETA.  The Inquiry system exists alongside the Negotiation system and works the same way, with the absence of bidding and approving.  When you submit an Inquiry, SlingPlan Admins receive a notification and we can respond to you through the administrative panel we have within SlingPlan.  When BETA is closed and the site launches, this system will be how actual users communicate problems and feature requests to the development and support teams.</p>
+
+  <p>You can submit new Inquiries and respond to existing Inquiries by going to the "Messages" section within the Planner or Vendor admin panels after you have registered and logged in. (see the "Registration" section under the "Planner" and "Vendor" sections of this documentation.)</p>
+
+  <p>To submit a new Inquiry...</p>
+  <ol>
+    <li>Log in if you haven't already.</li>
+    <li>In your Admin panel, click "Messages".</li>
+    <li>
+      Below the Negotiations section, click "New Suggestion", "New Question", or "New Bug Report" depending on what you'd like to tell us.
+    </li>
+  </ol>
+  <div class='hint'>Don't be shy.  Try to be as specific and detailed as you can when submitting ideas or problems during your BETA experience.  The ideas you have and issues you encounter are very important to us in order to ultimately deliver the best product we can, and will improve your experience when using the live version of SlingPlan after BETA has closed.</div>
+</section>
+
+
+
+<section class='section-wrap-full'>
+  <h4>Notifications</h4>
+
+  <p>SlingPlan generates Notifications when something happens that demands your attention. If you have unread Notifications, they will appear in the Notifications pane.  To access your Notifications, click the (<%= icon('exclamation') %>) icon in the top-right corner of the screen.</p>
+</section>
+
+
+
+<h2>The Map</h2>
+<p>SlingPlan provides a map with filtering and bookmarking functionality. The map is open to use for anyone without being subscribed or logged in.  The map contains a left and right sidebar, both of which can be collapsed using buttons at the top of the sidebars.</p>
+
+<section class="section-wrap-full">
+  <h4>History Bar</h4>
+  <%= content_tag :div, '', class: 'pic pic-history', style: "background-image: url(#{image_path('how_to_history.jpg')})" %>
+  <p>We keep track of each time you pan the map to a different location, so using the "Forward" and "Back" buttons will work as you'd expect.  You can also click "Find Me" to pan and zoom to your currently location (if you enable geolocation), or "Reset" to pan and zoom back to the initial state and reset your history.</p>
+</section>
+
+
+
+<section class="section-wrap-full">
+  <h4>Left Sidebar</h4>
+  <p>The left sidebar is used for filtering vendors by service type and exploring the results.  It has two pages: filter and results.</p>
+
+  <h5>Page 1</h5>
+  <%= content_tag :div, '', class: 'pic pic-left', style: "background-image: url(#{image_path('how_to_left_sidebar_filter.jpg')})" %>
+  <ul>
+    <li>Select one or more services, as well as use "Select All" and "Deselect All" buttons.</li>
+    <li>A service name is only highlighted if vendors matching that service are within the part of the map currently being viewed.</li>
+    <li>Click "filter" to explore the results on the next page.</li>
+  </ul>
+
+  <h5>Page 2</h5>
+  <%= content_tag :div, '', class: 'pic pic-left', style: "background-image: url(#{image_path('how_to_left_sidebar_results.jpg')})" %>
+  <ul>
+    <li>Expand and collapse results tree by Service, State, and City.</li>
+    <li>Zoom and pan the map to a result's location using the find location icon. (<%= icon('crosshairs') %>)</li>
+    <li>Bookmark the result using the bookmark icon if you'd like to be able to come back to it quickly in the future. (<%= icon('book') %>)</li>
+  </ul>
+</section>
+
+
+
+<section class="section-wrap-full">
+  <h4>Right Sidebar</h4>
+  <p>The left sidebar is used for filtering vendors by service type and exploring the results.  It has two pages: list and export.</p>
+
+  <h5>Page 1</h5>
+  <%= content_tag :div, '', class: 'pic pic-right', style: "background-image: url(#{image_path('how_to_right_sidebar_list.jpg')})" %>
+  <ul>
+    <li>Zoom and pan the map to a result's location using the find location icon. (<%= icon('crosshairs') %>)</li>
+    <li>Remove a bookmark from the list using the remove icon. (<%= icon('times') %>)</li>
+    <li>Continue to the export page using the save icon. (<%= icon('save') %>)</li>
+  </ul>
+
+  <h5>Page 2</h5>
+  <%= content_tag :div, '', class: 'pic pic-right', style: "background-image: url(#{image_path('how_to_right_sidebar_export.jpg')})" %>
+  <ul>
+    <li>Click "Email" and send your bookmarks to the email address entered on the next page.</li>
+    <li>Click "XLS" to download your bookmarks as an excel file.</li>
+    <li>Click "CSV" to download your bookmarks as comma separated values.</li>
+    <li>Click "Print Friendly" to open and view your bookmarks in plain text in a new window.</li>
+  </ul>
+</section>

@@ -1,0 +1,99 @@
+<%= section_wrap_mini({
+  title: "Bookmarks"
+}) do; end %>
+
+
+<% @selected_bookmark_list_id = bookmark_list.nil? ? nil : bookmark_list.id %>
+<% @selected_bookmark_list_name = bookmark_list.nil? ? nil : bookmark_list.name %>
+
+<%= hidden_field_tag :selected_bookmark_list_id, @selected_bookmark_list_id %>
+<%#= hidden_field_tag :selected_bookmark_list_name, @selected_bookmark_list_name %>
+
+<div class='bookmarks-list'>
+  <% if current_planner %>
+    <% if bookmark_list.nil? %>
+      <div class='hint'>
+        <%= responsive_form_for BookmarkList.new, url: '' do |f| %>
+          <% if !current_planner.bookmark_lists.empty? %>
+            <div class='new-bookmark-list-controls'>
+              <%= f.select :id,
+                collection: options_for_select([['New Bookmark List', nil]] + current_planner.bookmark_lists.map { |b| [b.name, b.id] }, @selected_bookmark_list_id),
+                label: false,
+                prompt: false %>
+            </div>
+          <% else %>
+            <div class='hint green'>Save your new list of bookmarks after adding some.</div>
+          <% end %>
+
+          <%= f.text_field :name, label: 'List Name' %>
+          <%= f.submit 'Save' %>
+        <% end %>
+      </div>
+
+      <% for location in Location.where('id IN (?)', get_cookie_bookmarks) %>
+        <%= render partial: 'map/service_result',
+          locals: {
+            location: location,
+            bookmark_list: nil,
+            vendor_profile: false,
+            for_bookmarks: true
+          }
+        %>
+      <% end %>
+
+    <% else %>
+      <div class='hint'>
+        <%= responsive_form_for bookmark_list, url: '' do |f| %>
+          <div class='bookmark-list-controls'>
+            <%= f.select :id,
+              collection: options_for_select([['New Bookmark List', nil]] + current_planner.bookmark_lists.map { |b| [b.name, b.id] }, @selected_bookmark_list_id),
+              label: false,
+              prompt: false %>
+            <a href='#' class='btn btn-red btn-delete-bookmark-list'><i class='fa fa-times'></i></a>
+          </div>
+        <% end %>
+      </div>
+
+      <% for location in bookmark_list.bookmarks.map(&:location) %>
+        <%= render partial: 'map/service_result',
+          locals: {
+            location: location,
+            bookmark_list: nil,
+            vendor_profile: false,
+            for_bookmarks: true
+          }
+        %>
+      <% end %>
+
+    <% end %>
+
+    <div class='hint no-bookmarks'>
+      You haven't yet added any bookmarks.  In order to do so, search for locations using the sidebar on the left and click the <i class='fa fa-bookmark'></i> icon (bookmark).
+    </div>
+
+  <% else %>
+
+    <div class='hint no-bookmarks'>
+      You haven't yet added any bookmarks to this bookmark list.  In order to do so, search for locations using the sidebar on the left and click the <i class='fa fa-bookmark'></i> icon (bookmark).
+    </div>
+
+    <div class='hint green'>
+      Want to save lists of bookmarks for later use? Create a <strong>free</strong> Planner account <a href='/signin'>here</a>!
+    </div>
+
+
+    <% unless get_cookie_bookmarks.blank? %>
+      <% for location in Location.where('id IN (?)', get_cookie_bookmarks) %>
+        <%= render partial: 'map/service_result',
+          locals: {
+            location: location,
+            bookmark_list: nil,
+            vendor_profile: false,
+            for_bookmarks: true
+          }
+        %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+</div>

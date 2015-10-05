@@ -1,0 +1,86 @@
+<% if ENV['HOLDING'] == 'true' %>
+  <div class='container landing' style='top: 0;'>
+<% else %>
+  <div class='container landing'>
+<% end %>
+
+  <%= section_wrap_full({
+    title: "SlingPlan",
+    subtitle: "A modern, efficient, and simple solution to sourcing, scheduling, and negotiating with vendors for your meeting and event needs.",
+    class: 'first'
+  }) do %>
+    Whether you are a planner or a vendor, our mission is to save you time and money in the event planning process.
+  <% end %>
+
+  <%= section_wrap_between('first') do %>
+    <h1>Ready to get to work?</h1>
+    <div>Register as...</div>
+    <%= link_to 'Vendor', new_vendor_registration_path, class: 'btn btn-blue' %>
+    <%= link_to 'Staffer', new_staffer_registration_path, class: 'btn btn-blue' %>
+    <%= link_to 'Planner', new_planner_registration_path, class: 'btn btn-blue' %>
+    <h1>or keep going to learn more about SlingPlan</h1>
+  <% end %>
+
+
+  <%= section_wrap_full({
+    title: "Goodbye Notebook",
+    subtitle: "It has served you well over the years, but the time has come for a modern, efficient approach.",
+    class: "second"
+  }) do %>
+    Sourcing and negotiating with vendors for your events is a time consuming process.  As a subscriber, you can <strong>let SlingPlan do the work for you.</strong>
+  <% end %>
+
+  <%= section_wrap_between('second') do %>
+    <h1>How it works</h1>
+    We improve the event creation workflow for planners and vendors alike.  Take a moment to understand our process and you will be as excited about SlingPlan as we are.
+  <% end %>
+
+
+
+  <%= section_wrap_full({
+    title: "Define Your Event",
+    subtitle: "With our simplified process, you will have your event created in a matter of minutes.",
+    class: "third"
+  }) do %>
+    Tell us where and when your event will take place, and select what services you need to make it a success.
+  <% end %>
+
+  <%= section_wrap_between('third') do %>
+    <h1>Instant Communication</h1>
+    When you confirm your event, a summary of your event and Request for Proposal are provided to eligible vendors near your event.
+  <% end %>
+
+
+
+  <%= section_wrap_full({
+    title: "Negotiate",
+    subtitle: "Streamline your workflow by communicating real-time with all potential vendors all in one place.",
+    class: 'fourth'
+  }) do %>
+    Respond to and ask questions, relay contracts and other files, and review all vendor bids and proposals to find the one that is right for your event.
+  <% end %>
+
+
+
+  <%= section_wrap_between('fourth') do %>
+    <h1>Everyone benefits</h1>
+    The SlingPlan map will help everyone save time sourcing their events, and service providers within our growing database of prospective vendors will get valuable free advertising.
+
+    <% unless ENV['HOLDING'] == 'true' %>
+      <div><%= link_to 'Try out the map now', '/map', class: 'btn' %></div>
+    <% end %>
+  <% end %>
+
+  <%= section_wrap_full({
+    title: "The Map",
+    subtitle: "Vendors presented on a familiar map, filtered by service and location, available for anyone and everyone.",
+    class: 'fifth'
+  }) do %>
+    Quickly find the vendors you need for your event or meeting, bookmark those vendors, and email or export your bookmarks for reference.
+  <% end %>
+
+  <%= section_wrap_between('fifth') do %>
+    <h1>It's as simple as that</h1>
+    You've now saved <i>hours</i> of searching manually, initiating contact, and negotiating with vendors.
+  <% end %>
+</div>

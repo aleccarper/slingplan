@@ -1,0 +1,23 @@
+<%= hidden_field_tag :crumbs_step, page %>
+
+<div class='crumbs location-edit-crumbs'>
+  <%= link_to "#{edit_vendors_admin_location_path(location)}/location", class: 'step step-location' do %>
+    <%= icon('map-marker') %>
+    <span>Location</span>
+  <% end %>
+
+  <%= link_to "#{edit_vendors_admin_location_path(location)}/services", class: 'step step-services' do %>
+    <div>
+      <%= icon('bus') %>
+      <%= icon('bed') %>
+      <%= icon('music') %>
+      <%= icon('cutlery') %>
+    </div>
+    <span>Services</span>
+  <% end %>
+
+  <%= link_to "#{edit_vendors_admin_location_path(location)}/finalize", class: 'step step-finalize' do %>
+    <%= icon('check') %>
+    <span>Finalize</span>
+  <% end %>
+</div>

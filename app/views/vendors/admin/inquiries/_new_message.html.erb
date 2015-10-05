@@ -1,0 +1,18 @@
+<div class='new-message'>
+  <%= responsive_form_for InquiryMessage.new(inquiry: inquiry), url: '/vendors/admin/inquiries/create_message' do |f| %>
+
+    <%= f.hidden_field :inquiry_id, value: inquiry.id %>
+
+    <h3>Create Response</h3>
+
+    <%= f.text_area :content, class: 'new-message-area', label: false %>
+
+    <% if inquiry.is_open? %>
+      <%= submit_tag 'Reply', name: 'reply', class: 'f-right btn' %>
+      <%= submit_tag 'Reply and Close', name: 'closed', class: 'f-right btn' %>
+    <% else %>
+      <%= submit_tag 'Reply and Reopen', name: 'open', class: 'f-right btn' %>
+    <% end %>
+
+  <% end %>
+</div>

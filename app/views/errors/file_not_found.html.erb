@@ -1,0 +1,24 @@
+<div class='errors-container'>
+  <div class='inner-container'>
+
+    <div class='container'>
+
+      <div class='title'>
+        <i class='fa fa-warning'></i>404
+      </div>
+      <div class='subtitle'>Not Found</div>
+
+      <div class='description'>
+        <p>
+          We're not sure how you arrived here, but if you see see this page frequently please <%= mail_to 'support@slingplan.com', 'let us know' %>.
+        </p>
+      </div>
+
+      <div class='call-to-action'>
+        <%= link_to 'Return to the home page', root_path, class: 'btn' %>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,157 @@
+.vendors-admin-account-billing,
+.planners-admin-account-billing,
+.staffers-admin-account-billing {
+  @import 'components/credit-card';
+
+  .page-header {
+    margin: 0 $margin / 2;
+  }
+
+  h3 {
+
+  }
+
+  .payment-errors {
+    display: none;
+  }
+
+  .submit {
+    @include transition(all 0.25s ease);
+    height: auto;
+    left: 0;
+    margin-top: $margin;
+    padding: $margin / 3;
+    overflow-y: hidden;
+
+    &.disabled {
+      height: 0;
+      margin-top: 0;
+      left: -300%;
+      padding: 0;
+    }
+  }
+
+  .status {
+    &.active, &.trial {
+      .fa-circle {
+        color: $palette-green-medium;
+      }
+    }
+    &.disabled {
+      .fa-circle {
+        color: $palette-red-medium;
+      }
+    }
+  }
+
+
+
+  .billing-history {
+    .charges {
+      margin: $margin / 2 0 0;
+      padding: $margin / 4;
+    }
+
+    .charge-item {
+      height: 30px;
+      padding-top: 2px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+
+      @include breakpoint(400px) {
+        font-size: 12px;
+      }
+    }
+
+    .amount {
+      float: left;
+      font-weight: bold;
+      margin-right: $margin / 2;
+    }
+
+    .card {
+      color: $palette-gray-medium;
+      float: left;
+    }
+
+    .date, .date-shorthand {
+      color: $palette-gray-medium;
+      float: right;
+      text-align: right;
+    }
+    .date-shorthand {
+      display: none;
+      font-size: $font-size-small;
+      margin-top: 3px;
+    }
+
+    .paid {
+      display: inline-block;
+      float: right;
+      margin-left: $margin / 2;
+      text-align: right;
+
+      &.true {
+        color: $palette-green-medium;
+      }
+      &.false {
+        color: $palette-red-medium;
+      }
+    }
+  }
+
+
+
+  .coupon-wrapper {
+    margin-bottom: $margin / 4;
+
+    label span {
+      font-size: 25.6px;
+      font-style: normal !important;
+    }
+
+    .coupon {
+      @include drop-shadow(0px, 0px, 10px, 2px, $palette-green-medium);
+      margin-bottom: 0;
+    }
+
+    .coupon-entered {
+      display: none;
+      padding: $margin $margin / 3 0;
+    }
+  }
+
+  @include breakpoint(960px) {
+    .coupon-wrapper {
+      .coupon {
+        width: 50%;
+      }
+    }
+  }
+
+  @include breakpoint(597px) {
+    .status {
+      font-size: $font-size-base;
+      top: 25px;
+    }
+
+    .history {
+      .card {
+        font-size: $font-size-small;
+        margin-top: 3px;
+      }
+
+      .date {
+        display: none;
+      }
+      .date-shorthand {
+        display: inline-block;
+      }
+    }
+
+    .coupon-wrapper {
+      .coupon {
+        width: 98%;
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<%= section_wrap_full({
+  title: "Payment Information",
+  subtitle: "Choose the subscription plan right for you and supply us with your payment information.",
+  class: 'short'
+}) do; end %>
+
+
+
+<div class='inner devise'>
+  <%= form_tag('/staffers/admin/sign_up/subscribe',
+    url: '/staffers/admin/sign_up/subscribe',
+    id: 'credit-card-form',
+    class: 'credit-card-form',
+    role: 'form',
+    authenticity_token: true) do %>
+
+    <div class='hint'>
+      <h3>Welcome to SlingPlan!</h3>
+      <br />
+      <p>
+        Please pick a plan below to finish up your registration.
+      </p>
+    </div>
+
+    <div class='subsection-wrap'>
+      <%= render partial: '/billing/plans', locals: { role: :vendor }  %>
+    </div>
+
+    <div id="error_explanation" class='payment-errors'></div>
+
+    <div class='subsection-wrap'>
+      <%= render partial: '/billing/card_info', locals: { role: :vendor } %>
+    </div>
+
+    <div class='submit'>
+      <%= submit_tag 'Finish!' %>
+    </div>
+
+  <% end %>
+</div>

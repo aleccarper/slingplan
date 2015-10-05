@@ -1,0 +1,62 @@
+.map {
+
+  @import 'components/tree';
+
+  .tree-item {
+    padding-right: $margin / 4;
+  }
+
+  .location-list-item {
+
+    .location-info {
+      color: $palette-gray-light;
+      font-size: $font-size-small;
+      margin-top: $margin / 4;
+    }
+
+    p {
+      line-height: 1em;
+      margin: $margin / 8 0 0;
+    }
+
+    .controls {
+      text-align: right;
+      position: absolute;
+      bottom: $margin / 4;
+      right: $margin / 4;
+
+      i {
+        color: $white;
+        display: inline;
+        font-size: $font-size-large;
+
+        &:hover {
+          cursor: pointer;
+          color: $palette-green-medium;
+        }
+
+        &.remove-bookmark {
+          display: none;
+        }
+      }
+    }
+
+    &.bookmarked {
+      i.remove-bookmark {
+        display: inline;
+      }
+      i.add-bookmark {
+        display: none;
+      }
+    }
+    &.for_bookmarks {
+      i.find-location {
+        display: none;
+      }
+    }
+  }
+
+  .view-company {
+    display: none !important;
+  }
+}

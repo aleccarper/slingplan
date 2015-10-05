@@ -1,0 +1,48 @@
+<%= section_wrap_full({
+  title: "Location Claims",
+  subtitle: "SlingPlan prefilled locations which you have claimed as your own during the location creation process."
+}) do %>
+  <%= link_to vendors_admin_locations_path, class: 'btn btn-large' do %>
+    View Locations <%= icon('list') %>
+  <% end %>
+  <%= link_to new_vendors_admin_location_path, class: 'btn btn-large' do %>
+    New Location <%= icon('plus') %>
+  <% end %>
+<% end %>
+
+
+
+<div class='inner'>
+  <div class='hint'>
+    Below you will see your on going location claims.  When a location claim is approved you will be transfered access to the already created location which you can then simply activate. Other wise, just go ahead and complete the creation of your new location to get on the map and start recieving RPFs from planners.
+  </div>
+
+  <% if @claims.blank? %>
+    <div class='nothing-here'>You have no ongoing claims.</div>
+  <% else %>
+    <% for c in @claims %>
+      <section>
+
+        <div class='subtitle'>
+          <%= content_tag :div, c.location.name, class: 'location-name' %>
+        </div>
+
+        <div class='section-content'>
+          <%= location_list_address(c.location) %>
+        </div>
+
+        <div class='section-content'>
+          <%= content_tag :div, "Phone: <strong>#{c.location.phone_number}</strong>".html_safe, class: 'location-phone' %>
+          <%= content_tag :div, "Web: <strong>#{c.location.website}</strong>".html_safe %>
+          <%= content_tag :div, "Email: <strong>#{c.location.email}</strong>".html_safe %>
+        </div>
+
+        <div class='section-content'>
+          <%= link_to('Cancel', "/vendors/admin/locations/claims/#{claim.id}/cancel", class: 'btn btn-default btn-danger', data: { confirm: "Are you sure?" }) %>
+        </div>
+
+      </section>
+
+    <% end %>
+  <% end %>
+</div>

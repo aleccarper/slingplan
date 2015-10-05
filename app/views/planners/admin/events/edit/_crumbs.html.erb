@@ -1,0 +1,35 @@
+<%= hidden_field_tag :crumbs_step, page %>
+
+<div class='crumbs event-crumbs'>
+  <%= link_to "#{edit_planners_admin_event_path(event)}/location", class: 'step step-location' do %>
+    <%= icon('map-marker') %>
+    <span>Location</span>
+  <% end %>
+
+  <%= link_to "#{edit_planners_admin_event_path(event)}/contact", class: 'step step-contact' do %>
+    <%= icon('phone') %>
+    <span>Contact</span>
+  <% end %>
+
+  <%= link_to "#{edit_planners_admin_event_path(event)}/date", class: 'step step-date' do %>
+    <%= icon('calendar') %>
+    <span>Date</span>
+  <% end %>
+
+  <%= link_to "#{edit_planners_admin_event_path(event)}/services", class: 'step step-services' do %>
+    <div>
+      <%= icon('bus') %>
+      <%= icon('bed') %>
+      <%= icon('music') %>
+      <%= icon('cutlery') %>
+    </div>
+    <span>Services</span>
+  <% end %>
+
+  <%= link_to "#{edit_planners_admin_event_path(event)}/service_rfp", class: 'step step-service-rfps' do %>
+    <%= icon('users') %>
+    <span>RFPs</span>
+  <% end %>
+
+  <% #link_to 'Vendor RFPs', "#{edit_planners_admin_event_path(event)}/vendor_rfps", class: 'step step-vendor-rfps' %>
+</div>

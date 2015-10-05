@@ -1,0 +1,39 @@
+<%= section_wrap_full({
+  title: "Profile",
+  subtitle: "Define your business for prospective planners."
+}) do %>
+  Keeping this information detailed and up to date will help planners learn about and communicate with you, as well as boost your search rankings.
+<% end %>
+
+
+
+<div class='inner'>
+  <%= responsive_form_for(@vendor, url: vendors_admin_account_profile_path(current_vendor.id), method: :patch, validate_submit: true) do |f| %>
+
+    <div class='subsection-wrap'>
+      <h1>Contact Info</h1>
+      <%= f.text_field :primary_phone_number %>
+      <%= f.text_field :primary_email %>
+      <%= f.text_field :primary_website %>
+    </div>
+
+    <div class='subsection-wrap'>
+      <h1>Misc</h1>
+      <%= f.text_field :name, label: 'Company Name' %>
+      <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: 'Central Time (US & Canada)' %>
+      <%= f.text_area :description, rows: 5 %>
+      <%= f.file_field :logo_image %>
+      <%= image_tag @vendor.logo_image.url(:medium) %>
+    </div>
+
+
+    <div class='change-password'>
+      <%= link_to 'Change Password', edit_vendor_registration_path %>
+    </div>
+
+    <div class='submit'>
+      <%= submit_tag 'Update Profile' %>
+    </div>
+
+  <% end %>
+</div>

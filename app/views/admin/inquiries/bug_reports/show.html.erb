@@ -1,0 +1,42 @@
+<%= render partial: '/admin/inquiries/inquiry_header' %>
+
+
+
+<div class='inner'>
+  <%= content_tag :div, class: classes_for_inquiry(@bug_report) do %>
+
+    <%= content_tag :div, class: 'controls' do %>
+      <%= back_to_admin_inquiries %>
+    <% end %>
+
+    <%= hidden_field_tag :id, nil, value: @bug_report.id %>
+
+    <%= content_tag :h1, @bug_report.subject, class: 'heading' %>
+
+    <% if @bug_report.vendor %>
+      <%= link_to @bug_report.vendor.name, vendor_path(@bug_report.vendor.id), class: 'author' %>
+    <% elsif @bug_report.planner %>
+      <%= mail_to @bug_report.planner.email, @bug_report.planner.email, class: 'author' %>
+    <% end %>
+
+    <%= content_tag :div, time_for_inquiry(@bug_report), class: 'time' %>
+
+    <%= content_tag :div, simple_format(@bug_report.body), class: 'body' %>
+
+    <div class='responses'>
+      <h2>Responses</h2>
+      <div class='message-list inquiry-message-list'>
+        <%= render partial: '/admin/inquiries/message_list', locals: { inquiry: @bug_report } %>
+      </div>
+    </div>
+
+    <%= render partial: '/inquiries/new_message', locals: { inquiry: @bug_report } %>
+
+  <% end %>
+</div>
+
+<%= render partial: '/partials/sse_stream', locals: {
+  source: "/admin/inquiries/#{@bug_report.id}/stream",
+  destination: '.message-list'
+} %>
+

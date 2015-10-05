@@ -1,0 +1,23 @@
+<%= section_wrap_full({
+  title: "Reset your password",
+  subtitle: "Forgot your password?  No problem.  Enter your email to receive a password reset link."
+}) do; end %>
+
+
+
+<div class='inner devise'>
+  <div class="subsection-wrap">
+    <div class='call-to-action'>
+      Know your password?
+      <%= link_to "Sign in", new_session_path(resource_name), class: 'sign-in' %>
+      <br>
+      Don't have an account?
+      <%= link_to "Sign up", new_registration_path(resource_name), class: 'sign-up' %>
+    </div>
+
+    <%= responsive_form_for(resource, as: resource_name, url: password_path(resource_name)) do |f| %>
+      <%= f.email_field :email, autofocus: true, validate: false %>
+      <%= f.submit 'Reset my password' %>
+    <% end %>
+  </div>
+</div>

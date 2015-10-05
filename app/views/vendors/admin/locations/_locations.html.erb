@@ -1,0 +1,42 @@
+<%
+  show_controls = false
+  if defined? hide_controls
+    show_controls = hide_controls
+  end
+
+  show_claimable = false
+  if defined? show_claim_button
+    show_claimable = show_claim_button
+  end
+%>
+
+<% unless current_vendor.locations.unconfirmed.blank? %>
+  <div class='hint red unconfirmed-locations'>
+    <div class='heading'>Hold up!</div>
+    You have locations that haven't yet been completed.  Click the <a href='#' class='btn btn-small btn-fake'>Complete</a> button whenever you are ready to finish creating a location in order to make it visible to vendors.
+
+    <div class='locations tree'>
+      <div class='tree-level tree-level-0'>
+        <%= paginate 'page_unconfirmed', '/vendors/admin/locations/page_unconfirmed' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+<div class='locations tree'>
+  <% states.each do |state, locations| %>
+    <div class='tree-level tree-level-0 state'>
+      <div class='tree-header'>
+        <div class='tree-arrow'></div>
+        <%= content_tag :div, full_state_name_from_abbreviation(state), class: 'tree-header-text state-name' %>
+      </div>
+      <div class='tree-items'>
+        <%= paginate "page_state_#{state}", '/vendors/admin/locations/page_state', {
+          state: state
+        } %>
+      </div>
+    </div>
+  <% end %>
+</div>

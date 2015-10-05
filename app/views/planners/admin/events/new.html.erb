@@ -1,0 +1,39 @@
+<%= section_wrap_full({
+  title: "New Event",
+  subtitle: "Double check the accuracy of this information.  We will use it to determine what vendor locations should be included in negotiations."
+}) do %>
+  First, name your event and tell us where it's taking place.
+<% end %>
+
+
+
+<div class='inner'>
+  <%= responsive_form_for(@event, url: planners_admin_events_path, validate_submit: true, data: { id: @event.id }) do |f| %>
+
+    <div class='subsection-wrap'>
+      <h3>Location Info</h3>
+
+      <%= f.text_field :name, label: 'Event Name', required: true %>
+      <%= f.text_field :address1 %>
+      <%= f.text_field :address2 %>
+      <%= f.text_field :city, required: true %>
+      <%= f.select :state, collection: us_states, required: true %>
+      <%= f.text_field :zip %>
+      <%= f.country_select :country_code,
+        prompt: 'Country',
+        as: :country,
+        locale: 'en',
+        only: ['US'],
+        selected: 'US',
+        autofocus: true, required: true
+      %>
+
+    </div>
+
+    <div class='save-wrap'>
+      <%= submit_tag 'Next', name: 'next', class: 'btn f-right btn-next' %>
+      <%= submit_tag 'Save', name: 'save', class: 'btn f-right btn-save' %>
+    </div>
+
+  <% end %>
+</div>

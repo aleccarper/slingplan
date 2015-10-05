@@ -1,0 +1,15 @@
+<%= form_tag('/staffers/admin/account/billing/create_subscription',
+  url: '/staffers/admin/account/billing/create_subscription',
+  role: 'form',
+  class: 'choose-plan',
+  authenticity_token: true) do %>
+
+  <div id="error_explanation" class='payment-errors'></div>
+
+  <%= render(partial: 'plans') %>
+
+  <div class='submit'>
+    <%= submit_tag 'Sign Up' %>
+  </div>
+<% end %>
+

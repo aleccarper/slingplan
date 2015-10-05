@@ -1,0 +1,12 @@
+<div class='pagination' id='<%= id %>'></div>
+<%= javascript_tag defer: 'defer' do %>
+  Pagination.init({
+    id: '#<%= id %>',
+    url: '<%= source %>',
+    data_func: function(page) {
+      return jQuery.extend(<%= raw data.to_json %>, {
+        page: page || 0
+      });
+    }
+  });
+<% end %>

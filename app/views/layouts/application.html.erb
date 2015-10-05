@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <%= render partial: 'partials/head' %>
+
+  <%= body_tag do %>
+
+    <% if (ENV['HOLDING'] != 'true' and ENV['MAINTENANCE'] != 'true' and ENV['BETA'] != 'true') \
+       or (ENV['BETA'] == 'true' and !get_cookie('beta_tester_email').blank?) %>
+
+      <%= render partial: 'partials/header' %>
+
+      <div class='container'>
+        <%= yield %>
+        <%= flash_background %>
+        <%= render partial: 'partials/footer' %>
+        <%= overlay %>
+      </div>
+
+    <% else %>
+      <%= yield %>
+      <%= render partial: 'partials/footer' %>
+        <%= overlay %>
+    <% end %>
+
+  <% end %>
+</html>

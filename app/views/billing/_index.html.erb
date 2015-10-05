@@ -1,0 +1,92 @@
+<%= section_wrap_full({
+  title: "Billing",
+  subtitle: "Where your money is going and when."
+}) do %>
+  Manage your account's financial details, review your payment history, and adjust your subscription plan to fit your needs.
+<% end %>
+
+<div class='inner'>
+  <div class='subsection-wrap'>
+    <%= render(partial: 'billing/status', locals: {
+        role: :role,
+        plan: @plan,
+        cc_brand: @cc_brand,
+        cc_last_4: @cc_last_4,
+        cc_exp_month: @cc_exp_month,
+        cc_exp_year: @cc_exp_year,
+        upcoming_invoice: @upcoming_invoice
+      })
+    %>
+  </div>
+
+  <div class='subsection-wrap'>
+    <%= render(partial: 'billing/history') %>
+  </div>
+
+  <div class='subsection-wrap'>
+    <% subscribed = send("current_#{current_authenticated_role}").subscribed? %>
+
+    <% if(subscribed) %>
+      <%= render(partial: 'billing/subscribed', locals: { role: role }) %>
+    <% else %>
+      <%= render(partial: 'billing/not_subscribed', locals: { role: role }) %>
+    <% end %>
+  </div>
+
+  <div class='subsection-wrap'>
+
+    <%= form_tag("/#{role}s/admin/account/billing/update_billing",
+      url: "/#{role}s/admin/account/billing/update_billing",
+      id: 'credit-card-form',
+      class: 'credit-card-form',
+      role: 'form',
+      authenticity_token: true) do %>
+
+      <div id="error_explanation" class='payment-errors'></div>
+
+      <%= hidden_field_tag('success_redirect', "/#{role}s/admin/account/billing") %>
+
+      <%= render(partial: 'billing/card_info') %>
+
+      <div class='submit disabled'>
+        <%= submit_tag 'Update Card' %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @model.billing_status != 'inactive' && @model.subscription_id != 'ptier1m' %>
+    <div class='subsection-wrap'>
+      <p>
+      <% if @can_revert_cancelation %>
+        <% if @model.cancelation_date %>
+          Your subscription will be cancelled on <%= prettify_date_short(@model.cancelation_date) %>.
+          <br />
+          <br />
+        <% end %>
+        <%= link_to 'Reactive Subscription', "/#{role}s/admin/account/billing/reactivate_subscription", class: 'btn btn-green', method: :patch %>
+      <% end %>
+
+      <% if @model.billing_status == 'active' %>
+        <% case role %>
+            <% when :vendor %>
+              If you cancel your account your locations will remain active until the end of your current billing period.
+            <% when :planner %>
+              If you cancel your account your events will remain active until the end of your current billing period.
+            <% when :staffer %>
+              If you cancel your profile will remain on the map until the end of your current billing period.
+          <% end %>
+        <br />
+        <br />
+        <%= link_to 'Cancel Subscription', "/#{role}s/admin/account/billing/cancel_subscription", method: :delete, class: 'btn btn-red btn-small', data: { confirm: 'Are you sure?' } %>
+      <% end %>
+
+      <% if @model.billing_status == 'trial' %>
+        If you cancel your trial you will no longer be able to recieve RFPs from planners.
+        <br />
+        <br />
+        <%= link_to 'Cancel Trial', "/#{role}s/admin/account/billing/cancel_trial", method: :patch, class: 'btn btn-red btn-small', data: { confirm: 'Are you sure?' } %>
+      <% end %>
+      </p>
+    </div>
+  <% end %>
+</div>

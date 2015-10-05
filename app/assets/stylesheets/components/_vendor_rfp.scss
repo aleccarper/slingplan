@@ -1,0 +1,136 @@
+.vendors-admin-inquiries-negotiations,
+.planners-admin-inquiries-negotiations {
+
+  .vendor-rfp {
+
+    .heading {
+      text-align: center;
+
+      .time {
+        float: none !important;
+      }
+    }
+
+    .rfp-heading {
+      font-size: $font-size-giant;
+    }
+
+    h5 {
+      margin-top: $margin / 2;
+    }
+
+    .map {
+      height: 334px;
+      width: 100%;
+      border: 1px solid red;
+    }
+
+    .status,
+    .from,
+    .to,
+    .event-date,
+    .event-location,
+    .service-requested,
+    .service-budget,
+    .current-bid,
+    .notes {
+      padding: $margin / 2;
+    }
+
+    .section-wrap {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .section-wrap-between {
+      .bidding-area {
+        .status {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .status-area {
+      padding: $margin / 2;
+
+      .subsection-label {
+        margin-top: 10px;
+      }
+    }
+
+    .status {
+      font-size: 20px;
+      padding: 0;
+      position: relative;
+    }
+
+    .btn-bid {
+      top: 4px;
+      position: relative;
+    }
+
+    .bid-area {
+      position: relative;
+
+      span {
+        font-size: 28px;
+      }
+
+      .btn-red {
+        float: none;
+      }
+
+      .field {
+        display: inline-block;
+        width: 70%;
+      }
+
+      .btn {
+        display: inline-block;
+      }
+    }
+
+    &.pending-bid {
+      .section-wrap-between {
+        background: $palette-blue-light;
+      }
+    }
+
+    &.pending-bid-approval {
+      .section-wrap-between {
+        background: $palette-yellow-light;
+      }
+    }
+
+    &.bid-approved {
+      .section-wrap-between {
+        background: $palette-green-light;
+      }
+    }
+  }
+
+  .bidding-area {
+    .bid-area {
+      display: inline-block;
+    }
+    .controls {
+      top: 17px;
+      width: 151px;
+      display: inline-block;
+    }
+  }
+
+  &.vendors-admin-account-inquiries-negotiations {
+    .vendor-rfp.pending-bid .status-area .fa {
+      margin-top: 14px;
+    }
+  }
+
+  &.planners-admin-account-inquiries-negotiations {
+    .vendor-rfp.pending-bid-approval, .vendor-rfp.bid-approved {
+      .status-area .fa {
+        margin-top: 14px;
+      }
+    }
+  }
+}

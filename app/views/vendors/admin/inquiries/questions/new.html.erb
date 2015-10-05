@@ -1,0 +1,17 @@
+<%= render partial: 'inquiry_header' %>
+
+
+
+<div class='inner questions'>
+  <h1>New Question</h1>
+
+  <%= responsive_form_for @question, url: vendors_admin_inquiries_questions_path do |f| %>
+    <%= f.text_field :subject %>
+    <%= f.text_area :body %>
+
+    <div class='submit'>
+      <%= back_to_vendor_inquiries %>
+      <%= submit_tag 'Create', class: 'btn f-right' %>
+    </div>
+  <% end %>
+</div>

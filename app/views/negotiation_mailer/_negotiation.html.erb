@@ -1,0 +1,35 @@
+<h4><%= greeting %></h4>
+
+<hr/>
+
+<hr/>
+
+<p>Event:</p>
+<div style='padding-left: 8px;'>
+  <div>Event: <%= @negotiation.vendor_rfp.service_rfp.event.name %></div>
+  <div>Service: <%= @negotiation.vendor_rfp.service_rfp.service.name %></div>
+  <% if defined? @message %>
+    <% unless @message.nil? %>
+      <% if @message.owner.class == Vendor %>
+        <div>Vendor: <%= @message.owner.name %></div>
+      <% elsif @message.owner.class == Planner %>
+        <div>Planner: <%= @message.owner.name %></div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div>Planner: <%= @negotiation.vendor_rfp.service_rfp.event.owner.name %></div>
+  <% end %>
+  <% unless @negotiation.vendor_rfp.current_bid.nil? %>
+    <div>Bid: $<%= @negotiation.vendor_rfp.current_bid %></div>
+  <% end %>
+</div>
+
+<% if defined? @message %>
+  <% unless @message.nil? %>
+    <% if @message.action == 'file' %>
+      <%= render partial: 'negotiation_file' %>
+    <% else %>
+      <%= render partial: 'negotiation_message' %>
+    <% end %>
+  <% end %>
+<% end %>

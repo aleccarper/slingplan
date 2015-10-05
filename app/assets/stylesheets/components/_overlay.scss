@@ -1,0 +1,47 @@
+.loading-overlay, .overlay {
+  @include transition(opacity 0.25s ease-in-out);
+  background: #000;
+  bottom:0;
+  left: 0;
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  text-align: center;
+  top: 0;
+  vertical-align: middle;
+  z-index: 100000;
+
+  i.spinner {
+    @include transition(color 0.25s ease-in-out);
+    bottom: 0;
+    color: rgba(255, 255, 255, 0);
+    font-size: 190px;
+    height: 189.6px;
+    left: 0;
+    line-height: 1;
+    margin: auto;
+    position: absolute;
+    transform: translateZ(2);
+    right: 0;
+    top: 0;
+    width: 189.6px;
+    z-index: 100001;
+  }
+}
+
+.loading-overlay {
+  position: fixed;
+}
+
+.loading {
+  .loading-overlay {
+    opacity: 0.5;
+    pointer-events: all;
+
+    i.spinner {
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+}

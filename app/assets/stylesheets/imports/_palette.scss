@@ -1,0 +1,76 @@
+$white: #fff;
+$black: #1a1a1a;
+
+$palette-gray-darker: #222;
+$palette-gray-dark: #333;
+$palette-gray-medium: #ccc;
+$palette-gray-light: #efefef;
+$palette-gray-lightest: #FBFAF4;
+
+$palette-green-light: #2a9b5d;
+$palette-green-medium: #168755;
+$palette-green-dark: #0e312f;
+
+$palette-red-medium: #c0392b;
+$palette-red-dark: #520e0a;
+
+$palette-yellow-medium: #2F2A18;
+$palette-yellow-light: #bcac20;
+
+$palette-blue-dark: #03101a;
+$palette-blue-medium: #0d1c26;
+$palette-blue-light: #30456e;
+$palette-blue-lighter: #476db3;
+
+
+$color-footer-background:$palette-blue-dark;
+
+$color-text-dark: #1a1a1a;
+$color-text-light: #fff;
+
+$color-total-background: $palette-gray-medium;
+$color-total-used: $palette-green-medium;
+
+$color-hint-main: $palette-green-dark;
+$color-hint-yellow: $palette-yellow-medium;
+$color-hint-red: $palette-red-dark;
+$color-hint-green: $palette-green-medium;
+
+
+$color-main-background: $palette-blue-dark; // #222;
+$color-container-background: $palette-blue-dark;
+$color-container-background-solid: $palette-blue-dark;
+$color-sub-container-background-solid: $palette-blue-medium;
+
+$color-header-background: $palette-blue-dark;
+$color-header-button-background-hover: $palette-green-medium;
+$color-header-link: $white;
+$color-header-link-hover: $palette-green-medium;
+$color-header-input-underline: $palette-gray-medium;
+
+$color-help-background: $palette-gray-darker;
+$color-help-border: $palette-gray-dark;
+$color-help-outline: $palette-gray-light;
+
+$color-inquiry-li-item-hover-background: lighten($palette-gray-light, 20%);
+
+$color-inactive-tab-background: $black;
+$color-active-tab-background: $palette-green-medium;
+$color-active-sub-tab-background: $palette-blue-light;
+
+$color-link: $palette-green-medium;
+
+$color-form-input-border: $palette-gray-light;
+$color-checkbox: $palette-gray-light;
+$color-checkbox-activated: $palette-green-medium;
+
+$color-button-primary: $palette-gray-dark;
+$color-button-primary-hover: $palette-green-medium;
+
+$color-flash-notice: $palette-green-medium;
+$color-flash-alert: $palette-red-medium;
+
+$color-admin-location-claims-bubble: $white;
+$color-admin-location-claims-bubble-background: $palette-red-medium;
+
+$color-admin-account-billing-title: $palette-gray-medium;

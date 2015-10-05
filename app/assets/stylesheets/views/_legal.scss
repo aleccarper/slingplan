@@ -1,0 +1,28 @@
+.legal-container {
+  h2 {
+    margin: $margin 0 $margin / 2;
+  }
+
+  h3 {
+    margin: $margin 0 $margin / 2;
+  }
+
+  ol, ul, p {
+    font-size: $font-size-small;
+  }
+
+  p {
+    margin: $margin / 2 0;
+  }
+
+  li, ul {
+    li {
+      list-style: inherit;
+      padding: $margin / 8 $margin $margin / 8 $margin;
+    }
+  }
+
+  ol, ul {
+    margin-bottom: $margin / 4;
+  }
+}

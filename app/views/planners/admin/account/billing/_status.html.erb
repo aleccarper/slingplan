@@ -1,0 +1,74 @@
+<div class='status'>
+  <h1>Account Info</h1>
+
+  <div class='section-wrap'>
+    <div class='subsection-label'>Status</div>
+    <div class='section-content'>
+      <%= content_tag :div, class: "status #{@planner.billing_status}" do %>
+        <span>Account</span>
+        <strong>
+           <%= content_tag :span, "#{@planner.billing_status.titlecase}", class: 'value' %>
+          <i class='fa fa-circle'></i>
+        </strong>
+      <% end %>
+
+      <% if plan %>
+        Plan: <strong><%= plan['plan']['name'] %></strong>
+        <% if plan['start'] %>
+          <br />
+          Started on: <strong><%= prettify_date(plan['start']) %></strong>
+        <% end %>
+
+        <% if plan['ended_at'] %>
+          <br />
+          Ended on: <strong><%= prettify_date(plan['ended_at']) %></strong>
+        <% end %>
+        <br />
+      <% end %>
+    </div>
+  </div>
+
+  <% if upcoming_invoice && upcoming_invoice[:total] > 0
+    next_payment_date = upcoming_invoice[:period_end]
+    next_payment_subtotal = upcoming_invoice[:subtotal]
+    next_payment_discount = nil
+    next_payment_total = upcoming_invoice[:total]
+    coupon_id = nil
+
+    if(upcoming_invoice[:discount] && upcoming_invoice[:discount][:coupon])
+      coupon_id = upcoming_invoice[:discount][:coupon][:id]
+      next_payment_amount_discount = upcoming_invoice[:discount][:coupon][:amount_off]
+      next_payment_percent_discount = upcoming_invoice[:discount][:coupon][:percent_off]
+    end
+  %>
+
+    <div class='section-wrap'>
+      <div class='subsection-label'>Payment</div>
+      <div class='section-content'>
+        <strong><%= cc_brand %> **** **** **** <%= cc_last_4 %></strong> Exp: <strong><%= cc_exp_month %>/<%= cc_exp_year %></strong>
+
+          <br />
+          Next Payment due: <strong><%= prettify_date(next_payment_date) %></strong>
+
+          <% if next_payment_amount_discount || next_payment_percent_discount %>
+            <br />
+            Next Payment Subtotal: <strong>$<%= prettify_amount(next_payment_subtotal) %></strong>
+
+            <% if next_payment_amount_discount %>
+              <br />
+              Next Payment Discount: <strong>$<%= prettify_amount(next_payment_amount_discount) %></strong>
+            <% end %>
+
+            <% if next_payment_percent_discount %>
+              <br />
+              Next Payment Discount: <strong>%<%= next_payment_percent_discount %></strong>
+            <% end %>
+          <% end %>
+
+          <br />
+          Next Payment Total: <strong>$<%= prettify_amount(next_payment_total) %></strong>
+
+      </div>
+    </div>
+  <% end %>
+</div>

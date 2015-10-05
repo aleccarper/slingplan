@@ -1,0 +1,76 @@
+.site-footer {
+  background: $color-footer-background;
+  bottom: -20px;
+  color: $palette-gray-light;
+  font-size: $font-size-small;
+  height: $margin;
+  text-align: center;
+
+  .footer-wrapper {
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+
+  .divider {
+    margin: 0 $margin / 8;
+  }
+
+  .left, .right {
+    position: absolute;
+
+    & > div {
+      display: inline-block;
+
+      a {
+        color: $palette-gray-light;
+      }
+    }
+  }
+
+  .left {
+    left: $margin / 4;
+  }
+
+  .right {
+    right: $margin / 4;
+  }
+
+  &.fixed {
+    @include transition(all 0.25s ease);
+    bottom: -50px;
+    opacity: 0;
+    position: fixed;
+  }
+
+  &.fixed-active {
+    bottom: 0px;
+    opacity: 1;
+  }
+
+  @include breakpoint(600px) {
+    height: 50px;
+    .left, .right {
+      position: relative;
+      left: auto;
+      right: auto;
+    }
+  }
+}
+
+
+
+.planners-admin-events, .vendor-admin-events {
+  .container {
+    height: 100%;
+    .tab-content {
+      min-height: 100%;
+      padding-bottom: 20px;
+      .site-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+    }
+  }
+}

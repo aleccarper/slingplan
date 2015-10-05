@@ -1,0 +1,15 @@
+<div class='locations tree'>
+  <% states.each do |state, locations| %>
+    <div class='tree-level tree-level-0 state'>
+      <div class='tree-header'>
+        <div class='tree-arrow'></div>
+        <%= content_tag :div, full_state_name_from_abbreviation(state), class: 'tree-header-text state-name' %>
+      </div>
+      <div class='tree-items'>
+        <%= paginate "page_state_#{state}", '/admin/locations/page_state', {
+          state: state
+        } %>
+      </div>
+    </div>
+  <% end %>
+</div>

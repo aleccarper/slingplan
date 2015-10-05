@@ -1,0 +1,29 @@
+<li class='location-list-item' id='location-<%= location.id %>' data-location-id='<%= location.id %>'>
+  <div class='location-header'>
+    <%= content_tag :div, location.name, class: 'location-name' %>
+
+    <%= link_to admin_location_path(location), method: :delete, class: 'btn-remove', data: { confirm: 'Are you sure?' } do %>
+      <i class='fa fa-times tip' data-dir='n' data-msg='delete-location'></i>
+    <% end %>
+
+    <%= link_to edit_admin_location_path(location), class: 'btn-edit' do %>
+      <i class='fa fa-edit tip' data-dir='n' data-msg='edit-location'></i>
+    <% end %>
+  </div>
+
+  <div class='contents'>
+    <%= location_list_address(location) %>
+  </div>
+
+  <div class='sub-contents'>
+    <%= content_tag :div, "Phone: <strong>#{location.phone_number}</strong>".html_safe, class: 'location-phone' %>
+  </div>
+
+  <div class='footer'>
+    <%= content_tag :div, class: "location-active slider #{location.status != 'active' ? 'inactive' : ''}"  do %>
+      <div class='switch'></div>
+      <div class='active-text'>Active</div>
+      <div class='inactive-text'>Inactive</div>
+    <% end %>
+  </div>
+</li>

@@ -1,0 +1,22 @@
+<%= responsive_form_for(@location, url: vendors_admin_location_path(@location), class: 'location-services') do |f| %>
+  <div class='service-selection'>
+
+    <div class='hint'>
+      <div class='heading'>What do you have to offer?</div>
+      Select all services that your location provides.
+    </div>
+    <div class='errors'></div>
+    <div class='check-boxes'>
+      <%= f.service_selection(:service_ids, Service.all, label: false, validate: false) do |c| %>
+        <%= c.check_box %>
+        <%= c.label %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class='save-wrap'>
+    <%= submit_tag 'Next', name: 'next', class: 'btn f-right btn-next' %>
+    <%= submit_tag 'Save', name: 'save', class: 'btn f-right btn-save' %>
+    <%= submit_tag 'Back', name: 'back', class: 'btn f-right btn-back' %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<div class='page-header'>
+  <%= link_to "<i class='left fa fa-plus'></i>Create Coupon".html_safe, '/admin/stripe/new_coupon', class: 'left btn create-coupon' %>
+</div>
+
+<ul class='coupon-list'>
+  <% for coupon in @coupons || [] %>
+    <%= render partial: 'coupon', locals: { coupon: coupon } %>
+  <% end %>
+</ul>

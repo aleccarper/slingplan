@@ -1,0 +1,53 @@
+<%= responsive_form_for(@location, url: vendors_admin_locations_confirm_path, method: :post, class: 'location-finalize') do |f| %>
+  <%= hidden_field_tag :id, @location.id %>
+  <%= hidden_field_tag :lat, @location.latitude %>
+  <%= hidden_field_tag :lng, @location.longitude %>
+
+  <div class='confirm-preview'>
+    <h2 class='heading'>Location Preview</h2>
+    <ul>
+      <%= render partial: 'location', locals: {
+        location: @location,
+        vendor_profile: true,
+        hide_edit_button: true,
+        hide_delete_button: true,
+        hide_active_slider: true,
+        show_claim_button: false
+      } %>
+    </ul>
+  </div>
+
+  <%= render partial: '/map/small_horizontal_map', locals: {
+    locations: [@location],
+    show_pins: true,
+    index: false,
+    lock: true,
+    zoom_control: false,
+    zoom_scroll: false,
+    center: false,
+  } %>
+
+  <% if !@claimables.blank? %>
+    <div class='confirm-conflicts'>
+      <h2 class='heading'>Conflicts</h2>
+      <div class='notice'>There were conflicts for this location.
+We may already have the data for the location above.
+If one of the locations listed below is the location you are attempting to create, declare it as your own using the "Claim" button.</div>
+      <ul>
+        <% for loc in @claimables %>
+          <%= render partial: 'location', locals: {
+            location: loc,
+            vendor_profile: true,
+            hide_edit_button: true,
+            hide_delete_button: true,
+            hide_active_slider: true,
+            show_claim_button: true
+          } %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <br />
+  <%= submit_tag 'Confirm', name: 'confirm', class: 'btn btn-large btn-green btn-confirm' %>
+<% end %>

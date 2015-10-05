@@ -1,0 +1,38 @@
+<%= section_wrap_full({
+  title: "SlingPlan Blog",
+  subtitle: "Thoughts and news about SlingPlan and our role in Event Planning",
+  class: 'blog'
+}) do %>
+  <div class='page-header'>
+    <%= link_to "<i class='left fa fa-plus'></i>New Post".html_safe, '/admin/blog/new', class: 'left btn btn-success create-coupon' %>
+  </div>
+<% end %>
+
+
+
+<div class='posts'>
+  <% if @posts.blank? %>
+    <div class='nothing-here'>No blog posts yet created.</div>
+  <% else %>
+    <ul>
+      <% for post in @posts || [] %>
+        <li class='blog-post subsection-wrap'>
+
+          <div class='heading'>
+            <%= link_to post.title, blog_path(post.id), class: 'title' %>
+
+            <%= content_tag :div, post.created_at.strftime(
+              'Posted on <strong>%m/%d/%Y</strong> at <strong>%I:%M%p</strong>').html_safe, class: 'date' %>
+          </div>
+
+          <%= content_tag :div, simple_format(post.content.html_safe), class: 'content' %>
+
+          <%= render partial: '/admin/blog/admin_controls', locals: { post: post } %>
+
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= will_paginate @posts %>
+</div>

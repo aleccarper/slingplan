@@ -1,0 +1,41 @@
+<%= render partial: '/admin/inquiries/inquiry_header' %>
+
+
+
+<div class='inner'>
+  <%= content_tag :div, class: classes_for_inquiry(@suggestion) do %>
+
+    <%= content_tag :div, class: 'controls' do %>
+      <%= back_to_admin_inquiries %>
+    <% end %>
+
+    <%= hidden_field_tag :inquiry_id, nil, value: @suggestion.id %>
+
+    <%= content_tag :h1, @suggestion.subject, class: 'heading' %>
+
+    <% if @suggestion.vendor %>
+      <%= link_to @suggestion.vendor.name, vendor_path(@suggestion.vendor.id), class: 'author' %>
+    <% elsif @suggestion.planner %>
+      <%= mail_to @suggestion.planner.email, @suggestion.planner.email %>
+    <% end %>
+
+    <%= content_tag :div, time_for_inquiry(@suggestion), class: 'time' %>
+
+    <%= content_tag :div, simple_format(@suggestion.body), class: 'body' %>
+
+    <div class='responses'>
+      <h2>Responses</h2>
+      <div class='message-list inquiry-message-list'>
+        <%= render partial: '/admin/inquiries/message_list', locals: { inquiry: @suggestion } %>
+      </div>
+    </div>
+
+    <%= render partial: '/inquiries/new_message', locals: { inquiry: @suggestion } %>
+
+  <% end %>
+</div>
+
+<%= render partial: '/partials/sse_stream', locals: {
+  source: "/admin/inquiries/#{@suggestion.id}/stream",
+  destination: '.message-list'
+} %>

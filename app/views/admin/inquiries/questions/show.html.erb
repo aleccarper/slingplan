@@ -1,0 +1,41 @@
+<%= render partial: '/admin/inquiries/inquiry_header' %>
+
+
+
+<div class='inner'>
+  <%= content_tag :div, class: classes_for_inquiry(@question) do %>
+
+    <%= content_tag :div, class: 'controls' do %>
+      <%= back_to_admin_inquiries %>
+    <% end %>
+
+    <%= hidden_field_tag :inquiry_id, nil, value: @question.id %>
+
+    <%= content_tag :h1, @question.subject, class: 'heading' %>
+
+    <% if @question.vendor %>
+      <%= link_to @question.vendor.name, vendor_path(@question.vendor.id), class: 'author' %>
+    <% elsif @question.planner %>
+      <%= mail_to @question.planner.email, @question.planner.email, class: 'author' %>
+    <% end %>
+
+    <%= content_tag :div, time_for_inquiry(@question), class: 'time' %>
+
+    <%= content_tag :div, simple_format(@question.body), class: 'body' %>
+
+    <div class='responses'>
+      <h2>Responses</h2>
+      <div class='message-list inquiry-message-list'>
+        <%= render partial: '/admin/inquiries/message_list', locals: { inquiry: @question } %>
+      </div>
+    </div>
+
+    <%= render partial: '/inquiries/new_message', locals: { inquiry: @question } %>
+
+  <% end %>
+</div>
+
+<%= render partial: '/partials/sse_stream', locals: {
+  source: "/admin/inquiries/#{@question.id}/stream",
+  destination: '.message-list'
+} %>

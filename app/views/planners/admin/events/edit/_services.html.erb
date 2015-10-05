@@ -1,0 +1,72 @@
+<% eligible, not_eligible = get_eligible_services %>
+
+<%= hidden_field_tag :id, @event.id %>
+
+<%= responsive_form_for(@event, url: planners_admin_event_path(@event), class: 'event-services') do |f| %>
+  <div class='service-selection'>
+    <% if eligible.blank? %>
+      <div class='hint red'>
+        <div class='heading'>Sorry!</div>
+        Unfortunately, no Vendors around your event have yet subscribed.
+      </div>
+    <% end %>
+
+    <% if !eligible.blank? %>
+      <div class='in-area'>
+        <div class='hint'>
+          <div class='heading'>In Area</div>
+          Select all services that you will need for your event.
+        </div>
+        <div class='errors'></div>
+        <div class='check-boxes'>
+          <%= f.service_selection(:service_ids, eligible, label: false, validate: false) do |c| %>
+            <%= c.check_box %>
+            <%= c.label %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if !not_eligible.blank? %>
+      <div class='out-of-range <%= @event.service_request_submitted ? 'submitted' : '' %>'>
+        <div class='hint'>
+          <div class='text'>
+            <div class='heading'>Out of Range</div>
+            <p class='there-are-not-yet-text'>There are not yet any subscribed Vendors supplying these services in range of your event.</p>
+            <br>
+            <div class='service-request-submitted'>
+              <p><strong>Thank you</strong> for your Service Request submission for this event.  You will be notified once per service when these services become available in range of this event's address.</p>
+            </div>
+            <div class='service-request-not-submitted'>
+              <p>Help us prioritize our sales efforts by submitting a Service Request for the services that you need the most in this area.</p>
+              <br>
+              <p>we will notify you via email when Vendor locations matching these services are created within range of this area.</p>
+            </div>
+          </div>
+
+          <div class='check-boxes'>
+            <%= f.service_selection(:ineligible_service_ids, not_eligible, label: false, validate: false) do |c| %>
+              <%= c.check_box class: 'not-found', checked: 'checked' %>
+              <%= c.label %>
+            <% end %>
+          </div>
+          <div class='controls'>
+            <%= link_to 'Submit Service Request', '/planners/admin/inquiries/create_service_request', class: 'btn btn-submit-service-request' %>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='save-wrap'>
+    <% if eligible.blank? %>
+
+    <% else %>
+      <%= submit_tag 'Next', name: 'next', class: 'btn f-right btn-next' %>
+      <%= submit_tag 'Save', name: 'save', class: 'btn f-right btn-save' %>
+    <% end %>
+
+    <%= submit_tag 'Back', name: 'back', class: 'btn f-right btn-back' %>
+  </div>
+<% end %>

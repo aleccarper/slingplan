@@ -1,0 +1,55 @@
+.devise {
+  .call-to-action {
+    text-align: center;
+  }
+
+  .errorlist {
+    color: $palette-red-medium;
+  }
+
+  .options {
+    margin-top: 20px;
+  }
+
+  .links {
+    margin-bottom: $margin;
+    position: absolute;
+    width: 100%;
+
+    a {
+      @include drop-shadow(0px, 0px, 4px, 2px, rgba(255, 255, 255, 0.50));
+      @include transition(color 0.25s ease, background 0.25s ease);
+      background: rgba(0, 0, 0, 0.90);
+      border-radius: $margin / 2;
+      color: $white;
+      display: inline-block;
+      font-size: $font-size-small;
+      font-style: italic;
+      margin-top: $margin / 2;
+      padding: $margin / 4;
+      text-decoration: none;
+
+      &:hover, &:active {
+        background: rgba(255, 255, 255, 1);
+        color: $black;
+      }
+    }
+  }
+
+  @include breakpoint(360px) {
+    .links {
+      a {
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
+
+
+#new_vendor, #new_planner, #new_staffer {
+  .accept-tos-wrap {
+    span {
+      display: inline-block;
+    }
+  }
+}

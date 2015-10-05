@@ -1,0 +1,40 @@
+<%= responsive_form_for NegotiationMessage.new(negotiation: rfp.negotiation),
+  url: '/inquiries/create_negotiation_message', remote: true do |f| %>
+
+  <%= f.hidden_field :negotiation_id, value: rfp.negotiation.id %>
+
+  <% if rfp.negotiation.is_open? and not rfp.current_bid_placed_by?(current_vendor) %>
+
+    <div class='status'>This originator of this Request for Proposal is waiting for you to submit a bid.  If you need more information to produce a bid or have any questions for the originator, send them a response at bottom of this page.</div>
+
+    <div class='bid-area'>
+      <%= icon('usd') %>
+      <%= f.hidden_field :action, value: 'bid' %>
+      <%= f.number_field :bid, class: 'new-message-bid', label: false, placeholder: 'Place a bid', min: 0 %>
+      <%= submit_tag 'Bid', class: 'btn btn-bid' %>
+    </div>
+
+  <% elsif rfp.negotiation.is_open? and rfp.current_bid_placed_by?(current_vendor)  %>
+    <div class='status'>No action is required by you at this time.  Your proposal is pending confirmation by the originator of the Request for Proposal.</div>
+
+    <div class='bid-area'>
+      <span>You placed a $<strong><%= rfp.current_bid %></strong></span> bid.
+    </div>
+
+  <% elsif rfp.negotiation.is_closed? and rfp.current_bid_placed_by?(current_vendor) %>
+    <%= f.hidden_field :action, value: 'revoke' %>
+
+    <div class='status'>You and the originator of the Request for Proposal are in agreement about rendering of services defined within this proposal.</div>
+
+    <div class='bid-area'>
+      <span>Your $<strong><%= rfp.current_bid %></strong></span> bid was approved.
+      <%= submit_tag 'Revoke', class: 'f-right btn btn-red', data: { confirm: 'Are you sure you want to revoke your bid?' } %>
+    </div>
+
+  <% elsif rfp.negotiation.is_closed? and not rfp.current_bid_placed_by?(current_vendor) %>
+
+    <div class='status'>The originator of the Request for Proposal is in agreement about rendering of services defined within this proposal.</div>
+
+  <% end %>
+
+<% end %>

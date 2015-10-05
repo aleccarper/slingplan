@@ -1,0 +1,32 @@
+<%= location_list_item location do %>
+
+  <div class='location-header'>
+    <%= content_tag :div, truncate_with_ellipsis(location.name, 30), class: 'location-name' %>
+  </div>
+
+  <div class='contents'>
+    <%= location_list_address(location) %>
+  </div>
+
+  <div class='sub-contents'>
+    <% unless location.phone_number.blank? %>
+      <%= content_tag :div, "Phone: <strong>#{location.phone_number}</strong>".html_safe, class: 'location-phone' %>
+    <% end %>
+    <% unless location.email.blank? %>
+      <%= content_tag :div, "Email: <strong>#{location.email}</strong>".html_safe %>
+    <% end %>
+    <% unless location.website.blank? %>
+      <div>
+        <strong>
+          <%= link_to 'View Website', location.website, class: '', target: '_blank' %>
+        </strong>
+      </div>
+    <% end %>
+  </div>
+  <% if defined? show_hide_from_service_rfp_button %>
+    <% if show_hide_from_service_rfp_button %>
+      <%= link_to 'Hide', '#', class: 'hide-location btn btn-red' %>
+      <%= link_to 'Undo', '#', class: 'undo-hide-location btn btn-red' %>
+    <% end %>
+  <% end %>
+<% end %>

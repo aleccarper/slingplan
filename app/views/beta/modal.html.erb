@@ -1,0 +1,22 @@
+<span class='close-beta-how-to-expand' title='show help'><%= icon('question-circle fa-3x') %></span>
+
+<span class='close-beta-how-to-collapse' title='hide help'><%= icon('times-circle-o fa-3x') %></span>
+
+<div class='beta-modal collapsed'>
+  <div class='beta-modal-container beta-container'>
+
+    <div class='title'>Ahoy!</div>
+
+    <div class='description'>Welcome to the SlingPlan Documentation</div>
+
+    <div class='subtitle'>What would would like to know about?
+      <%= beta_nav %>
+    </div>
+
+    <div class='how-to'>
+      <%= content_tag :div, render(partial: '/beta/vendors'), class: 'how-to-vendors' %>
+      <%= content_tag :div, render(partial: '/beta/overview'), class: 'how-to-overview' %>
+      <%= content_tag :div, render(partial: '/beta/planners'), class: 'how-to-planners' %>
+    </div>
+  </div>
+</div>

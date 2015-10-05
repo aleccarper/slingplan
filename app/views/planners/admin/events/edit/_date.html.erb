@@ -1,0 +1,52 @@
+<%= responsive_form_for(@event, url: planners_admin_event_path(@event), validate_submit: true) do |f| %>
+  <div class='hint'>
+    <div class='heading'>Tentative Planning</div>
+    Are you planning this event tentatively?  If so, you will have to mark the event non-tentative before you can approve any Vendor bids.
+    <div class='check-boxes'>
+      <%= f.check_box :tentative %> <%= f.label :tentative %>
+    </div>
+  </div>
+
+
+  <div class='hint'>
+    <div class='heading'>Event Date</div>
+    <p>Click once in the calendar to set the <strong>start date</strong> of the event.</p>
+    <ol>
+      <li>Clicking once will set the <strong>start date</strong> of the Event.</li>
+      <li>Clicking again will set the <strong>start date</strong> and <strong>end date</strong> to a range between the two dates.
+      <li>Clicking a third time will reset the calendar and select the <strong>start date</strong>.</li>
+    </ol>
+  </div>
+  <div class='section-content'>
+    <div class='datepicker'>
+      <label>
+        <div class='field-wrapper'>
+          <div class='date'></div>
+        </div>
+      </label>
+    </div>
+
+    <div class='inline'>
+      <%= hidden_field_tag :js_start_date, date_mdy(@event.start_date) %>
+      <%= f.text_field :start_date,
+        value: @event.start_date.nil? ? nil : date_mdy(@event.start_date),
+        readonly: 'readonly',
+        validate: false
+      %>
+    </div>
+    <div class='inline'>
+      <%= hidden_field_tag :js_end_date, date_mdy(@event.end_date) %>
+      <%= f.text_field :end_date,
+        value: @event.end_date.nil? ? nil : date_mdy(@event.end_date),
+        readonly: 'readonly',
+        validate: false
+      %>
+    </div>
+  </div>
+
+  <div class='save-wrap'>
+    <%= submit_tag 'Next', name: 'next', class: 'btn f-right btn-next' %>
+    <%= submit_tag 'Save', name: 'save', class: 'btn f-right btn-save' %>
+    <%= submit_tag 'Back', name: 'back', class: 'btn f-right btn-back' %>
+  </div>
+<% end %>

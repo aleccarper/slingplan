@@ -1,0 +1,27 @@
+<% page.each do |vendor_rfp| %>
+  <div class='rfp half' data-id='<%= vendor_rfp.id %>'>
+    <p><strong><%= vendor_rfp.location.name %></strong></p>
+    <p>
+      Status:
+      <span>
+        <strong>
+          <% if vendor_rfp.current_bid.nil? %>
+            Pending Proposal
+          <% elsif not vendor_rfp.bid_approved? %>
+            Pending Proposal Confirmation
+          <% else %>
+            Proposal Approved
+          <% end %>
+        </strong>
+      </span>
+    </p>
+
+    <p>
+      <strong>Responses: </strong>
+      <span><%= vendor_rfp.negotiation.messages.length %></span>
+      <br/>
+      <%= link_to 'View Messages', vendor_rfp.negotiation.planner_path, class: 'btn btn-medium' %>
+      <%= link_to 'Hide Vendor', '#', class: 'hide-vendor btn btn-red btn-medium' %>
+    </p>
+  </div>
+<% end %>

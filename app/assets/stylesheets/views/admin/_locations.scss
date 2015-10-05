@@ -1,0 +1,49 @@
+.admin-locations {
+  .nothing-here {
+    margin: $margin / 2;
+  }
+
+  .errors {
+    table {
+      width: 100%;
+    }
+
+    tr {
+      padding: $margin / 2;
+      width: 100%;
+    }
+
+    thead th {
+      font-weight: bold;
+    }
+
+    tbody tr {
+      border-left: 1px solid $palette-gray-medium;
+      border-bottom: 1px solid $palette-gray-medium;
+
+      td {
+        border-left: 1px dotted $palette-gray-medium;
+      }
+    }
+
+    th, td {
+      padding: $margin / 4;
+      text-align: center;
+
+      &.sheet {
+        width: 25%;
+      }
+      &.column {
+        width: 10%;
+      }
+      &.messages {
+        text-align: left;
+        width: 65%;
+      }
+    }
+
+    .message {
+      padding: $margin / 4;
+    }
+  }
+}

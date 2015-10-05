@@ -1,0 +1,34 @@
+<div class='action <%= message.action %>'>
+
+  <% case message.action
+     when 'approve' %>
+    <%= icon('check-circle-o') %>
+    <span>Bid approved.</span>
+
+  <% when 'bid' %>
+    <%= icon('warning') %>
+    <span>$<strong><%= message.bid %></strong> bid placed.</span>
+
+  <% when 'file' %>
+    <%= icon('link') %>
+    <span>
+      <strong>File Attached</strong> -
+      <%= message.file_attachment_file_name %> -
+      <%= link_to 'Download', "/negotiations/#{message.id}/download_attachment", target: '_blank', class: 'btn btn-small download-file-attachment' %>
+    </span>
+
+  <% when 'revoke' %>
+    <%= icon('times-circle-o') %>
+    <%= content_tag :span, 'Bid revoked.' %>
+
+  <% when 'closed' %>
+    <%= icon('check-circle-o') %>
+    <span>Inquiry closed.</span>
+
+  <% when 'open' %>
+    <%= icon('times-circle-o') %>
+    <span>Inquiry reopened</span>
+
+  <% end %>
+
+</div>

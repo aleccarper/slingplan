@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+
+        <Cell><Data ss:Type="String">Address 1</Data></Cell>
+        <Cell><Data ss:Type="String">Address 2</Data></Cell>
+        <Cell><Data ss:Type="String">city</Data></Cell>
+        <Cell><Data ss:Type="String">State</Data></Cell>
+        <Cell><Data ss:Type="String">Zip</Data></Cell>
+
+        <Cell><Data ss:Type="String">Phone</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Website</Data></Cell>
+      </Row>
+      <% @locations.each do |l| %>
+        <Row>
+          <Cell><Data ss:Type="Number"><%= l.id %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= l.name %></Data></Cell>
+
+          <Cell><Data ss:Type="String"><%= l.address1 %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= l.address2 %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= l.city %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= l.state %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= l.zip.to_s %></Data></Cell>
+
+          <Cell><Data ss:Type="String"><%= l.phone_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= l.email %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= l.website %></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

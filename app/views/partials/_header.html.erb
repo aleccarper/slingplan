@@ -1,0 +1,44 @@
+<div class='header'>
+  <%= icon('bars', class: 'tabs-expand-collapse') %>
+
+  <%= link_to 'SlingPlan', root_path, class: 'logo normal' %>
+  <%= link_to 'SP', root_path, class: 'logo mobile' %>
+
+  <div class='header-right'>
+    <% if anyone_signed_in? %>
+      <%= link_to icon('exclamation'), '#', class: 'tip link-notifications js-open-close-notifications', data: { dir: 's', msg: 'notifications' } %>
+      <%= link_to icon('user'), current_manage_account_path, class: 'tip link-manage-account', data: { dir: 's', msg: 'manage-account' } %>
+      <%= link_to icon('sign-out'), current_sign_out_path, class: 'tip link-sign-out', method: :delete, data: { dir: 's', msg: 'sign-out' } %>
+    <% else %>
+      <%= link_to ('Sign In' + icon('sign-in')).html_safe, signin_path, class: 'link-sign-in' %>
+      <%= link_to ('Register' + icon('key')).html_safe, '#', class: 'link-register' %>
+    <% end %>
+  </div>
+</div>
+
+<% unless current_controller == 'blog' || anyone_signed_in? %>
+  <%= link_to blog_index_path, class: 'btn btn-large header-view-blog' do %>
+    <span>Blog <%= icon('book') %></span>
+  <% end %>
+<% end %>
+
+<% unless current_controller == 'map' %>
+  <%= link_to map_path, class: 'btn btn-large header-view-map' do %>
+    <span><%= icon('map-marker') %> Map</span>
+  <% end %>
+<% end %>
+
+<% unless anyone_signed_in? %>
+  <div class='register-which'>
+    <div class='register-which-wrap'>
+      <span>As...</span>
+      <%= link_to 'Planner', new_planner_registration_path, class: 'btn btn-small' %>
+      <%= link_to 'Vendor', new_vendor_registration_path, class: 'btn btn-small' %>
+      <%= link_to 'Staffer', new_staffer_registration_path, class: 'btn btn-small' %>
+    </div>
+  </div>
+<% end %>
+
+<% unless current_authenticated_role == :admin %>
+  <%= render partial: '/partials/notifications' %>
+<% end %>

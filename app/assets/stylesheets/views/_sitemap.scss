@@ -1,0 +1,33 @@
+.sitemap {
+  .container {
+    @include position(fixed, 74px, 0, 0, 0);
+    left: 0;
+    margin: 0;
+    width: 100%;
+    overflow: scroll;
+  }
+
+  .sitemap-wrapper {
+    @include position(absolute, 0);
+  }
+
+  .node {
+    cursor: pointer;
+  }
+
+  .node circle {
+    stroke: $palette-green-medium;
+    stroke-width: 1.5px;
+  }
+
+  .node text {
+    fill: $white;
+    font: $font-size-large sans-serif;
+  }
+
+  .link {
+    fill: none;
+    stroke: $palette-green-medium;
+    stroke-width: 1.5px;
+  }
+}

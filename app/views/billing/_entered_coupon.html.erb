@@ -1,0 +1,33 @@
+<li class='coupon'>
+  <div class='coupon-header'>
+    <%= content_tag :span, coupon[:id], class: 'coupon-id' %>
+    <%= content_tag :div, "Valid", class: "valid #{coupon[:valid]}" %>
+  </div>
+
+  <% if coupon[:amount_off] %>
+    <div class='contents amount-off'>
+      <div class='symbol'>$</div>
+      <%
+      dollars_off = prettify_amount_without_cents(coupon[:amount_off])
+      cents_off = prettify_amount_just_cents(coupon[:amount_off])
+      %>
+      <%= content_tag :div, "#{dollars_off}", class: 'amount' %>
+      <div class='right'>
+        <div class='cents'><%= cents_off %></div>
+        <div class='off'>OFF</div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class='sub-contents'>
+    <%= content_tag :div, "Duration: <strong>#{coupon[:duration]}</strong>".html_safe %>
+  </div>
+
+  <div class='footer'>
+    <% unless coupon[:redeem_by].nil? %>
+      <%= content_tag :div, "Expires #{coupon[:redeem_by]}", class: 'expiration' %>
+    <% else %>
+      <div class='expiration'>No Expiration</div>
+    <% end %>
+  </div>
+</li>

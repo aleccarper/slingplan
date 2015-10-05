@@ -1,0 +1,56 @@
+<% results.each do |state, cities| %>
+  <%= result_tree_level(expanded, service_id, 0, 'state', state) do %>
+
+    <div class='tree-header'>
+      <div class='tree-arrow'></div>
+      <%= content_tag :div, full_state_name_from_abbreviation(state), class: 'tree-header-text state-name' %>
+    </div>
+
+    <% cities.each do |city, locations| %>
+      <%= result_tree_level(expanded, service_id, 1, 'city', state, city) do %>
+
+        <div class='tree-header'>
+          <div class='tree-arrow'></div>
+          <%= content_tag :div, city, class: 'tree-header-text city-name' %>
+        </div>
+
+        <div class='tree-items'>
+          <% locations.each do |location| %>
+            <div class='tree-item'>
+              <%= service_result(location, bookmark_list, false, false) do %>
+                <%= content_tag :div, truncate_with_ellipsis(location.name, 22), class: 'title' %>
+
+                <div class='location-info'>
+                  <%= content_tag :p, "#{location.address1} #{location.address2}" %>
+                  <%= content_tag :p, "#{location.city}, #{location.state} #{location.zip}" %>
+
+                  <% if location.phone_number %>
+                    <p><%= location.phone_number %></p>
+                  <% end %>
+
+                  <% if location.email %>
+                    <p><%= location.email %></p>
+                  <% end %>
+
+                  <% unless location.website.blank? %>
+                    <p><a href='<%= location.website %>' target='_blank'>Website</a></p>
+                  <% end %>
+                </div>
+
+                <div class='controls'>
+                  <i class='fa fa-crosshairs find-location'></i>
+                  <% if location.vendor_id %>
+                    <a href='/vendors/<%= location.vendor_id %>'<i class='fa fa-building-o view-company'></i></a>
+                  <% end %>
+                  <i class="fa fa-times remove-bookmark"></i>
+                  <i class="fa fa-bookmark add-bookmark"></i>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+  <% end %>
+<% end %>

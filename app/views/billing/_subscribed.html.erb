@@ -1,0 +1,16 @@
+<%= form_tag("/#{role}s/admin/account/billing/change_plan",
+  url: "/#{role}s/admin/account/billing/change_plan",
+  role: 'form',
+  class: 'change-plan',
+  authenticity_token: true) do %>
+
+	<% if @model.billing_status == 'trial' %>
+	  <p class='hint'>Changing your subscription will end your trial and start active billing.</p>
+	<% end %>
+
+  <%= render(partial: 'billing/plans') %>
+
+  <div class='submit disabled'>
+    <%= submit_tag 'Change Plan' %>
+  </div>
+<% end %>
