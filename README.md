@@ -9,4 +9,4 @@ An Event Sourcing app that includes:
 * System for seeding vendors in batches
 * A whole bunch of other stuff that I forgot
 
-Co-developed with @csphere
+Co-developed with [Sean Kennedy](https://github.com/csphere)
